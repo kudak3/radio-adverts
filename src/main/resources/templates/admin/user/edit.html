@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+
+
+            <div class="col-md-2"></div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header"><strong>User</strong>
+                        <small> Edit</small>
+                    </div>
+                    <div class="card-body card-block">
+
+
+                        <form autocomplete="off" class="sky-form" th:object="${user}" method="post"
+                              th:action="@{/admin/user/save}" role="form">
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <div class="form-group">
+                                <label>Select Student Level</label>
+                                <select class="form-control" th:field="*{level}">
+                                    <option value="">----Select----</option>
+                                    <option th:each="level : ${levels}"
+                                            th:value="${{level.id}}"
+                                            th:text="${level.name}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group"><label for="name" class=" form-control-label">User
+                                Name</label><input type="text" id="name" name="name" th:field="*{name}"
+                                                   required=""        placeholder="Enter your user name" class="form-control">
+                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                            </div>
+
+                            <div class="form-group"><label for="facultyCode" class=" form-control-label">User
+                                Code</label><input type="text" id="facultyCode" name="facultyCode" th:field="*{facultyCode}"
+                                                   required=""    placeholder="Enter your user code" class="form-control">
+                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{facultyCode}"></div>
+                            </div>
+
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
+                            </div>
+
+                        </form>
+                        <span th:utext="${successMessage}">
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div>
+</div>
+</div>
+<div th:include="fragments/footer"></div>

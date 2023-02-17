@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Notifications</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#"> Notifications </a></li>
+                                <li class="active ml-4">List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <br/>
+            <br/>
+
+
+            <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
+                <br/>
+                <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
+                <thead>
+                <tr>
+
+
+                    <th scope="col">Affected Tables</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col">Action</th>
+
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="notification : ${notifications}">
+
+                    <td th:text="${notification.affectedTable}"></td>
+                    <td th:text="${notification.message}"></td>
+                    <td th:text="${notification.created}"></td>
+
+                    <td>
+
+
+                        <a th:href="@{'/notifications/delete/' + ${notification.id}}"
+                           onclick="return confirm('Are you sure you want to delete this!!!!')"
+                           class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                    </td>
+
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <script th:inline="none">
+                $(document).ready(function () {
+                    $('#roleListTable').DataTable();
+                });
+                $(document).ready(function () {
+                    $('#example').DataTable({
+                        "roleListTable": [[3, "desc"]]
+                    });
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<div th:include="fragments/footer"></div>
+</html>

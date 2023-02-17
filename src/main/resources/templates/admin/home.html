@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<th:block th:include="fragments/header"></th:block>
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Dashboard</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="active">Dasboard</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content mt-3">
+
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <!--/.col-->
+
+            <div class="col-sm-12 mb-4" sec:authorize=" hasAuthority('ADMIN')">
+                <div class="card-group">
+                    <div class="card col-md-6 no-padding ">
+                        <div class="card-body">
+                            <div class="h1 text-muted text-right mb-4">
+                                <i class="fa fa-building"></i>
+                                <a class="btn btn-primary" th:href="@{/templates/admin/client/list}"/> Students</a>
+                            </div>
+
+                            <div class="h4 mb-0">
+                                <span class="count">12</span>
+                            </div>
+
+                            <small class="text-muted text-uppercase font-weight-bold"></small>
+                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
+                                 style="width: 40%; height: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="card col-md-6 no-padding ">
+                        <div class="card-body">
+                            <div class="h1 text-muted text-right mb-4">
+                                <i class="fa fa-user-plus"></i>
+                                <a class="btn btn-primary" th:href="@{/templates/admin/role/activeReg}"/>Registered Courses</a>
+                            </div>
+                            <div class="h4 mb-0">
+                                <span class="count"></span>
+                            </div>
+                            <small class="text-muted text-uppercase font-weight-bold"></small>
+                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                 style="width: 40%; height: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="card col-md-6 no-padding ">
+                        <div class="card-body">
+                            <div class="h1 text-muted text-right mb-4">
+                                <i class="fa fa-user-plus"></i>
+                                <a class="btn btn-primary" th:href="@{/templates/admin/role/notActive}"/>De-registered Courses</a>
+                            </div>
+                            <div class="h4 mb-0">
+                                <span class="count"></span>
+                            </div>
+                            <small class="text-muted text-uppercase font-weight-bold"></small>
+                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                 style="width: 40%; height: 5px;"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+<div th:include="fragments/footer"></div>

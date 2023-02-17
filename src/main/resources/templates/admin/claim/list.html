@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Claims</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Insurance Claims </a></li>
+                                <li class="active ml-4">List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4 ">
+                <a class="btn btn-primary rounded " th:href="@{/claims/add}">Add Claim</a>
+            </div>
+            <br/>
+            <br/>
+
+
+            <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
+                <br/>
+                <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
+                <thead>
+                <tr>
+
+                    <th>Client</th>
+                    <th> Policy Number</th>
+                    <th> Policy Name</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="claim : ${claims}">
+
+                    <td th:text="${claim.policyCoverage.client.name }"></td>
+                    <td th:text="${claim.policyCoverage.policyNumber}"></td>
+                    <td th:text="${claim.policyCoverage.policy.name}"></td>
+                    <td th:text="${claim.description}"></td>
+                    <td th:text="${claim.date}"></td>
+                    <td th:text="${claim.claimStatus}"></td>
+
+
+                    <td>
+                        <a th:if="${claim.claimStatus == claim.claimStatus.PENDING}"
+                           th:href="@{'/claims/approve/' + ${claim.id}}" class="btn btn-outline-info"><i
+                                class="fa fa-check-circle"></i>Approve</a></h2>
+                        <a th:if="${claim.claimStatus == claim.claimStatus.PENDING}"
+                           th:href="@{'/claims/decline/' + ${claim.id}}" class="btn btn-outline-danger"><i
+                                class="fa fa-times-circle"></i>Decline</a></h2>
+
+                        <a th:href="@{'/claims/delete/' + ${claim.id}}"
+                           onclick="return confirm('Are you sure you want to delete this!!!!')"
+                           class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <script th:inline="none">
+                $(document).ready(function () {
+                    $('#roleListTable').DataTable();
+                });
+                $(document).ready(function () {
+                    $('#example').DataTable({
+                        "roleListTable": [[3, "desc"]]
+                    });
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+</div>
+<div th:include="fragments/footer"></div>
+</html>

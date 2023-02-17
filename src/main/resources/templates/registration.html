@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<!-- create navigation bar ( header) -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}">Life Assurance Premiums Application Backend</a>
+        </div>
+    </div>
+</nav>
+
+<br>
+<br>
+<!-- Create HTML registration form -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <!-- success message -->
+            <div th:if="${param.success}">
+                <div class="alert alert-info">You've successfully registered
+                    to our awesome app!</div>
+            </div>
+<!--            error message-->
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                    User with give email already exists
+                </div>
+
+            </div>
+
+            <h1>Registration</h1>
+
+            <form th:action="@{/users/registration}" method="post"
+
+                  th:object="${userDto}">
+                <div class="form-group">
+                    <label class="control-label" for="firstName"> First Name </label>
+                    <input id="firstName" class="form-control" th:field="*{firstName}"
+                           required autofocus="autofocus" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="lastName"> Last Name </label> <input
+                        id="lastName" class="form-control" th:field="*{lastName}"
+                        required autofocus="autofocus" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="email"> Email </label> <input
+                        id="email" class="form-control" th:field="*{email}" required
+                        autofocus="autofocus" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="password"> Password </label> <input
+                        id="password" class="form-control" type="password"
+                        th:field="*{password}" required autofocus="autofocus" />
+                </div>
+                <div th:if="${param.passwords}">
+                    <div class="alert alert-danger">
+                        Passwords do not match
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label" for="confirmPassword">Confirm Password </label> <input
+                        id="confirmPassword" class="form-control" type="password"
+                        th:field="*{confirmPassword}" required autofocus="autofocus" />
+                </div>
+
+                <div class="form-group">
+                    <label>Select Role</label>
+                    <select class="form-control" required="required" th:field="*{role}">
+                        <option value="">----Select----</option>
+                        <option th:each="role : ${roles}"
+                                th:value="${{role.id}}"
+                                th:text="${role.name}">
+                        </option>
+                    </select>
+                </div>
+
+<!--                <div class="form-group">-->
+<!--                    &lt;!&ndash;                                 th:classappend="${#fields.hasErrors('photo')}? 'has-error':''">&ndash;&gt;-->
+<!--                    <label for="profilePhoto" class="control-label">Profile Photo</label> <input id="profilePhoto" name="profilePhoto"-->
+<!--                                                                                                 type="file" />-->
+<!--                    &lt;!&ndash;                                <p class="error-message"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                   th:each="error : ${#fields.errors('photo')}"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                   th:text="${error}">Validation error</p>&ndash;&gt;-->
+
+<!--                </div>-->
+<!--                <div class="w-100 text-center ">-->
+
+<!--                    <img src="" class="user-avatar rounded-circle w-25 w-25" id="thumbnail" alt="Image preview">-->
+
+<!--                </div>-->
+
+
+                <div class="form-group align-content-center">
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <span>Already registered? <a href="/" th:href="@{/login}">Login
+								here</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:inline="none">
+    $(document).ready(function () {
+        $('#profilePhoto').change(function () {
+            showImageThumbnail(this);
+        })
+    });
+
+    function showImageThumbnail(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#thumbnail').attr('src',e.target.result);
+
+        };
+        reader.readAsDataURL(file);
+
+
+    }
+
+</script>
+
+</body>
+</html>

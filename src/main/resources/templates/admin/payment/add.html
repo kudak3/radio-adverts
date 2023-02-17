@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+
+
+            <div class="col-md-2"></div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header"><strong>Payment</strong>
+                        <small> Form</small>
+                    </div>
+                    <div class="card-body card-block">
+
+
+                        <form autocomplete="off" class="sky-form" th:object="${payment}" method="post"
+                              th:action="@{/payments/save}" role="form">
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <div class="form-group">
+                                <label>Select Client</label>
+                                <select class="form-control" required="required" th:field="*{client}">
+                                    <option value="">----Select----</option>
+                                    <option th:each="client : ${clients}"
+                                            th:value="${{client}}"
+                                            th:text="${client.firstName + ' ' +  client.lastName + ' ' + client.idNumber}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Policy</label>
+                                <select class="form-control" required="required" th:field="*{policyNumber}">
+                                    <option value="">----Select A Policy----</option>
+                                    <option th:each="cover : ${policyCovers}"
+                                            th:value="${{cover.policyNumber}}"
+                                            th:text="${cover.getPolicy().name }">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Payment Method</label>
+                                <select class="form-control" required="required" th:field="*{paymentType}">
+                                    <option value="">----Select Payment Method----</option>
+                                    <option th:each="type : ${paymentType}"
+                                            th:value="${{type}}"
+                                            th:text="${type.name}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group"><label for="accountNumber" class=" form-control-label">
+                                Account Number</label><input type="text" id="accountNumber" name="accountNumber" th:field="*{accountNumber}"
+                                               required=""    placeholder="Account Number" class="form-control">
+                                <div th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}"></div>
+                            </div>
+
+                            <div class="form-group"><label for="description" class=" form-control-label">
+                                Payment Description</label><input type="text" id="description" name="description" th:field="*{description}"
+                                                   required=""    placeholder="Payment Description" class="form-control">
+                                <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+                            </div>
+
+
+                            <div class="form-group"><label for="amount" class=" form-control-label">
+                                Amount</label><input type="number" id="amount" name="amount" th:field="*{amount}"
+                                                   required=""    placeholder="Enter amount paid" class="form-control">
+                                <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+                            </div>
+
+
+
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
+                            </div>
+
+                        </form>
+<!--                        <span th:utext="${successMessage}">-->
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div>
+</div>
+</div>
+    <div th:include="fragments/footer"></div>
+</html>

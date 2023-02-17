@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+
+
+            <div class="col-md-2"></div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header"><strong> Policy coverage </strong>
+                        <small> Form</small>
+                    </div>
+                    <div class="card-body card-block">
+
+
+                        <form autocomplete="off" class="sky-form" name="form" th:object="${coverage}" method="post"
+                              th:action="@{/coverages/save}" role="form">
+<!--                            <input type="hidden" th:field="*{id}"/>-->
+
+
+
+
+
+                            <div class="form-group">
+                                <label>Select Client</label>
+                                <select class="form-control" required="required" th:field="*{client}">
+                                    <option value="">----Select Client----</option>
+                                    <option th:each="client : ${clientList}"
+                                            th:value="${{client}}"
+                                            th:text="${client.firstName + ' ' + client.lastName + ' ' + client.idNumber}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Policy</label>
+                                <select class="form-control" required="required" th:field="*{policy}">
+                                    <option value="">----Select Policy----</option>
+                                    <option th:each="policy : ${policies}"
+                                            th:value="${{policy}}"
+                                            th:text="${policy.name}">
+                                    </option>
+                                </select>
+                            </div>
+
+
+<!--                            <div class="form-group">-->
+<!--                                <label>Select Status</label>-->
+<!--                                <select class="form-control" required="required" th:field="*{status}">-->
+<!--                                    <option value="">&#45;&#45;&#45;&#45;Select Status&#45;&#45;&#45;&#45;</option>-->
+<!--                                    <option th:each="status : ${coverageStatuses}"-->
+<!--                                            th:value="${{status}}"-->
+<!--                                            th:text="${status.name}">-->
+<!--                                    </option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+
+
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
+                            </div>
+
+                        </form>
+                        <!--                        <span th:utext="${successMessage}"></span>-->
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div>
+</div>
+</div>
+<div th:include="fragments/footer"></div>
+</html>

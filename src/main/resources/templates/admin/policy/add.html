@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+
+
+            <div class="col-md-2"></div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header"><strong>Policy</strong>
+                        <small> Form</small>
+                    </div>
+                    <div class="card-body card-block">
+
+
+                        <form autocomplete="off" class="sky-form" th:object="${policy}" method="post"
+                              th:action="@{/policies/save}" role="form">
+                            <input type="hidden" th:field="*{id}"/>
+
+
+
+
+                            <div class="form-group"><label for="name" class=" form-control-label">Policy
+                                Name</label><input type="text" id="name" name="name" th:field="*{name}"
+                                           required=""        placeholder="Enter a policy name" class="form-control">
+                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                            </div>
+
+
+
+                            <div class="form-group"><label for="description" class=" form-control-label">Description
+                            </label><input type="text" id="description" name="description" th:field="*{description}"
+                                           required=""         placeholder="Enter policy descrition" class="form-control">
+                                <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Plan Type</label>
+                                <select class="form-control" required="required" th:field="*{plan}">
+                                    <option value="">----Select Plan----</option>
+                                    <option th:each="plan : ${plans}"
+                                            th:value="${{plan}}"
+                                            th:text="${plan.name}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group"><label for="premium" class=" form-control-label">Premium
+                            </label><input type="number" id="premium" name="premium" th:field="*{premium}"
+                                           required=""         placeholder="Enter policy premium" class="form-control">
+                                <div th:if="${#fields.hasErrors('premium')}" th:errors="*{premium}"></div>
+                            </div>
+
+                            <div class="form-group"><label for="totalPayment" class=" form-control-label">Total Payment
+                            </label><input type="number" id="totalPayment" name="totalPayment" th:field="*{totalPayment}"
+                                           required=""         placeholder="Enter policy amount" class="form-control">
+                                <div th:if="${#fields.hasErrors('totalPayment')}" th:errors="*{totalPayment}"></div>
+                            </div>
+
+                            <div class="form-group"><label for="duration" class=" form-control-label">Duration
+                            </label><input type="number" id="duration" name="duration" th:field="*{duration}"
+                                           required=""         placeholder="Enter policy description" class="form-control">
+                                <div th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></div>
+                            </div>
+
+                            <div class="form-group"><label for="coverageAmount" class=" form-control-label">Cover Amount
+                            </label><input type="number" id="coverageAmount" name="coverageAmount" th:field="*{coverageAmount}"
+                                           required=""         placeholder="Enter the amount of cover the policy provides" class="form-control">
+                                <div th:if="${#fields.hasErrors('coverageAmount')}" th:errors="*{coverageAmount}"></div>
+                            </div>
+
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
+                            </div>
+
+                        </form>
+<!--                        <span th:utext="${successMessage}"></span>-->
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div>
+</div>
+</div>
+    <div th:include="fragments/footer"></div>
+</html>
