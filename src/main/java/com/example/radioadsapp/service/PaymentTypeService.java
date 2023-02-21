@@ -1,6 +1,5 @@
 package com.example.radioadsapp.service;
 
-import com.example.radioadsapp.dto.UserDto;
 import com.example.radioadsapp.model.PaymentType;
 
 import java.util.List;

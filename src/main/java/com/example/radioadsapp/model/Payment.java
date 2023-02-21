@@ -21,7 +21,7 @@ public class Payment implements Serializable {
     @ManyToOne
     private Advertiser advertiser;
     private String accountNumber;
-    private String policyNumber;
+    private String advertNumber;
 
 
     @OneToOne
@@ -101,13 +101,14 @@ public class Payment implements Serializable {
         this.date = date;
     }
 
-    public String getPolicyNumber() {
-        return policyNumber;
+    public String getAdvertNumber() {
+        return advertNumber;
     }
 
-    public void setPolicyNumber(String policyNumber) {
-        this.policyNumber = policyNumber;
+    public void setAdvertNumber(String advertNumber) {
+        this.advertNumber = advertNumber;
     }
+
 
     @Override
     public String toString() {
@@ -115,6 +116,7 @@ public class Payment implements Serializable {
                 "id=" + id +
                 ", advertiser=" + advertiser.getFirstName() +
                 ", accountNumber='" + accountNumber + '\'' +
+                ", advertNumber='" + advertNumber + '\'' +
                 ", paymentType=" + paymentType +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +

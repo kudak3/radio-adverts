@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header"></th:block>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+
+
+            <div class="col-md-2"></div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header"><strong>Add Radio Station </strong>
+                        <small> Form</small>
+                    </div>
+                    <div class="card-body card-block">
+
+
+                        <form autocomplete="off" class="sky-form" name="form" th:object="${radioStation}" method="post"
+                              th:action="@{/radio-stations}" role="form">
+
+
+
+                            <div class="form-group"><label for="name" class=" form-control-label"> Name
+                            </label><input type="text" id="name" name="name" th:field="*{name}"
+                                           required=""         placeholder="Enter Name of Radio Station" class="form-control">
+                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                            </div>
+
+
+
+
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
+                            </div>
+
+                        </form>
+                        <!--                        <span th:utext="${successMessage}"></span>-->
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div>
+</div>
+</div>
+<div th:include="fragments/footer"></div>
+</html>

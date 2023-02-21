@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/payment-types/")
+@RequestMapping("/config/payment-types/")
 public class PaymentTypeController {
     private final PaymentTypeService paymentTypeService;
 
