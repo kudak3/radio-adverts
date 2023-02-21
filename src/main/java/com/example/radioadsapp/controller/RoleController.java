@@ -1,7 +1,7 @@
 package com.example.radioadsapp.controller;
 
 import com.example.radioadsapp.model.Role;
-import com.example.radioadsapp.service.RoleService;
+import com.example.radioadsapp.service.impl.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("config/roles")
 public class RoleController {
     @Autowired
-    private RoleService roleService;
+    private RoleServiceImpl roleService;
 
     @GetMapping()
     public String listRoles(Model model) {
@@ -40,7 +40,7 @@ public class RoleController {
     @PostMapping()
     public String saveRole(@ModelAttribute("role") Role role) {
         // save role to database
-        roleService.saveRole(role);
+        roleService.save(role);
         return "redirect:/config/roles";
     }
 
@@ -48,7 +48,7 @@ public class RoleController {
     public String deleteRole(@PathVariable(value = "id") long id) {
 
         // call delete role
-        roleService.deleteRole(id);
+        roleService.delete(id);
         return "redirect:/config/roles";
     }
 }

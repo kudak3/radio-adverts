@@ -3,9 +3,8 @@ package com.example.radioadsapp.controller;
 
 import com.example.radioadsapp.dto.UserDto;
 import com.example.radioadsapp.model.Role;
-import com.example.radioadsapp.model.User;
 import com.example.radioadsapp.repository.UserRepository;
-import com.example.radioadsapp.service.RoleService;
+import com.example.radioadsapp.service.impl.RoleServiceImpl;
 import com.example.radioadsapp.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class UserRegistrationController {
     }
 
     @Autowired
-    private RoleService roleService;
+    private RoleServiceImpl roleService;
 
     @Autowired
     private UserRepository userRepository;
