@@ -7,6 +7,7 @@ import com.example.radioadsapp.model.User;
 import com.example.radioadsapp.repository.UserRepository;
 import com.example.radioadsapp.service.RoleService;
 import com.example.radioadsapp.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users/")
+//@RequestMapping("/users/")
 public class UserRegistrationController {
 
     private UserService userService;
@@ -31,9 +32,12 @@ public class UserRegistrationController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/login")
+    public String loginForm() {
+        return "login";
+    }
 
-
-    @GetMapping("registration")
+    @GetMapping("register")
     public String showRegistrationForm(Model model) {
 
         UserDto userDto = new UserDto();
@@ -44,11 +48,11 @@ public class UserRegistrationController {
         return "registration";
     }
 
-    @PostMapping("registration")
+    @PostMapping("/register/save")
     public String registerUserAccount(@ModelAttribute("userDto") UserDto userDto)  {
 
         if(!userDto.getPassword().equals(userDto.getConfirmPassword()))
-            return "redirect:/users/registration?password";
+            return "redirect:/register?password";
         // save user to database
 
 //        String  photoName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -56,9 +60,7 @@ public class UserRegistrationController {
 //        System.out.println("===================userDto");
 //        System.out.println(userDto);
 
-        User user = userService.save(userDto);
-        if(user == null)
-            return "redirect:/users/registration?error";
+        userService.saveUser(userDto);
 
 //        String uploadDir = "./src/main/resources/static/profile-photos/" + user.getId();
 //        Path uploadPath = Paths.get(uploadDir);
@@ -77,10 +79,10 @@ public class UserRegistrationController {
 
     }
 
-    @GetMapping("list")
+    @GetMapping("/users")
     public String listUsers(Model model) {
-        userRepository.updateAllUsers();
-        model.addAttribute("users", userService.getUsers());
+        System.out.println("==================");
+        model.addAttribute("users", userService.findAllUsers());
         return "admin/user/list";
     }
 
@@ -99,7 +101,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping("save")
-    public String saveUser(@ModelAttribute("user") UserDto userDto)  {
+    public String saveUser(@Valid @ModelAttribute("user") UserDto userDto)  {
 
 
         if(!userDto.getPassword().equals(userDto.getConfirmPassword()))
@@ -130,9 +132,9 @@ public class UserRegistrationController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteEm(@PathVariable(value = "id") long id) {
+    public String deleteUser(@PathVariable(value = "id") long id) {
 
-        // call delete employee payment-type
+        // call delete user
         userService.deleteUser(id);
         return "redirect:/users/list";
     }

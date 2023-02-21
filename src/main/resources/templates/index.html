@@ -62,20 +62,51 @@
 
                         </div>
                     </div>
+
                     <div class="card col-md-6 no-padding ">
                         <div class="card-body">
                             <div class="h1 text-muted text-right mb-4">
-                                <a th:href="@{/clients/add}"><i class="fa fa-user-plus"></i></a>
-                                <a class="btn btn-primary" th:href="@{/clients/list}">Clients</a>
+                                <a th:href="@{/radios/add}"> <i class="fa fa-radio"></i></a>
+                                <a class="btn btn-primary" th:href="@{/radios/list}">Radio Stations</a>
+                            </div>
+                            <div class="row justify-content-around">
+                                <div class="col-xs-6" >
+                                    <div class="h4 mb-0">
+                                        <span class="count" th:text="${newRadioStation}"></span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Radio Station</small>
+                                    <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                         style="width: 40%; height: 5px;"></div>
+                                </div>
+
+
+                                <div class=" col-xs-6">
+                                    <div class="h4 mb-0">
+                                        <span class="count" th:text="${radioStations}"></span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Radio Stations</small>
+                                    <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                         style="width: 40%; height: 5px;"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card col-md-6 no-padding ">
+                        <div class="card-body">
+                            <div class="h1 text-muted text-right mb-4">
+                                <a th:href="@{/advertisers/add}"><i class="fa fa-user-plus"></i></a>
+                                <a class="btn btn-primary" th:href="@{/advertisers/list}">Advertisers</a>
                             </div>
 
                             <div class="row justify-content-around">
                                 <div class="col-xs-6" >
 
                             <div class="h4 mb-0">
-                                <span class="count" th:text="${newClients}"></span>
+                                <span class="count" th:text="${newAdvertisers}"></span>
                             </div>
-                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Clients</small>
+                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Advertisers</small>
                             <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                  style="width: 40%; height: 5px;"></div>
 
@@ -84,31 +115,13 @@
 
                                 <div class=" col-xs-6">
                                     <div class="h4 mb-0">
-                                        <span class="count" th:text="${clients}"></span>
+                                        <span class="count" th:text="${advertisers}"></span>
                                     </div>
-                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Clients</small>
+                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Advertisers</small>
                                     <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                          style="width: 40%; height: 5px;"></div>
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="card col-md-6 no-padding ">
-                        <div class="card-body">
-                            <div class="h1 text-muted text-right mb-4">
-                                <a th:href="@{/policies/add}"><i class="fa fa-clipboard"></i></a>
-                                <a class="btn btn-primary" th:href="@{/policies/list}">Policies</a>
-                            </div>
-
-
-                            <div class="h4 mb-0">
-                                <span class="count" th:text="${policies}"></span>
-                            </div>
-                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">Available Policies</small>
-                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                 style="width: 40%; height: 5px;"></div>
-
 
                         </div>
                     </div>
@@ -165,17 +178,17 @@
                 <div class="card col-md-6 no-padding ">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                           <a th:href="@{/claims/add}"> <i class="fa fa-file"></i></a>
-                            <a class="btn btn-primary" th:href="@{/claims/list}">Claims</a>
+                           <a th:href="@{/adverts/add}"> <i class="fa fa-ad"></i></a>
+                            <a class="btn btn-primary" th:href="@{/adverts/list}">Adverts</a>
                         </div>
                         <div class="row justify-content-around">
                             <div class="col-xs-6" >
 
                         <div class="h4 mb-0">
-                            <span class="count" th:text="${newClaims}"></span>
+                            <span class="count" th:text="${newAdverts}"></span>
                         </div>
 
-                        <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Claims</small>
+                        <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Adverts</small>
                         <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
                              style="width: 40%; height: 5px;"></div>
 
@@ -184,46 +197,15 @@
 
                             <div class=" col-xs-6">
                                 <div class="h4 mb-0">
-                                    <span class="count" th:text="${claims}"></span>
+                                    <span class="count" th:text="${adverts}"></span>
                                 </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Claims</small>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Adverts</small>
                                 <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                      style="width: 40%; height: 5px;"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="card col-md-6 no-padding ">
-                    <div class="card-body">
-                        <div class="h1 text-muted text-right mb-4">
-                           <a th:href="@{/coverages/add}"> <i class="fa fa-bank"></i></a>
-                            <a class="btn btn-primary" th:href="@{/coverages/list}">Policy Coverage</a>
-                        </div>
-                        <div class="row justify-content-around">
-                            <div class="col-xs-6" >
-                                <div class="h4 mb-0">
-                                    <span class="count" th:text="${newCoverages}"></span>
-                                </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Covers</small>
-                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                     style="width: 40%; height: 5px;"></div>
-                            </div>
-
-
-                            <div class=" col-xs-6">
-                                <div class="h4 mb-0">
-                                    <span class="count" th:text="${coverages}"></span>
-                                </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Coverages</small>
-                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                     style="width: 40%; height: 5px;"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
 
 
             </div>

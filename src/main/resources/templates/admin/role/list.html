@@ -20,8 +20,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">Role </a></li>
-                                <li class="active">List</li>
+                                <li><a href="#">Role List </a></li>
                             </ol>
                         </div>
                     </div>
@@ -51,9 +50,9 @@
                 <tr th:each="role : ${roles}">
                     <td th:text="${role.id}"></td>
                     <td th:text="${role.name}"></td>
-                    <td><a th:href="@{'/roles/update/' + ${role.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
+                    <td><a th:href="@{'/config/roles/update/' + ${role.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
 
-                    <a th:href="@{'/roles/delete/' + ${role.id}}"
+                    <a th:href="@{'/config/roles/delete/' + ${role.id}}"
                            onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                     </td>
 
@@ -79,3 +78,4 @@
 </div>
 </div>
 <div th:include="fragments/footer"></div>
+</html>
