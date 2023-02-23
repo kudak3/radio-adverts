@@ -28,18 +28,18 @@
                                     <option value="">----Select----</option>
                                     <option th:each="client : ${clients}"
                                             th:value="${{client}}"
-                                            th:text="${client.firstName + ' ' +  client.lastName + ' ' + client.idNumber}">
+                                            th:text="${client.name}">
                                     </option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>Select Policy</label>
-                                <select class="form-control" required="required" th:field="*{policyNumber}">
-                                    <option value="">----Select A Policy----</option>
-                                    <option th:each="cover : ${policyCovers}"
-                                            th:value="${{cover.policyNumber}}"
-                                            th:text="${cover.getPolicy().name }">
+                                <select class="form-control" required="required" th:field="*{advertNumber}">
+                                    <option value="">----Select An Advert----</option>
+                                    <option th:each="advert : ${adverts}"
+                                            th:value="${{advert.id}}"
+                                            th:text="${advert.name }">
                                     </option>
                                 </select>
                             </div>
