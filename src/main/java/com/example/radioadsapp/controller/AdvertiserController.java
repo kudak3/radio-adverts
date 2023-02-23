@@ -34,7 +34,7 @@ public class AdvertiserController {
         Advertiser advertiser = new Advertiser();
         model.addAttribute("advertiser", advertiser);
         model.addAttribute("genderList", Gender.values());
-        model.addAttribute("users",userService.findAllUsers());
+        model.addAttribute("users",userService.getAll());
 
 
 
