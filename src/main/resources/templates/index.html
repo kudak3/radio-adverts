@@ -96,17 +96,17 @@
                     <div class="card col-md-6 no-padding ">
                         <div class="card-body">
                             <div class="h1 text-muted text-right mb-4">
-                                <a th:href="@{/advertisers/add}"><i class="fa fa-user-plus"></i></a>
-                                <a class="btn btn-primary" th:href="@{/advertisers/list}">Advertisers</a>
+                                <a th:href="@{/clients/add}"><i class="fa fa-user-plus"></i></a>
+                                <a class="btn btn-primary" th:href="@{/clients/list}">Clients</a>
                             </div>
 
                             <div class="row justify-content-around">
                                 <div class="col-xs-6" >
 
                             <div class="h4 mb-0">
-                                <span class="count" th:text="${newAdvertisers}"></span>
+                                <span class="count" th:text="${newClients}"></span>
                             </div>
-                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Advertisers</small>
+                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Clients</small>
                             <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                  style="width: 40%; height: 5px;"></div>
 
@@ -115,9 +115,9 @@
 
                                 <div class=" col-xs-6">
                                     <div class="h4 mb-0">
-                                        <span class="count" th:text="${advertisers}"></span>
+                                        <span class="count" th:text="${clients}"></span>
                                     </div>
-                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Advertisers</small>
+                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Clients</small>
                                     <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                          style="width: 40%; height: 5px;"></div>
                                 </div>

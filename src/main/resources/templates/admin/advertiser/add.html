@@ -12,14 +12,14 @@
             <div class="col-md-2"></div>
             <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header"><strong>Advertiser</strong>
+                    <div class="card-header"><strong>Client</strong>
                         <small> Form</small>
                     </div>
                     <div class="card-body card-block">
 
 
-                        <form autocomplete="off" class="sky-form" th:object="${advertiser}" method="post"
-                              th:action="@{/advertisers/save}" role="form">
+                        <form autocomplete="off" class="sky-form" th:object="${client}" method="post"
+                              th:action="@{/clients/save}" role="form">
                             <input type="hidden" th:field="*{id}"/>
 
 

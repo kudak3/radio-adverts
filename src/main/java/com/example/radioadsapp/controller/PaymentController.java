@@ -1,9 +1,9 @@
 package com.example.radioadsapp.controller;
 
 
-import com.example.radioadsapp.model.Advertiser;
+import com.example.radioadsapp.model.Client;
 import com.example.radioadsapp.model.Payment;
-import com.example.radioadsapp.service.impl.AdvertiserServiceImpl;
+import com.example.radioadsapp.service.impl.ClientServiceImpl;
 import com.example.radioadsapp.service.impl.PaymentServiceImpl;
 import com.example.radioadsapp.service.impl.PaymentTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ public class PaymentController {
     final
     PaymentServiceImpl paymentService;
 
-    public PaymentController(PaymentServiceImpl paymentService, AdvertiserServiceImpl advertiserService) {
+    public PaymentController(PaymentServiceImpl paymentService, ClientServiceImpl clientService) {
         this.paymentService = paymentService;
-        this.advertiserService = advertiserService;
+        this.clientService = clientService;
     }
 
-    private final AdvertiserServiceImpl advertiserService;
+    private final ClientServiceImpl clientService;
 
     @Autowired
     private PaymentTypeServiceImpl paymentTypeService;
@@ -41,14 +41,14 @@ public class PaymentController {
 
     @GetMapping("add")
     public String addPage(Model model) {
-        List<Advertiser> advertisers = advertiserService.getAll();
+        List<Client> clients = clientService.getAll();
 
 
 
         Payment payment = new Payment();
         model.addAttribute("payment", payment);
         model.addAttribute("paymentType", paymentTypeService.getAll());
-        model.addAttribute("advertisers",advertisers);
+        model.addAttribute("clients",clients);
 
         return "admin/payment/add";
     }

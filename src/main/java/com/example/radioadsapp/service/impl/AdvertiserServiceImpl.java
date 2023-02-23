@@ -1,9 +1,9 @@
 package com.example.radioadsapp.service.impl;
 
-import com.example.radioadsapp.model.Advertiser;
+import com.example.radioadsapp.model.Client;
 import com.example.radioadsapp.model.Payment;
-import com.example.radioadsapp.repository.AdvertiserRepository;
-import com.example.radioadsapp.service.AdvertiserService;
+import com.example.radioadsapp.repository.ClientRepository;
+import com.example.radioadsapp.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,51 +12,51 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class AdvertiserServiceImpl implements AdvertiserService {
+public class ClientServiceImpl implements ClientService {
 
-        private final AdvertiserRepository advertiserRepository;
+        private final ClientRepository clientRepository;
 
-        public AdvertiserServiceImpl(AdvertiserRepository advertiserRepository) {
-            this.advertiserRepository = advertiserRepository;
+        public ClientServiceImpl(ClientRepository clientRepository) {
+            this.clientRepository = clientRepository;
         }
 
 
 
-        public List<Advertiser> getAll() {
-            return advertiserRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        public List<Client> getAll() {
+            return clientRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         }
 
-        public Advertiser save(Advertiser client) {
-            return advertiserRepository.save(client);
+        public Client save(Client client) {
+            return clientRepository.save(client);
         }
 
         public void delete(Long id) {
-            advertiserRepository.deleteById(id);
+            clientRepository.deleteById(id);
         }
 
-        public Advertiser updateAdvertiser(Advertiser updatedAdvertiser) {
+        public Client updateClient(Client updatedClient) {
 
-            return advertiserRepository.findById(updatedAdvertiser.getId())
-                    .map(advertiser-> {
+            return clientRepository.findById(updatedClient.getId())
+                    .map(client-> {
 
-                        advertiser.setFirstName(updatedAdvertiser.getFirstName());
-                        advertiser.setLastName(updatedAdvertiser.getLastName());
-                        advertiser.setEmail(updatedAdvertiser.getEmail());
-                        return advertiserRepository.save(advertiser);
+                        client.setFirstName(updatedClient.getFirstName());
+                        client.setLastName(updatedClient.getLastName());
+                        client.setEmail(updatedClient.getEmail());
+                        return clientRepository.save(client);
                     })
                     .orElse(null);
 
         }
 
-        public Advertiser getAdvertiser(Long id) {
-            return advertiserRepository.findById(id).orElse(null);
+        public Client getClient(Long id) {
+            return clientRepository.findById(id).orElse(null);
 
         }
 
 
 
         public List<Payment> getPaymentHistory(Long id) {
-            return advertiserRepository.findById(id).map(advertiser-> advertiser.getPayments()).orElse(null);
+            return clientRepository.findById(id).map(client-> client.getPayments()).orElse(null);
         }
 
     }

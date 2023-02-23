@@ -1,6 +1,6 @@
 package com.example.radioadsapp.service;
 
-import com.example.radioadsapp.model.Advertiser;
+import com.example.radioadsapp.model.Client;
 
-public interface AdvertiserService extends IService<Advertiser,Long>{
+public interface ClientService extends IService<Client,Long>{
 }

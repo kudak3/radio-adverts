@@ -1,7 +1,7 @@
 package com.example.radioadsapp.controller;
 
-import com.example.radioadsapp.model.Advertiser;
-import com.example.radioadsapp.service.impl.AdvertiserServiceImpl;
+import com.example.radioadsapp.model.Client;
+import com.example.radioadsapp.service.impl.ClientServiceImpl;
 import com.example.radioadsapp.service.impl.UserServiceImpl;
 import com.example.radioadsapp.utils.Gender;
 import org.springframework.stereotype.Controller;
@@ -9,60 +9,60 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/advertisers/")
-public class AdvertiserController {
+@RequestMapping("/clients/")
+public class ClientController {
 
-    private final AdvertiserServiceImpl advertiserService;
+    private final ClientServiceImpl clientService;
 
 
     private final UserServiceImpl userService;
 
-    public AdvertiserController(AdvertiserServiceImpl advertiserService, UserServiceImpl userService) {
-        this.advertiserService = advertiserService;
+    public ClientController(ClientServiceImpl clientService, UserServiceImpl userService) {
+        this.clientService = clientService;
         this.userService = userService;
     }
 
     @GetMapping("list")
-    public String listAdvertisers(Model model) {
-        model.addAttribute("advertisers", advertiserService.getAll());
-        return "admin/advertiser/list";
+    public String listClients(Model model) {
+        model.addAttribute("clients", clientService.getAll());
+        return "admin/client/list";
     }
 
     @GetMapping("add")
     public String addPage(Model model) {
 
-        Advertiser advertiser = new Advertiser();
-        model.addAttribute("advertiser", advertiser);
+        Client client = new Client();
+        model.addAttribute("client", client);
         model.addAttribute("genderList", Gender.values());
         model.addAttribute("users",userService.getAll());
 
 
 
-        return "admin/advertiser/add";
+        return "admin/client/add";
     }
 
     @GetMapping("view/{id}")
     public String viewPage(@PathVariable Long id, Model model) {
 
-        Advertiser advertiser = advertiserService.getAdvertiser(id);
-        model.addAttribute("advertiser",advertiser);
+        Client client = clientService.getClient(id);
+        model.addAttribute("client",client);
 
-        return "admin/advertiser/view";
+        return "admin/client/view";
     }
 
     @PostMapping("save")
-    public String saveUser(@ModelAttribute("advertiser") Advertiser advertiser) {
-        System.out.println("========advertiser");
+    public String saveUser(@ModelAttribute("client") Client client) {
+        System.out.println("========client");
         // save user to database
-        advertiserService.save(advertiser);
-        return "redirect:/advertisers/list";
+        clientService.save(client);
+        return "redirect:/clients/list";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteAdvertiser(@PathVariable(value = "id") long id) {
+    public String deleteClient(@PathVariable(value = "id") long id) {
 
-        // call delete advertiser payment-type
-        advertiserService.delete(id);
-        return "redirect:/advertisers/list";
+        // call delete client payment-type
+        clientService.delete(id);
+        return "redirect:/clients/list";
     }
 }

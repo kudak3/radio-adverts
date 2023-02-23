@@ -11,8 +11,8 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "advertiser")
-public class Advertiser implements Serializable {
+@Table(name = "client")
+public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -36,8 +36,8 @@ public class Advertiser implements Serializable {
 
 
 
-    @JsonBackReference(value = "payment-advertiser")
-    @OneToMany(mappedBy = "advertiser")
+    @JsonBackReference(value = "payment-client")
+    @OneToMany(mappedBy = "client")
     private List<Payment> payments = new ArrayList<>();
 
 
@@ -138,7 +138,7 @@ public class Advertiser implements Serializable {
 
     @Override
     public String toString() {
-        return "Advertiser{" +
+        return "Client{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

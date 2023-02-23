@@ -12,7 +12,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h4>Advertisers</h4>
+                            <h4>Clients</h4>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">Advertisers List </a></li>
+                                <li><a href="#">Clients List </a></li>
 
                             </ol>
                         </div>
@@ -30,7 +30,7 @@
 
 
             <div class="col-sm-4 ">
-                <a class="btn btn-primary rounded " th:href="@{/advertisers/add}">New Advertiser</a>
+                <a class="btn btn-primary rounded " th:href="@{/clients/add}">New Client</a>
             </div>
 
             <br/>
@@ -55,18 +55,18 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="advertiser : ${advertisers}">
+                <tr th:each="client : ${clients}">
 
-                    <td th:text="${advertiser.title}"></td>
-                    <td th:text="${advertiser.firstName + ' ' + advertiser.lastName}"></td>
+                    <td th:text="${client.title}"></td>
+                    <td th:text="${client.firstName + ' ' + client.lastName}"></td>
 
-                    <td th:text="${advertiser.gender?.name}"></td>
-                    <td th:text="${advertiser.phoneNumber}"></td>
-                    <td th:text="${advertiser.email}"></td>
-                    <td><a th:href="@{'/advertisers/view/' + ${advertiser.id}}" class="btn btn-outline-success"><i class=" fa fa-eye" style="color: green"></i></a>
-                        <a th:href="@{'/advertisers/update/' + ${advertiser.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a></h2>
+                    <td th:text="${client.gender?.name}"></td>
+                    <td th:text="${client.phoneNumber}"></td>
+                    <td th:text="${client.email}"></td>
+                    <td><a th:href="@{'/clients/view/' + ${client.id}}" class="btn btn-outline-success"><i class=" fa fa-eye" style="color: green"></i></a>
+                        <a th:href="@{'/clients/update/' + ${client.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a></h2>
 
-                        <a th:href="@{'/advertisers/delete/' + ${advertiser.id}}"
+                        <a th:href="@{'/clients/delete/' + ${client.id}}"
                            onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i> </a></h2>
 
                     </td>

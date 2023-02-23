@@ -17,9 +17,9 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference(value="payment-advertiser")
+    @JsonBackReference(value="payment-client")
     @ManyToOne
-    private Advertiser advertiser;
+    private Client client;
     private String accountNumber;
     private String advertNumber;
 
@@ -53,12 +53,12 @@ public class Payment implements Serializable {
         this.id = id;
     }
 
-    public Advertiser getAdvertiser() {
-        return advertiser;
+    public Client getClient() {
+        return client;
     }
 
-    public void setAdvertiser(Advertiser advertiser) {
-        this.advertiser = advertiser;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Long getAmount() {
@@ -114,7 +114,7 @@ public class Payment implements Serializable {
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", advertiser=" + advertiser.getFirstName() +
+                ", client=" + client.getFirstName() +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", advertNumber='" + advertNumber + '\'' +
                 ", paymentType=" + paymentType +
