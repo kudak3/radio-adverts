@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <label>Select Client</label>
                                 <select class="form-control" required="required" th:field="*{client}">
-                                    <option value="">----Select----</option>
+                                    <option value="">----Select A Client----</option>
                                     <option th:each="client : ${clients}"
                                             th:value="${{client}}"
                                             th:text="${client.name}">
@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Select Policy</label>
+                                <label>Select Advert</label>
                                 <select class="form-control" required="required" th:field="*{advertNumber}">
                                     <option value="">----Select An Advert----</option>
                                     <option th:each="advert : ${adverts}"
