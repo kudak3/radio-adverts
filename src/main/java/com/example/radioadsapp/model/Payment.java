@@ -20,6 +20,15 @@ public class Payment implements Serializable {
     @JsonBackReference(value="payment-client")
     @ManyToOne
     private Client client;
+
+    @JsonBackReference(value="payment-advert")
+    @ManyToOne
+    private Advert advert;
+
+    @JsonBackReference(value="payment-radio")
+    @ManyToOne
+    private RadioStation radioStation;
+
     private String accountNumber;
     private String advertNumber;
 
@@ -109,6 +118,21 @@ public class Payment implements Serializable {
         this.advertNumber = advertNumber;
     }
 
+    public Advert getAdvert() {
+        return advert;
+    }
+
+    public void setAdvert(Advert advert) {
+        this.advert = advert;
+    }
+
+    public RadioStation getRadioStation() {
+        return radioStation;
+    }
+
+    public void setRadioStation(RadioStation radioStation) {
+        this.radioStation = radioStation;
+    }
 
     @Override
     public String toString() {
