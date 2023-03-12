@@ -56,8 +56,8 @@
                 <tbody>
                 <tr th:each="payment : ${payments}">
 
-                    <td th:text="${payment.client.firstName + ' ' + payment.client.lastName}"></td>
-                    <td th:text="${payment.advertNumber}"></td>
+                    <td th:text="${payment.client.name}"></td>
+                    <td th:text="${payment.advert.name}"></td>
                     <td th:text="${payment.description}"></td>
                     <td th:text="${'$'+payment.amount}">
                     </td>

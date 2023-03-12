@@ -1,10 +1,15 @@
 package com.example.radioadsapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
-public class RadioStation {
+public class RadioStation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,14 +17,10 @@ public class RadioStation {
     @Column(unique = true)
     private String name;
 
-    public RadioStation() {
+    @JsonBackReference(value = "payment-radio-station")
+    @OneToMany(mappedBy = "radioStation")
+    private List<Payment> payments = new ArrayList<>();
 
-    }
-
-    public RadioStation(String name) {
-        super();
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
@@ -34,11 +35,20 @@ public class RadioStation {
         this.name = name;
     }
 
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
     @Override
     public String toString() {
         return "RadioStation{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", payments='" + payments + '\'' +
                 '}';
     }
 }

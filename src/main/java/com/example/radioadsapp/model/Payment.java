@@ -25,7 +25,7 @@ public class Payment implements Serializable {
     @ManyToOne
     private Advert advert;
 
-    @JsonBackReference(value="payment-radio")
+    @JsonBackReference(value="payment-radio-station")
     @ManyToOne
     private RadioStation radioStation;
 
@@ -139,6 +139,8 @@ public class Payment implements Serializable {
         return "Payment{" +
                 "id=" + id +
                 ", client=" + client.getFirstName() +
+                ", advert=" + advert.getName() +
+                ", radio=" + radioStation.getName() +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", advertNumber='" + advertNumber + '\'' +
                 ", paymentType=" + paymentType +
@@ -146,5 +148,16 @@ public class Payment implements Serializable {
                 ", description='" + description + '\'' +
                 ", date=" + date +
                 '}';
+    }
+
+    @ManyToOne(optional = false)
+    private RadioStation radioStations;
+
+    public RadioStation getRadioStations() {
+        return radioStations;
+    }
+
+    public void setRadioStations(RadioStation radioStations) {
+        this.radioStations = radioStations;
     }
 }

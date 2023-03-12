@@ -22,6 +22,18 @@
                               th:action="@{/payments/save}" role="form">
                             <input type="hidden" th:field="*{id}"/>
 
+
+                            <div class="form-group">
+                                <label>Select Radio Station</label>
+                                <select class="form-control" required="required" th:field="*{radioStation}">
+                                    <option value="">----Select A RadioStation----</option>
+                                    <option th:each="radioStation : ${radioStations}"
+                                            th:value="${{radioStation}}"
+                                            th:text="${radioStation.name}">
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <label>Select Client</label>
                                 <select class="form-control" required="required" th:field="*{client}">
@@ -35,10 +47,10 @@
 
                             <div class="form-group">
                                 <label>Select Advert</label>
-                                <select class="form-control" required="required" th:field="*{advertNumber}">
+                                <select class="form-control" required="required" th:field="*{advert}">
                                     <option value="">----Select An Advert----</option>
                                     <option th:each="advert : ${adverts}"
-                                            th:value="${{advert.id}}"
+                                            th:value="${{advert}}"
                                             th:text="${advert.name }">
                                     </option>
                                 </select>
