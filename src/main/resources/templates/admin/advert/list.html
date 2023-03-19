@@ -39,9 +39,10 @@
 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
 <!--                <thead>-->
                 <tr>
-                    <th scope="col">Advert Id</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Advert Type</th>
+                    <th scope="col">Url</th>
 
                     <th scope="col">Action</th>
                 </tr>
@@ -49,9 +50,9 @@
 
                 <tbody>
                 <tr th:each="advert : ${adverts}">
-                    <td th:text="${advert.id}"></td>
                     <td th:text="${advert.name}"></td>
                     <td th:text="${advert.description}"></td>
+                    <td th:text="${advert.advertType}"></td>
                     <td><a th:href="@{'/adverts/update/' + ${advert.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
 
                     <a th:href="@{'/adverts/delete/' + ${advert.id}}"

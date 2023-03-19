@@ -2,6 +2,7 @@ package com.example.radioadsapp.controller;
 
 import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.service.impl.AdvertServiceImpl;
+import com.example.radioadsapp.utils.AdvertType;
 import com.example.radioadsapp.utils.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class AdvertController {
     public String addPage(Model model) {
 
         Advert advert = new Advert();
+        model.addAttribute("advertTypes", AdvertType.values());
         model.addAttribute("advert", advert);
         return "admin/advert/add";
     }

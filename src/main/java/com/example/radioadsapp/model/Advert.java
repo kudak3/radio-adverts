@@ -1,9 +1,7 @@
 package com.example.radioadsapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.radioadsapp.utils.AdvertType;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
@@ -16,6 +14,10 @@ public class Advert implements Serializable {
     private Long id;
     private String name;
     private String description;
+    @Enumerated
+    private AdvertType advertType;
+
+    private String url;
 
     public Long getId() {
         return id;
@@ -39,6 +41,22 @@ public class Advert implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public AdvertType getAdvertType() {
+        return advertType;
+    }
+
+    public void setAdvertType(AdvertType advertType) {
+        this.advertType = advertType;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
