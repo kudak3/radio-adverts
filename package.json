@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/kudak3/radio-adverts#readme",
   "devDependencies": {
-    "tailwindcss": "^3.2.7"
+    "tailwindcss": "^3.3.1"
   }
 }

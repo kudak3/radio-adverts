@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ["./src/main/resources/templates/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'radio-ads': "url('/img/radio-ads.jpg')",
+      }
+    },
   },
   plugins: [],
 }
