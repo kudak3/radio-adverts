@@ -114,7 +114,7 @@ textarea {
     width: 100%;
 }
 aside.left-panel {
-    background: $menu-bg;
+    //background: $menu-bg;
     display: table-cell;
     height: 100vh;
     min-height: 100%;
@@ -125,7 +125,6 @@ aside.left-panel {
 }
 
 .navbar {
-    background: #272c33;
     border-radius: 0;
     border: none;
     display: block;
@@ -1626,7 +1625,7 @@ header .form-inline {
 
 
 
-// Responsive Styles 
+// Responsive Styles
 
 @media (max-width: 1368px) {
     .content {
@@ -1690,7 +1689,7 @@ header .form-inline {
         flex: none;
     }
 }
-@media (max-width: 575.99px) { 
+@media (max-width: 575.99px) {
     body {
         display: block;
     }
