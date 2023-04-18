@@ -3,6 +3,8 @@ package com.example.radioadsapp.model;
 import com.example.radioadsapp.utils.CustomDateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
@@ -14,9 +16,17 @@ public class NotificationEntity {
     private Long id;
     private String message;
 
+    @CreatedDate
+    @Column( nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
     @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date created;
+
+    @LastModifiedDate
+    @Column( nullable = false)
+    @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    private Date modified;
 
     private String affectedTable;
 
@@ -84,5 +94,13 @@ public class NotificationEntity {
 
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
+    }
+
+    public Date getModified() {
+        return modified;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
     }
 }
