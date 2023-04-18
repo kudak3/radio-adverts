@@ -38,4 +38,4 @@ out/
 /src/main/resources/application.properties
 /build.gradle
 #node modules
-node_modules/
+/node_modules/
