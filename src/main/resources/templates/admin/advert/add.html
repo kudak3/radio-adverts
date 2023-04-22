@@ -1,19 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<div class=" bg-radio-ads bg-cover bg-center h-screen">
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+        <div class="flex flex-col justify-center items-center place-content-center ">
 
 
-
-            <div class="col-md-2"></div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md mt-8">
                 <div class="card">
-                    <div class="card-header"><strong>Add Advert </strong>
-                        <small> Form</small>
+                    <div class="card-header bg-white text-center"><strong>Add Advert </strong>
                     </div>
                     <div class="card-body card-block">
 
@@ -56,11 +53,11 @@
 
 
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm">
+                            <div class="flex flex-row justify-center space-x-4">
+                                <button type="submit" class="btn btn-primary btn-sm rounded">
                                     <i class="fa fa-dot-circle-o"></i> Submit
                                 </button>
-                                <button type="reset" class="btn btn-danger btn-sm">
+                                <button type="reset" class="btn btn-danger btn-sm rounded">
                                     <i class="fa fa-ban"></i> Reset
                                 </button>
                             </div>
@@ -73,7 +70,7 @@
 
 
             </div>
-            <div class="col-md-2"></div>
+
         </div>
 
     </div>
