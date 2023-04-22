@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
-      th:fragment="showCount (count)">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en"
+      th:fragment="showCount (count,request)">
 <head>
     <title>Home Page</title>
     <meta charset="utf-8">
@@ -9,6 +9,7 @@
     <meta name="description" content="Radio Adverts backend">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -26,8 +27,6 @@
     <script th:src="@{/js/main.js}"></script>
 
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <!--<script th:src="@{/../../static/js/jquery-1.12.3.min.js}"></script>-->
 
     <script th:src="@{/js/plugins.js}"></script>
     <script th:src="@{/js/main.js}"></script>
@@ -37,6 +36,7 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/vendor/jquery-2.1.4.min.js}">
     </script>
+
 
 
 </head>
@@ -55,40 +55,46 @@
                 <img th:src="@{/img/logo.jpeg}" alt="School logo" class=" w-24 h-24 rounded-full">
             </div>
 
-
             <h5 class="text-white my-2">Radio Adverts System </h5>
         </div>
 
-        <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav ">
 
-                <li class="active ">
+            <ul class="nav navbar-nav">
+
+                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300 "
+                    th:classappend="${request.requestURI == '/' ? 'active':''}"
+                >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    <a th:href="@{/}" > <i class="menu-icon fa fa-dashboard ml-4"></i>Dashboard </a>
                 </li>
 
-                <li class="active">
+                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300 active:bg-blue-400"
+                    th:classappend="${request.requestURI == '/notifications' ? 'active':''}"
+                >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/notifications}"> <i class="menu-icon fa fa-bell"></i>Notifications <i
+                    <a th:href="@{/notifications}"> <i class="menu-icon fa fa-bell ml-4"></i>Notifications <i
                             th:if="${count}" class="badge bg-danger rounded-circle"><span
                             class="text-center text-capitalize text-white" th:text="${count}"></span></i></a>
                 </li>
 
 
-                <li class="active">
+                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+                    th:classappend="${request.requestURI == '/config' ? 'active':''}"
+                >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/config}"> <i class="menu-icon fa fa-gears"></i>Configurations </a>
+                    <a th:href="@{/config}"> <i class="menu-icon fa fa-gears ml-4"></i>Configurations </a>
                 </li>
 
-                <li>
-                    <a th:href="@{/logout}"> <i class="menu-icon fa  fa-sign-out"></i>Logout</a>
+                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+
+                >
+                    <a th:href="@{/logout}"> <i class="menu-icon fa  fa-sign-out ml-4"></i>Logout</a>
                 </li>
 
 
             </ul>
-        </div><!-- /.navbar-collapse -->
+
     </nav>
 </aside><!-- /#left-panel -->
-
 </body>
 </html>
