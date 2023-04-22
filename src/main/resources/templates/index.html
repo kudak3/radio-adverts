@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{/css/main.css}"/>
 
-<th:block th:include="fragments/header :: showCount(count=${notifications})"></th:block>
+
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
 <div class=" bg-radio-ads bg-cover bg-center ">
 
@@ -15,7 +15,7 @@
                         <div class="page-header float-left">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li class="active">Dashboard</li>
+                                    <li class="active" >Dashboard </li>
                                 </ol>
                             </div>
                         </div>
@@ -211,5 +211,5 @@
 
 </div>
 
-<div th:include="fragments/footer"></div>
+<div th:include="fragments/footer" class="h-4"></div>
 </html>
