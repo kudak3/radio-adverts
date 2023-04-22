@@ -4,8 +4,10 @@ package com.example.radioadsapp.controller;
 import com.example.radioadsapp.model.Client;
 import com.example.radioadsapp.model.Payment;
 import com.example.radioadsapp.model.RadioStation;
+import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.AdvertService;
 import com.example.radioadsapp.service.impl.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,32 +19,35 @@ import java.util.List;
 @RequestMapping("/payments")
 public class PaymentController {
 
-    final
-    PaymentServiceImpl paymentService;
+    final PaymentServiceImpl paymentService;
     private final ClientServiceImpl clientService;
 
     private final PaymentTypeServiceImpl paymentTypeService;
     private final AdvertServiceImpl advertService;
     private final RadioStationServiceImpl radioStationService;
+    private final NotificationRepository notificationRepository;
 
-    public PaymentController(PaymentServiceImpl paymentService, ClientServiceImpl clientService, PaymentTypeServiceImpl paymentTypeService, AdvertServiceImpl advertService, RadioStationServiceImpl radioStationService) {
+    public PaymentController(PaymentServiceImpl paymentService, ClientServiceImpl clientService, PaymentTypeServiceImpl paymentTypeService, AdvertServiceImpl advertService, RadioStationServiceImpl radioStationService, NotificationRepository notificationRepository) {
         this.paymentService = paymentService;
         this.clientService = clientService;
         this.paymentTypeService = paymentTypeService;
         this.advertService = advertService;
         this.radioStationService = radioStationService;
+        this.notificationRepository = notificationRepository;
     }
 
 
     @GetMapping("/list")
-    public String getPayments(Model model) {
+    public String getPayments(Model model, HttpServletRequest request) {
         model.addAttribute("payments", paymentService.getAll());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
         return "admin/payment/list";
     }
 
 
     @GetMapping("add")
-    public String addPage(Model model) {
+    public String addPage(Model model, HttpServletRequest request) {
 
         Payment payment = new Payment();
         model.addAttribute("payment", payment);
@@ -50,6 +55,8 @@ public class PaymentController {
         model.addAttribute("clients", clientService.getAll());
         model.addAttribute("adverts", advertService.getAll());
         model.addAttribute("radioStations", radioStationService.getRadioStations());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
 
         return "admin/payment/add";
     }

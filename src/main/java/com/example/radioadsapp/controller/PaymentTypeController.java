@@ -1,7 +1,9 @@
 package com.example.radioadsapp.controller;
 
 import com.example.radioadsapp.model.PaymentType;
+import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.PaymentTypeService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,28 +12,29 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/config/payment-types/")
 public class PaymentTypeController {
     private final PaymentTypeService paymentTypeService;
+    private final NotificationRepository notificationRepository;
 
-    public PaymentTypeController(PaymentTypeService paymentTypeService) {
+    public PaymentTypeController(PaymentTypeService paymentTypeService, NotificationRepository notificationRepository) {
         this.paymentTypeService = paymentTypeService;
+        this.notificationRepository = notificationRepository;
     }
 
     @GetMapping("list")
-    public String getPaymentMethods(Model model){
+    public String getPaymentMethods(Model model, HttpServletRequest request) {
         model.addAttribute("paymentTypes", paymentTypeService.getAll());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
         return "admin/payment-type/list";
     }
 
 
     @GetMapping("add")
-    public String addPage(Model model) {
-
-
-
+    public String addPage(Model model, HttpServletRequest request) {
 
         PaymentType paymentType = new PaymentType();
-
         model.addAttribute("paymentType", paymentType);
-
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
 
         return "admin/payment-type/add";
     }

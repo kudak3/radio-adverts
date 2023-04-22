@@ -18,14 +18,14 @@
                             <div class="page-header float-left">
                                 <div class="page-title">
                                     <ol class="breadcrumb text-right">
-                                        <li class="active">Configurations</li>
+                                        <li class="active">Adverts</li>
                                     </ol>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 mt-2">
-                        <a class="btn btn-primary rounded " th:href="@{/adverts/add}">New Advert</a>
+                        <a class="btn btn-primary rounded " th:href="@{/adverts/add}">Add</a>
                     </div>
                     </div>
                     <div class="flex pr-4">
@@ -43,29 +43,29 @@
 
 
 
-            <table id="advertListTable" th:inline="none" class="table table-striped p-4 w-full">
+            <table id="advertListTable" th:inline="none" class="table table-striped p-4 w-full" style="background-color: rgb(96 165 250 / .5)">
                 <br/>
 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
-<!--                <thead>-->
+                <thead class="bg-blue-500/[.7] border-solid border-y-2">
                 <tr>
                     <th scope="col" class="text-white">Name</th>
-                    <th scope="col" class="text-white">Description</th>
-                    <th scope="col" class="text-white">Advert Type</th>
-                    <th scope="col" class="text-white">Url</th>
+                    <th scope="col" class="text-white text-center">Description</th>
+                    <th scope="col" class="text-white text-center">Advert Type</th>
+                    <th scope="col" class="text-white text-center">Url</th>
 
-                    <th scope="col" class="text-white">Action</th>
+                    <th scope="col" class="text-white text-right">Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="advert : ${adverts}">
-                    <td th:text="${advert.name}"></td>
-                    <td th:text="${advert.description}"></td>
-                    <td th:text="${advert.advertType}"></td>
-                    <td><a th:href="@{'/adverts/update/' + ${advert.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
+                    <td th:text="${advert.name}" class=" text-white"></td>
+                    <td th:text="${advert.description}" class="text-center text-white"></td>
+                    <td th:text="${advert.advertType}" class="text-center text-white"></td>
+                    <td class="text-right"><a th:href="@{'/adverts/update/' + ${advert.id}}" class="btn btn-info"><i class="fa fa-pencil"></i></a>
 
                     <a th:href="@{'/adverts/delete/' + ${advert.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
 
 

@@ -1,6 +1,7 @@
 package com.example.radioadsapp.controller;
 
 import com.example.radioadsapp.repository.NotificationRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,11 @@ public class NotificationController {
     }
 
     @GetMapping
-    public String getNotifications(Model model){
+    public String getNotifications(Model model, HttpServletRequest request){
         notificationRepository.updateAllNotifications();
         model.addAttribute("notifications",notificationRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
+        model.addAttribute("notificationCount",notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
         return "admin/notification/list";
     }
 

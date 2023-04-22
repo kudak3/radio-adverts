@@ -2,58 +2,65 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<body>
+<div class=" bg-radio-ads bg-cover bg-center h-screen">
 
-            <div class="breadcrumbs">
-                <div class="col-sm-4">
-                    <div class="page-header float-left">
-                        <div class="page-title">
-                            <h1>Roles List</h1>
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+
+        <div class="flex flex-col pt-4 px-8">
+
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row">
+                    <div class="breadcrumbs">
+                        <div class="col-sm-4">
+                            <div class="page-header float-left">
+                                <div class="page-title">
+                                    <ol class="breadcrumb text-right">
+                                        <li class="active">Clients</li>
+                                    </ol>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="page-header float-right">
-                        <div class="page-title">
-                            <ol class="breadcrumb text-right">
-                                <li><a href="#">Role List </a></li>
-                            </ol>
-                        </div>
+                    <div class="col-sm-4 mt-2">
+                        <a class="btn btn-primary rounded " th:href="@{/clients/add}">Add</a>
                     </div>
                 </div>
+                <div class="flex pr-4">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <span th:text="${username}"> username</span>
+                            <img class="w-8 h-8 rounded-full" src="/images/user.png" alt="User Avatar">
+                        </a>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="col-sm-4 ">
-                <a class="btn btn-primary rounded " th:href="@{/config/roles/add}">New Role</a>
-            </div>
 
-            <br/>
-            <br/>
-
-
-            <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
+            <table id="roleListTable" th:inline="none"  class="table table-striped p-4 w-full" style="background-color: rgb(96 165 250 / .5)">
                 <br/>
 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
-<!--                <thead>-->
+                <thead class="bg-blue-500/[.7] border-solid border-y-2 ">
                 <tr>
-                    <th scope="col">Role Id</th>
-                    <th scope="col">Name</th>
 
-                    <th scope="col">Action</th>
+                    <th scope="col" class="text-white">Name</th>
+
+                    <th scope="col" class="text-white text-right">Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="role : ${roles}">
-                    <td th:text="${role.id}"></td>
-                    <td th:text="${role.name}"></td>
-                    <td><a th:href="@{'/config/roles/update/' + ${role.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
+
+                    <td th:text="${role.name}" class="text-white"></td>
+                    <td class="text-right text-white"><a th:href="@{'/config/roles/update/' + ${role.id}}" class="btn btn-info"><i class="fa fa-pencil"></i></a>
 
                     <a th:href="@{'/config/roles/delete/' + ${role.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
 
 
@@ -78,4 +85,5 @@
 </div>
 </div>
 <div th:include="fragments/footer"></div>
+</body>
 </html>
