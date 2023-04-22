@@ -1,48 +1,49 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<th:block th:include="fragments/header :: showCount(count=${notificationCount},request=${request})"></th:block>
 
-            <div class="breadcrumbs">
-                <div class="col-sm-4">
-                    <div class="page-header float-left">
-                        <div class="page-title">
-                            <h1>Notifications</h1>
+<div class=" bg-radio-ads bg-cover bg-center h-screen">
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+
+        <div class="flex flex-col pt-4 px-8">
+            <div class="flex flex-row justify-between">
+                <div class="breadcrumbs">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Notifications</li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
-                    <div class="page-header float-right">
-                        <div class="page-title">
-                            <ol class="breadcrumb text-right">
-                                <li><a href="#"> Notifications </a></li>
-                                <li class="active ml-4">List</li>
-                            </ol>
-                        </div>
+                <div class="flex pr-4">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <span th:text="${username}"> username</span>
+                            <img class="w-8 h-8 rounded-full" src="images/user.png" alt="User Avatar">
+                        </a>
                     </div>
+
+
                 </div>
             </div>
 
-
-            <br/>
-            <br/>
-
-
-            <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
+            <table id="roleListTable" th:inline="none"  class="table table-striped p-4 w-full ">
                 <br/>
                 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
                 <thead>
-                <tr>
+                <tr >
 
 
-                    <th scope="col">Affected Tables</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Date Created</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="text-white">Affected Tables</th>
+                    <th scope="col" class="text-white">Message</th>
+                    <th scope="col" class="text-white">Date Created</th>
+                    <th scope="col" class="text-white">Action</th>
 
 
                 </tr>
@@ -83,6 +84,7 @@
         </div>
     </div>
 </div>
+</div>
 
-<div th:include="fragments/footer"></div>
+<div th:include="fragments/footer" class="h-4"></div>
 </html>
