@@ -1,116 +1,148 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<div class=" bg-radio-ads bg-cover bg-center min-h-screen">
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+        <div class="flex flex-col pt-4 px-8">
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row space-x-4">
+                    <div class="breadcrumbs">
 
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Payments</li>
+                                </ol>
+                            </div>
+                        </div>
 
-
-            <div class="col-md-2"></div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header"><strong>Payment</strong>
-                        <small> Form</small>
                     </div>
-                    <div class="card-body card-block">
 
-
-                        <form autocomplete="off" class="sky-form" th:object="${payment}" method="post"
-                              th:action="@{/payments/save}" role="form">
-                            <input type="hidden" th:field="*{id}"/>
-
-
-                            <div class="form-group">
-                                <label>Select Radio Station</label>
-                                <select class="form-control" required="required" th:field="*{radioStation}">
-                                    <option value="">----Select A RadioStation----</option>
-                                    <option th:each="radioStation : ${radioStations}"
-                                            th:value="${{radioStation}}"
-                                            th:text="${radioStation.name}">
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Select Client</label>
-                                <select class="form-control" required="required" th:field="*{client}">
-                                    <option value="">----Select A Client----</option>
-                                    <option th:each="client : ${clients}"
-                                            th:value="${{client}}"
-                                            th:text="${client.name}">
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Select Advert</label>
-                                <select class="form-control" required="required" th:field="*{advert}">
-                                    <option value="">----Select An Advert----</option>
-                                    <option th:each="advert : ${adverts}"
-                                            th:value="${{advert}}"
-                                            th:text="${advert.name }">
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Select Payment Method</label>
-                                <select class="form-control" required="required" th:field="*{paymentType}">
-                                    <option value="">----Select Payment Method----</option>
-                                    <option th:each="type : ${paymentType}"
-                                            th:value="${{type}}"
-                                            th:text="${type.name}">
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="form-group"><label for="accountNumber" class=" form-control-label">
-                                Account Number</label><input type="text" id="accountNumber" name="accountNumber" th:field="*{accountNumber}"
-                                               required=""    placeholder="Account Number" class="form-control">
-                                <div th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}"></div>
-                            </div>
-
-                            <div class="form-group"><label for="description" class=" form-control-label">
-                                Payment Description</label><input type="text" id="description" name="description" th:field="*{description}"
-                                                   required=""    placeholder="Payment Description" class="form-control">
-                                <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-                            </div>
-
-
-                            <div class="form-group"><label for="amount" class=" form-control-label">
-                                Amount</label><input type="number" id="amount" name="amount" th:field="*{amount}"
-                                                   required=""    placeholder="Enter amount paid" class="form-control">
-                                <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
-                            </div>
-
-
-
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-dot-circle-o"></i> Submit
-                                </button>
-                                <button type="reset" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-ban"></i> Reset
-                                </button>
-                            </div>
-
-                        </form>
-<!--                        <span th:utext="${successMessage}">-->
-
+                </div>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
-            <div class="col-md-2"></div>
-        </div>
 
+            <div class="flex flex-col justify-center items-center place-content-center ">
+                <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md my-8">
+                    <div class="card">
+                        <div class="card-header bg-white text-center"><strong>Payment</strong>
+                        </div>
+                        <div class="card-body card-block">
+
+
+                            <form autocomplete="off" class="sky-form" method="post" role="form"
+                                  th:action="@{/payments/save}" th:object="${payment}">
+                                <input th:field="*{id}" type="hidden"/>
+
+
+                                <div class="form-group">
+                                    <label>Select Radio Station</label>
+                                    <select class="form-control" required="required" th:field="*{radioStation}">
+                                        <option value="">----Select A RadioStation----</option>
+                                        <option th:each="radioStation : ${radioStations}"
+                                                th:text="${radioStation.name}"
+                                                th:value="${{radioStation}}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Select Client</label>
+                                    <select class="form-control" required="required" th:field="*{client}">
+                                        <option value="">----Select A Client----</option>
+                                        <option th:each="client : ${clients}"
+                                                th:text="${client.name}"
+                                                th:value="${{client}}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Select Advert</label>
+                                    <select class="form-control" required="required" th:field="*{advert}">
+                                        <option value="">----Select An Advert----</option>
+                                        <option th:each="advert : ${adverts}"
+                                                th:text="${advert.name }"
+                                                th:value="${{advert}}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Select Payment Method</label>
+                                    <select class="form-control" required="required" th:field="*{paymentType}">
+                                        <option value="">----Select Payment Method----</option>
+                                        <option th:each="type : ${paymentType}"
+                                                th:text="${type.name}"
+                                                th:value="${{type}}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group"><label class=" form-control-label" for="accountNumber">
+                                    Account Number</label><input class="form-control" id="accountNumber" name="accountNumber"
+                                                                 placeholder="Account Number"
+                                                                 required="" th:field="*{accountNumber}"
+                                                                 type="text">
+                                    <div th:errors="*{accountNumber}"
+                                         th:if="${#fields.hasErrors('accountNumber')}"></div>
+                                </div>
+
+                                <div class="form-group"><label class=" form-control-label" for="description">
+                                    Payment Description</label><input class="form-control" id="description" name="description"
+                                                                      placeholder="Payment Description"
+                                                                      required="" th:field="*{description}"
+                                                                      type="text">
+                                    <div th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></div>
+                                </div>
+
+
+                                <div class="form-group"><label class=" form-control-label" for="amount">
+                                    Amount</label><input class="form-control" id="amount" name="amount" placeholder="Enter amount paid"
+                                                         required="" th:field="*{amount}"
+                                                         type="number">
+                                    <div th:errors="*{amount}" th:if="${#fields.hasErrors('amount')}"></div>
+                                </div>
+
+
+                                <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
+                                    <button class="btn btn-primary btn-sm rounded" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-sm rounded" type="reset">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+
+                            </form>
+                            <!--                        <span th:utext="${successMessage}">-->
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+        </div>
     </div>
 </div>
-</div>
-    <div th:include="fragments/footer"></div>
+<div th:include="fragments/footer"></div>
 </html>

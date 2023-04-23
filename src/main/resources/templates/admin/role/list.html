@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -18,49 +17,58 @@
                             <div class="page-header float-left">
                                 <div class="page-title">
                                     <ol class="breadcrumb text-right">
-                                        <li class="active">Clients</li>
+                                        <li class="active">Roles</li>
                                     </ol>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 mt-2">
-                        <a class="btn btn-primary rounded " th:href="@{/clients/add}">Add</a>
+                        <a class="btn btn-primary rounded " th:href="@{/config/roles/add}">Add</a>
                     </div>
                 </div>
-                <div class="flex pr-4">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            <span th:text="${username}"> username</span>
-                            <img class="w-8 h-8 rounded-full" src="/images/user.png" alt="User Avatar">
-                        </a>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
 
-            <table id="roleListTable" th:inline="none"  class="table table-striped p-4 w-full" style="background-color: rgb(96 165 250 / .5)">
+            <table class="table table-striped p-4 w-full" id="roleListTable"
+                   style="background-color: rgb(96 165 250 / .5)"
+                   th:inline="none">
                 <br/>
-<!--                <span th:utext="${successMessage}" class="text-success"></span>-->
+                <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
                 <thead class="bg-blue-500/[.7] border-solid border-y-2 ">
                 <tr>
 
-                    <th scope="col" class="text-white">Name</th>
+                    <th class="text-white" scope="col">Name</th>
 
-                    <th scope="col" class="text-white text-right">Action</th>
+                    <th class="text-white text-right" scope="col">Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="role : ${roles}">
 
-                    <td th:text="${role.name}" class="text-white"></td>
-                    <td class="text-right text-white"><a th:href="@{'/config/roles/update/' + ${role.id}}" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+                    <td class="text-white" th:text="${role.name}"></td>
+                    <td class="text-right text-white"><a class="btn btn-info"
+                                                         th:href="@{'/config/roles/update/' + ${role.id}}"><i
+                            class="fa fa-pencil"></i></a>
 
-                    <a th:href="@{'/config/roles/delete/' + ${role.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        <a class="btn btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this!!!!')"
+                           th:href="@{'/config/roles/delete/' + ${role.id}}"><i class="fa fa-trash"></i></a>
                     </td>
 
 

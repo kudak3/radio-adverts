@@ -28,20 +28,25 @@
                         <a class="btn btn-primary rounded " th:href="@{/clients/add}">Add</a>
                     </div>
                 </div>
-                <div class="flex pr-4">
-                    <div class="user-area dropdown float-right">
-                        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
-                           href="#">
-                            <span th:text="${username}"> username</span>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
                             <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
-                        </a>
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
 
-            <table class="table table-striped  p-4 w-full" id="clientListTable" style="background-color: rgb(96 165 250 / .5)"
+            <table class="table table-striped  p-4 w-full" id="clientListTable"
+                   style="background-color: rgb(96 165 250 / .5)"
                    th:inline="none">
                 <br/>
                 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
@@ -62,13 +67,14 @@
                 <tbody>
                 <tr th:each="client : ${clients}">
 
-                    <td th:text="${client.title}" class="text-white"></td>
-                    <td th:text="${client.firstName + ' ' + client.lastName}" class="text-center text-white"></td>
+                    <td class="text-white" th:text="${client.title}"></td>
+                    <td class="text-center text-white" th:text="${client.firstName + ' ' + client.lastName}"></td>
 
-                    <td th:text="${client.gender?.name}" class="text-center text-white"></td>
-                    <td th:text="${client.phoneNumber}" class="text-center text-white"></td>
-                    <td th:text="${client.email}" class="text-center text-white"></td>
-                    <td class="text-right"><a class="btn btn-outline-success" th:href="@{'/clients/view/' + ${client.id}}"><i
+                    <td class="text-center text-white" th:text="${client.gender?.name}"></td>
+                    <td class="text-center text-white" th:text="${client.phoneNumber}"></td>
+                    <td class="text-center text-white" th:text="${client.email}"></td>
+                    <td class="text-right"><a class="btn btn-outline-success"
+                                              th:href="@{'/clients/view/' + ${client.id}}"><i
                             class=" fa fa-eye" style="color: green"></i></a>
                         <a class="btn btn-info" th:href="@{'/clients/update/' + ${client.id}}"><i
                                 class="fa fa-pencil"></i></a></h2>

@@ -27,20 +27,25 @@
                         <a class="btn btn-primary rounded " th:href="@{/config/payment-types/add}">Add</a>
                     </div>
                 </div>
-                <div class="flex pr-4">
-                    <div class="user-area dropdown float-right">
-                        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
-                           href="#">
-                            <span th:text="${username}"> username</span>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
                             <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
-                        </a>
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
 
-            <table class="table table-striped p-4 w-full " id="pTypeListTable" th:inline="none" style="background-color: rgb(96 165 250 / .5)">
+            <table class="table table-striped p-4 w-full " id="pTypeListTable" style="background-color: rgb(96 165 250 / .5)"
+                   th:inline="none">
                 <br/>
                 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
                 <thead class="bg-blue-500/[.7] border-solid border-y-2 ">
@@ -56,7 +61,7 @@
                 <tbody>
                 <tr th:each="type : ${paymentTypes}">
 
-                    <td th:text="${type.name}" class="text-white"></td>
+                    <td class="text-white" th:text="${type.name}"></td>
 
 
                     <td class="text-right"><a class="btn btn-info" th:href="@{'/payment-types/update/' + ${type.id}}"><i

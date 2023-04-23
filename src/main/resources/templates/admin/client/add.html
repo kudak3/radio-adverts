@@ -1,158 +1,177 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<div class=" bg-radio-ads bg-cover bg-center min-h-screen">
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+        <div class="flex flex-col pt-4 px-8">
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row space-x-4">
+                    <div class="breadcrumbs">
 
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Clients</li>
+                                </ol>
+                            </div>
+                        </div>
 
-
-            <div class="col-md-2"></div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header"><strong>Client</strong>
-                        <small> Form</small>
                     </div>
-                    <div class="card-body card-block">
 
-
-                        <form autocomplete="off" class="sky-form" th:object="${client}" method="post"
-                              th:action="@{/clients/save}" role="form">
-                            <input type="hidden" th:field="*{id}"/>
-
-
-
-
-                            <div class="form-group">
-                                <label>Select Title</label>
-                                <select class="form-control" required="required" th:field="*{title}">
-                                    <option value="">----Select----</option>
-                                    <option
-                                            th:value="Mr"
-                                            >
-                                        Mr
-                                    </option>
-                                    <option
-                                            th:value="Mrs"
-                                    >
-                                        Mrs
-                                    </option>
-                                    <option
-                                            th:value="Miss"
-                                    >
-                                        Miss
-                                    </option>
-                                    <option
-                                            th:value="Dr"
-                                    >
-                                        Dr
-                                    </option>
-                                    <option
-                                            th:value="Prof"
-                                    >
-                                        Prof
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
-                                <label for="firstName" class="control-label">First name</label> <input
-                                    required=""  id="firstName" class="form-control" th:field="*{firstName}"/>
-                                <p class="error-message"
-                                   th:each="error: ${#fields.errors('firstName')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
-                                <label for="lastName" class="control-label">Last name</label> <input
-                                    required=""   id="lastName" class="form-control" th:field="*{lastName}"/>
-                                <p class="error-message"
-                                   th:each="error : ${#fields.errors('lastName')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
-                                <label for="email" class="control-label">Email</label> <input
-                                    required=""   id="email" class="form-control" th:field="*{email}"/>
-                                <p class="error-message"
-                                   th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation
-                                    error</p>
-                            </div>
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('phoneNumber')}? 'has-error':''">
-                                <label for="phoneNumber" class="control-label">PhoneNumber</label> <input
-                                    required=""   id="phoneNumber" class="form-control" th:field="*{phoneNumber}"/>
-                                <p class="error-message"
-                                   th:each="error : ${#fields.errors('phoneNumber')}" th:text="${error}">Validation
-                                    error</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Select Gender</label>
-                                <select class="form-control" required="required" th:field="*{gender}">
-                                    <option value="">----Select----</option>
-                                    <option th:each="gender : ${genderList}"
-                                            th:value="${{gender}}"
-                                            th:text="${gender.name}">
-                                    </option>
-                                </select>
-                            </div>
-
-<!--                            <div class="form-group"-->
-<!--                                 th:classappend="${#fields.hasErrors('password')}? 'has-error':''">-->
-<!--                                <label for="password" class="control-label">Password-->
-<!--                                    </label> <input id="password" class="form-control"-->
-<!--                                                          required=""             th:field="*{password}"/>-->
-<!--                                <p class="error-message"-->
-<!--                                   th:each="error : ${#fields.errors('password')}"-->
-<!--                                   th:text="${error}">Validation error</p>-->
-<!--                            </div>-->
-
-
-
-
-<!--                            <div class="form-group">-->
-<!--                                <label>Supporting Documents</label>-->
-<!--                                <select class="form-control" required="required" th:field="*{coverage}">-->
-<!--                                    <option value="">&#45;&#45;&#45;&#45;Select&#45;&#45;&#45;&#45;</option>-->
-<!--                                    <option th:each="coverage : ${levels}"-->
-<!--                                            th:value="${{coverage}}"-->
-<!--                                            th:text="${coverage.name}">-->
-<!--                                    </option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-
-
-
-
-
-
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-dot-circle-o"></i> Submit
-                                </button>
-                                <button type="reset" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-ban"></i> Reset
-                                </button>
-                            </div>
-
-                        </form>
-<!--                        <span th:utext="${successMessage}"> </span>-->
-
+                </div>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
-            <div class="col-md-2"></div>
-        </div>
 
+            <div class="flex flex-col justify-center items-center place-content-center ">
+                <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md my-8">
+                    <div class="card">
+                        <div class="card-header bg-white text-center"><strong>Add Client</strong>
+
+                        </div>
+                        <div class="card-body card-block">
+
+
+                            <form autocomplete="off" class="sky-form" method="post" role="form"
+                                  th:action="@{/clients/save}" th:object="${client}">
+                                <input th:field="*{id}" type="hidden"/>
+
+
+                                <div class="form-group">
+                                    <label>Select Title</label>
+                                    <select class="form-control" required="required" th:field="*{title}">
+                                        <option value="">----Select----</option>
+                                        <option
+                                                th:value="Mr"
+                                        >
+                                            Mr
+                                        </option>
+                                        <option
+                                                th:value="Mrs"
+                                        >
+                                            Mrs
+                                        </option>
+                                        <option
+                                                th:value="Miss"
+                                        >
+                                            Miss
+                                        </option>
+                                        <option
+                                                th:value="Dr"
+                                        >
+                                            Dr
+                                        </option>
+                                        <option
+                                                th:value="Prof"
+                                        >
+                                            Prof
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+                                    <label class="control-label" for="firstName">First name</label> <input
+                                        class="form-control" id="firstName" required="" th:field="*{firstName}"/>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('firstName')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                                    <label class="control-label" for="lastName">Last name</label> <input
+                                        class="form-control" id="lastName" required="" th:field="*{lastName}"/>
+                                    <p class="error-message"
+                                       th:each="error : ${#fields.errors('lastName')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+                                    <label class="control-label" for="email">Email</label> <input
+                                        class="form-control" id="email" required="" th:field="*{email}"/>
+                                    <p class="error-message"
+                                       th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation
+                                        error</p>
+                                </div>
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('phoneNumber')}? 'has-error':''">
+                                    <label class="control-label" for="phoneNumber">PhoneNumber</label> <input
+                                        class="form-control" id="phoneNumber" required="" th:field="*{phoneNumber}"/>
+                                    <p class="error-message"
+                                       th:each="error : ${#fields.errors('phoneNumber')}" th:text="${error}">Validation
+                                        error</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Select Gender</label>
+                                    <select class="form-control" required="required" th:field="*{gender}">
+                                        <option value="">----Select----</option>
+                                        <option th:each="gender : ${genderList}"
+                                                th:text="${gender.name}"
+                                                th:value="${{gender}}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!--                            <div class="form-group"-->
+                                <!--                                 th:classappend="${#fields.hasErrors('password')}? 'has-error':''">-->
+                                <!--                                <label for="password" class="control-label">Password-->
+                                <!--                                    </label> <input id="password" class="form-control"-->
+                                <!--                                                          required=""             th:field="*{password}"/>-->
+                                <!--                                <p class="error-message"-->
+                                <!--                                   th:each="error : ${#fields.errors('password')}"-->
+                                <!--                                   th:text="${error}">Validation error</p>-->
+                                <!--                            </div>-->
+
+
+                                <!--                            <div class="form-group">-->
+                                <!--                                <label>Supporting Documents</label>-->
+                                <!--                                <select class="form-control" required="required" th:field="*{coverage}">-->
+                                <!--                                    <option value="">&#45;&#45;&#45;&#45;Select&#45;&#45;&#45;&#45;</option>-->
+                                <!--                                    <option th:each="coverage : ${levels}"-->
+                                <!--                                            th:value="${{coverage}}"-->
+                                <!--                                            th:text="${coverage.name}">-->
+                                <!--                                    </option>-->
+                                <!--                                </select>-->
+                                <!--                            </div>-->
+
+
+                                <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
+                                    <button class="btn btn-primary btn-sm rounded" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-sm rounded" type="reset">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+
+                            </form>
+                            <!--                        <span th:utext="${successMessage}"> </span>-->
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
 </div>
 <div th:include="fragments/footer"></div>
 </html>

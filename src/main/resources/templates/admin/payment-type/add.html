@@ -1,59 +1,85 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<div class=" bg-radio-ads bg-cover bg-center h-screen">
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+        <div class="flex flex-col pt-4 px-8">
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row space-x-4">
+                    <div class="breadcrumbs">
 
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Payment Methods</li>
+                                </ol>
+                            </div>
+                        </div>
 
-
-            <div class="col-md-2"></div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header"><strong>Payment Method</strong>
-                        <small> Form</small>
                     </div>
-                    <div class="card-body card-block">
 
-
-                        <form autocomplete="off" class="sky-form" th:object="${paymentType}" method="post"
-                              th:action="@{/payment-types/save}" role="form">
-                            <input type="hidden" th:field="*{id}"/>
-
-
-
-                            <div class="form-group"><label for="name" class=" form-control-label">
-                                Code</label><input type="text" id="name" name="name" th:field="*{name}"
-                                                   required=""    placeholder="Account Number" class="form-control">
-                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-                            </div>
-
-
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-dot-circle-o"></i> Submit
-                                </button>
-                                <button type="reset" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-ban"></i> Reset
-                                </button>
-                            </div>
-
-                        </form>
-                        <!--                        <span th:utext="${successMessage}">-->
-
+                </div>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
-            <div class="col-md-2"></div>
-        </div>
 
+            <div class="flex flex-col justify-center items-center place-content-center ">
+
+                <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md mt-8">
+                    <div class="card">
+                        <div class="card-header bg-white text-center"><strong>Add Payment Method</strong>
+
+                        </div>
+                        <div class="card-body card-block">
+
+
+                            <form autocomplete="off" class="sky-form" method="post" role="form"
+                                  th:action="@{/payment-types/save}" th:object="${paymentType}">
+                                <input th:field="*{id}" type="hidden"/>
+
+
+                                <div class="form-group"><label class=" form-control-label" for="name">
+                                    Code</label><input class="form-control" id="name" name="name" placeholder="Account Number"
+                                                       required="" th:field="*{name}" type="text">
+                                    <div th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
+                                </div>
+
+                                <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
+                                    <button class="btn btn-primary btn-sm rounded" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-sm rounded" type="reset">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+
+                            </form>
+                            <!--                        <span th:utext="${successMessage}">-->
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
 </div>
 <div th:include="fragments/footer"></div>
 </html>
