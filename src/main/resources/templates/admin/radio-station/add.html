@@ -1,60 +1,129 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<div class=" bg-radio-ads bg-cover bg-center h-screen">
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+        <div class="flex flex-col pt-4 px-8">
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row space-x-4">
+                    <div class="breadcrumbs">
 
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Radio Stations</li>
+                                </ol>
+                            </div>
+                        </div>
 
-
-            <div class="col-md-2"></div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header"><strong>Add Radio Station </strong>
-                        <small> Form</small>
                     </div>
-                    <div class="card-body card-block">
 
-
-                        <form autocomplete="off" class="sky-form" name="form" th:object="${radioStation}" method="post"
-                              th:action="@{/radio-stations}" role="form">
-
-
-
-                            <div class="form-group"><label for="name" class=" form-control-label"> Name
-                            </label><input type="text" id="name" name="name" th:field="*{name}"
-                                           required=""         placeholder="Enter Name of Radio Station" class="form-control">
-                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-                            </div>
-
-
-
-
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-dot-circle-o"></i> Submit
-                                </button>
-                                <button type="reset" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-ban"></i> Reset
-                                </button>
-                            </div>
-
-                        </form>
-                        <!--                        <span th:utext="${successMessage}"></span>-->
-
+                </div>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="flex flex-col justify-center items-center place-content-center ">
+
+                <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md mt-8">
+                    <div class="card">
+                        <div class="card-header bg-white text-center"><strong>Add Radio Station </strong>
+
+                        </div>
+                        <div class="card-body card-block">
+
+
+                            <form autocomplete="off" class="sky-form" method="post" name="form"
+                                  role="form"
+                                  th:action="@{/radio-stations}" th:object="${radioStation}">
+
+
+                                <div class="form-group"><label class=" form-control-label" for="name"> Name
+                                </label><input class="form-control" id="name" name="name" placeholder="Enter Name of Radio Station"
+                                               required="" th:field="*{name}"
+                                               type="text">
+                                    <div th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!--                                 th:classappend="${#fields.hasErrors('photo')}? 'has-error':''">-->
+                                    <label class="control-label" for="logo">Logo</label> <input class="form-control" id="logo"
+                                                                                                name="logo"
+                                                                                                type="file"/>
+                                    <!--                                <p class="error-message"-->
+                                    <!--                                   th:each="error : ${#fields.errors('photo')}"-->
+                                    <!--                                   th:text="${error}">Validation error</p>-->
+
+                                </div>
+                                <div class="w-100 text-center flex justify-center items-center place-content-center"
+                                     id="preview">
+
+                                    <img alt="Image preview" class="user-avatar rounded-circle w-25 w-25"
+                                         id="thumbnail" src="/img/placeholder.png">
+
+                                </div>
+
+                                <script th:inline="none">
+                                    $(document).ready(function () {
+                                        $('#logo').change(function () {
+
+                                            showImageThumbnail(this);
+                                        })
+                                    });
+
+                                    function showImageThumbnail(fileInput) {
+                                        const file = fileInput.files[0];
+                                        const reader = new FileReader();
+
+                                        reader.onload = function (e) {
+                                            $('#thumbnail').attr('src', e.target.result);
+
+                                        };
+                                        reader.readAsDataURL(file);
+
+
+                                    }
+
+                                </script>
+
+
+                                <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
+                                    <button class="btn btn-primary btn-sm rounded" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-sm rounded" type="reset">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+
+                            </form>
+                            <!--                        <span th:utext="${successMessage}"></span>-->
+
+                        </div>
+                    </div>
+
+
+                </div>
 
             </div>
-            <div class="col-md-2"></div>
-        </div>
 
+        </div>
     </div>
-</div>
 </div>
 <div th:include="fragments/footer"></div>
 </html>
