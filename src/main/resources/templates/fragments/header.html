@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
     <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
     <link rel="stylesheet" th:href="@{/css/flag-icon.min.css}">
     <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}">
@@ -60,7 +60,7 @@
         <div class="navbar-header">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
+                <i class="fa-solid fa-bars"></i>
             </button>
             <div class="w-full flex justify-center mt-2">
                 <img th:src="@{/img/logo.jpeg}" alt="School logo" class=" w-24 h-24 rounded-full">
@@ -76,14 +76,14 @@
                     th:classappend="${request.requestURI == '/' ? 'active':''}"
                 >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/}" > <i class="menu-icon fa fa-dashboard ml-4"></i>Dashboard </a>
+                    <a th:href="@{/}" > <span class="menu-icon mdi mdi-view-dashboard ml-4"></span>Dashboard </a>
                 </li>
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300 active:bg-blue-400"
                     th:classappend="${request.requestURI == '/notifications' ? 'active':''}"
                 >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/notifications}"> <i class="menu-icon fa fa-bell ml-4"></i>Notifications <i
+                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell ml-4"></span>Notifications <i
                             th:if="${count}" class="badge bg-danger rounded-circle"><span
                             class="text-center text-capitalize text-white" th:text="${count}"></span></i></a>
                 </li>
@@ -93,13 +93,31 @@
                     th:classappend="${request.requestURI == '/config' ? 'active':''}"
                 >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/config}"> <i class="menu-icon fa fa-gears ml-4"></i>Configurations </a>
+                    <a th:href="@{/users/list}"> <span class="menu-icon mdi mdi-account-group ml-4"></span>Users</a>
                 </li>
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
 
                 >
-                    <a th:href="@{/logout}"> <i class="menu-icon fa  fa-sign-out ml-4"></i>Logout</a>
+                    <a th:href="@{/radio-stations}"> <span class="menu-icon mdi mdi-radio ml-4"></span>Radio Stations</a>
+                </li>
+
+                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+
+                >
+                    <a th:href="@{/clients/list}"> <span class="menu-icon mdi mdi-account-multiple-plus ml-4"></span>Clients</a>
+                </li>
+
+                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+
+                >
+                    <a th:href="@{/payments/list}"> <span class="menu-icon mdi mdi-currency-usd ml-4"></span>Payments</a>
+                </li>
+
+                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+
+                >
+                    <a th:href="@{/adverts/list}"> <span class="menu-icon mdi mdi-advertisements ml-4"></span>Adverts</a>
                 </li>
 
 

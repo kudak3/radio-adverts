@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row pr-4">
+                <div class="flex flex-row pr-16">
                     <div class="user-area dropdown  float-right">
                         <div aria-expanded="false" aria-haspopup="true"
                              class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
@@ -42,7 +42,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                            <a th:href="@{/users/add}"> <i class="fa fa-users"></i></a>
+                            <a th:href="@{/users/add}"> <span class="mdi mdi-account-group"></span></a>
                             <a class="btn btn-primary" th:href="@{/users/list}"> Users</a>
                         </div>
                         <div class="row justify-content-around">
@@ -76,7 +76,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                            <a th:href="@{/radio-stations/add}"> <i class="fa fa-radio"></i></a>
+                            <a th:href="@{/radio-stations/add}"> <span class="mdi mdi-radio"></span></a>
                             <a class="btn btn-primary" th:href="@{/radio-stations}">Radio Stations</a>
                         </div>
                         <div class="row justify-content-around">
@@ -85,8 +85,7 @@
                                     <span class="count" th:text="${newRadioStation}"></span>
                                 </div>
                                 <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New
-                                    Radio
-                                    Station</small>
+                                    Radio Station</small>
                                 <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                      style="width: 40%; height: 5px;"></div>
                             </div>
@@ -109,7 +108,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                            <a th:href="@{/clients/add}"><i class="fa fa-user-plus"></i></a>
+                            <a th:href="@{/clients/add}"><span class="mdi mdi-account-multiple-plus"></span></a>
                             <a class="btn btn-primary" th:href="@{/clients/list}">Clients</a>
                         </div>
 
@@ -143,7 +142,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                            <a th:href="@{/payments/add}"> <i class=" fa fa-money"></i></a>
+                            <a th:href="@{/payments/add}"> <span class="mdi mdi-currency-usd"></span></a>
                             <a class="btn btn-primary" th:href="@{/payments/list}"> Payments</a>
                         </div>
                         <div class="row justify-content-around">
@@ -177,7 +176,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                            <a th:href="@{/adverts/add}"> <i class="fa fa-ad"></i></a>
+                            <a th:href="@{/adverts/add}"> <span class="mdi mdi-advertisements"></span></a>
                             <a class="btn btn-primary" th:href="@{/adverts/list}">Adverts</a>
                         </div>
                         <div class="row justify-content-around">

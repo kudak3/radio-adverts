@@ -903,7 +903,7 @@ aside.left-panel {
         .navbar .navbar-nav li > a .menu-icon {
           color: #fff;
           float: left;
-          margin-top: 8px;
+          font-size: medium;
           width: 55px;
           text-align: left;
           z-index: 9; }
