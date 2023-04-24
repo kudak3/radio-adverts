@@ -3,10 +3,9 @@ package com.example.radioadsapp.controller;
 import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.impl.AdvertServiceImpl;
+import com.example.radioadsapp.service.impl.RadioStationServiceImpl;
 import com.example.radioadsapp.utils.AdvertType;
-import com.example.radioadsapp.utils.Gender;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("adverts")
 public class AdvertController {
     private final AdvertServiceImpl advertService;
+    private final RadioStationServiceImpl radioStationService;
 
-    public AdvertController(AdvertServiceImpl advertService, NotificationRepository notificationRepository) {
+    public AdvertController(AdvertServiceImpl advertService, NotificationRepository notificationRepository, RadioStationServiceImpl radioStationService) {
         this.advertService = advertService;
         this.notificationRepository = notificationRepository;
+        this.radioStationService = radioStationService;
     }
 
     private final NotificationRepository notificationRepository;
@@ -26,18 +27,23 @@ public class AdvertController {
     @GetMapping("list")
     public String listAdverts(Model model, HttpServletRequest request) {
         model.addAttribute("adverts", advertService.getAll());
-        model.addAttribute("notifications",notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
         model.addAttribute("request", request);
         return "admin/advert/list";
     }
 
     @GetMapping("add")
-    public String addPage(Model model, HttpServletRequest request) {
-
+    public String addPage(@RequestParam(required = false) Long stationId, Model model, HttpServletRequest request) {
         Advert advert = new Advert();
+        if (stationId != null) {
+            radioStationService.getRadioStations().stream().filter(rStation -> stationId.equals(rStation.getId())).findAny().ifPresent(advert::setRadioStation);
+        }
+
+        System.out.println(advert);
         model.addAttribute("advertTypes", AdvertType.values());
         model.addAttribute("advert", advert);
-        model.addAttribute("notifications",notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("radioStations", radioStationService.getRadioStations());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
         model.addAttribute("request", request);
         return "admin/advert/add";
     }

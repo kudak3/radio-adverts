@@ -21,6 +21,10 @@ public class RadioStation implements Serializable {
     @OneToMany(mappedBy = "radioStation")
     private List<Payment> payments = new ArrayList<>();
 
+    @JsonBackReference(value = "advert-radio-station")
+    @OneToMany(mappedBy = "radioStation")
+    private List<Advert> adverts = new ArrayList<>();
+
 
     public Long getId() {
         return id;

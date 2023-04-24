@@ -1,6 +1,7 @@
 package com.example.radioadsapp.model;
 
 import com.example.radioadsapp.utils.AdvertType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,6 +19,9 @@ public class Advert implements Serializable {
     private AdvertType advertType;
 
     private String url;
+    @JsonBackReference(value="advert-radio-station")
+    @ManyToOne
+    private RadioStation radioStation;
 
     public Long getId() {
         return id;
@@ -59,12 +63,21 @@ public class Advert implements Serializable {
         this.url = url;
     }
 
+    public RadioStation getRadioStation() {
+        return radioStation;
+    }
+
+    public void setRadioStation(RadioStation radioStation) {
+        this.radioStation = radioStation;
+    }
+
     @Override
     public String toString() {
         return "Advert{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", radio-station='" + radioStation + '\'' +
                 '}';
     }
 }

@@ -54,6 +54,7 @@
                 <tr>
                     <th scope="col" class="text-white">Name</th>
                     <th scope="col" class="text-white text-center">Description</th>
+                    <th scope="col" class="text-white text-center">Radio Station</th>
                     <th scope="col" class="text-white text-center">Advert Type</th>
                     <th scope="col" class="text-white text-center">Url</th>
 
@@ -65,7 +66,9 @@
                 <tr th:each="advert : ${adverts}">
                     <td th:text="${advert.name}" class=" text-white"></td>
                     <td th:text="${advert.description}" class="text-center text-white"></td>
-                    <td th:text="${advert.advertType}" class="text-center text-white"></td>
+                    <td th:text="${advert.radioStation.name}" class="text-center text-white"></td>
+                    <td th:text="${advert.advertType.name}" class="text-center text-white"></td>
+                    <td th:text="${advert.url}" class="text-center text-white"></td>
                     <td class="text-right"><a th:href="@{'/adverts/update/' + ${advert.id}}" class="btn btn-info"><i class="fa fa-pencil"></i></a>
 
                     <a th:href="@{'/adverts/delete/' + ${advert.id}}"
