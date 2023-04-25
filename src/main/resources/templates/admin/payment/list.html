@@ -97,11 +97,11 @@
                     <td class="text-white text-center" th:text="${payment.date}">
                     </td>
 
-                    <td class="text-right"><a class="btn btn-outline-info"
+                    <td class="text-right"><a class="btn btn-info btn-sm"
                                               th:href="@{'/payments/update/' + ${payment.id}}"><i
                             class="fa fa-pencil"></i></a>
 
-                        <a class="btn btn-outline-danger"
+                        <a class="btn btn-danger btn-sm"
                            onclick="return confirm('Are you sure you want to delete this!!!!')"
                            th:href="@{'/payments/delete/' + ${payment.id}}"><i class="fa fa-trash"></i></a>
                     </td>
