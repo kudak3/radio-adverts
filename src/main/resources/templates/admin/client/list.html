@@ -90,12 +90,12 @@
                 <tbody>
                 <tr th:each="client : ${clients}">
 
-                    <td class="text-white" th:text="${client.title}"></td>
-                    <td class="text-center text-white" th:text="${client.firstName + ' ' + client.lastName}"></td>
+                    <td class="text-white" th:text="${client.title ?: '--'}"></td>
+                    <td class="text-center text-white" th:text="${client.name ?: '--'}"></td>
 
-                    <td class="text-center text-white" th:text="${client.gender?.name}"></td>
-                    <td class="text-center text-white" th:text="${client.phoneNumber}"></td>
-                    <td class="text-center text-white" th:text="${client.email}"></td>
+                    <td class="text-center text-white" th:text="${client.gender?.name ?: '--'}"></td>
+                    <td class="text-center text-white" th:text="${client.phoneNumber ?: '--'}"></td>
+                    <td class="text-center text-white" th:text="${client.email ?: '--'}"></td>
                     <td class="text-right">
                         <a class="btn btn-info btn-sm" th:href="@{'/clients/update/' + ${client.id}}"><i
                                 class="5fa fa-pencil"></i></a>

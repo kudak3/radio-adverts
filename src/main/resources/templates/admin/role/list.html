@@ -85,7 +85,7 @@
                 <tbody>
                 <tr th:each="role : ${roles}">
 
-                    <td class="text-white" th:text="${role.name}"></td>
+                    <td class="text-white" th:text="${role.name ?: '--'}"></td>
                     <td class="text-right text-white"><a class="btn btn-info btn-sm"
                                                          th:href="@{'/config/roles/update/' + ${role.id}}"><i
                             class="fa fa-pencil"></i></a>

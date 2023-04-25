@@ -84,7 +84,7 @@
                 <tbody>
                 <tr th:each="type : ${paymentTypes}">
 
-                    <td class="text-white" th:text="${type.name}"></td>
+                    <td class="text-white" th:text="${type.name ?: '--'}"></td>
 
 
                     <td class="text-right"><a class="btn btn-info btn-sm" th:href="@{'/payment-types/update/' + ${type.id}}"><i

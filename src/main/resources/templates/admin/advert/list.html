@@ -87,11 +87,11 @@
 
                 <tbody>
                 <tr th:each="advert : ${adverts}">
-                    <td th:text="${advert.name}" class=" text-white"></td>
-                    <td th:text="${advert.description}" class="text-center text-white"></td>
-                    <td th:text="${advert.radioStation.name}" class="text-center text-white"></td>
-                    <td th:text="${advert.advertType.name}" class="text-center text-white"></td>
-                    <td th:text="${advert.url}" class="text-center text-white"></td>
+                    <td th:text="${advert.name ?: '--'}" class=" text-white"></td>
+                    <td th:text="${advert.description ?: '--'}" class="text-center text-white"></td>
+                    <td th:text="${advert.radioStation.name ?: '--'}" class="text-center text-white"></td>
+                    <td th:text="${advert.advertType.name ?: '--'}" class="text-center text-white"></td>
+                    <td th:text="${advert.url ?: '--'}" class="text-center text-white"></td>
                     <td class="text-right">
                         <a th:href="@{'/payments/add?advertId=' + ${advert.id}}" class="btn btn-success btn-sm"><i class="fa fa-money " title="Pay for advert"></i></a>
                         <a th:href="@{'/adverts/update/' + ${advert.id}}" class="btn btn-info btn-sm" title="Update advert"><i class="fa fa-pencil "></i></a>

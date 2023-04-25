@@ -92,9 +92,9 @@
                     <!--                             <img class="user-avatar rounded-circle" style="width: 2.4rem; height:2.4rem" th:src="@{${user.photoPath}}" alt="Profile photo">-->
 
                     <!--                         </td>-->
-                    <td class="text-white" th:text="${user.firstName} "></td>
-                    <td class="text-white text-center" th:text="${user.lastName}"></td>
-                    <td class="text-white text-center" th:text="${user.email}"></td>
+                    <td class="text-white" th:text="${user.firstName ?: '--'} "></td>
+                    <td class="text-white text-center" th:text="${user.lastName ?: '--'}"></td>
+                    <td class="text-white text-center" th:text="${user.email ?: '--'}"></td>
                     <td class="text-right">
                         <a class="btn btn-info btn-sm" th:href="@{'/users/update/' + ${user.id}}"><i
                                 class="fa fa-pencil"></i></a>
