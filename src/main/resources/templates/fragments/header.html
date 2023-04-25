@@ -82,32 +82,32 @@
 
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
-                    th:classappend="${request.requestURI == '/config' ? 'active':''}"
+                    th:classappend="${request.requestURI == '/users/list' ? 'active':''}"
                 >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
                     <a th:href="@{/users/list}"> <span class="menu-icon mdi mdi-account-group ml-4"></span>Users</a>
                 </li>
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
-
+                    th:classappend="${request.requestURI == '/radio-stations' ? 'active':''}"
                 >
                     <a th:href="@{/radio-stations}"> <span class="menu-icon mdi mdi-radio ml-4"></span>Radio Stations</a>
                 </li>
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
-
+                    th:classappend="${request.requestURI == '/clients/list' ? 'active':''}"
                 >
                     <a th:href="@{/clients/list}"> <span class="menu-icon mdi mdi-account-multiple-plus ml-4"></span>Clients</a>
                 </li>
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
-
+                    th:classappend="${request.requestURI == '/payments/list' ? 'active':''}"
                 >
                     <a th:href="@{/payments/list}"> <span class="menu-icon mdi mdi-currency-usd ml-4"></span>Payments</a>
                 </li>
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
-
+                    th:classappend="${request.requestURI == '/adverts/list' ? 'active':''}"
                 >
                     <a th:href="@{/adverts/list}"> <span class="menu-icon mdi mdi-advertisements ml-4"></span>Adverts</a>
                 </li>
