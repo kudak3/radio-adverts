@@ -1264,7 +1264,10 @@ header .form-inline {
 
 .dropdown-menu {
   border-radius: 0;
-  transform: none !important; }
+  transform: none !important;
+  min-width: auto !important;
+
+}
 
 .for-notification .dropdown-menu .dropdown-item {
   padding: 5px 15px !important;

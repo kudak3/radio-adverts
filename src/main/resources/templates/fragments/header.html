@@ -80,15 +80,6 @@
                     <a th:href="@{/}" > <span class="menu-icon mdi mdi-view-dashboard ml-4"></span>Dashboard </a>
                 </li>
 
-                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300 active:bg-blue-400"
-                    th:classappend="${request.requestURI == '/notifications' ? 'active':''}"
-                >
-                    <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell ml-4"></span>Notifications <i
-                            th:if="${count}" class="badge bg-danger rounded-circle"><span
-                            class="text-center text-capitalize text-white" th:text="${count}"></span></i></a>
-                </li>
-
 
                 <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
                     th:classappend="${request.requestURI == '/config' ? 'active':''}"
