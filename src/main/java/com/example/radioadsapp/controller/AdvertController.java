@@ -52,6 +52,17 @@ public class AdvertController {
         return "admin/advert/add";
     }
 
+    @GetMapping("schedule")
+    public String scheduledPage( Model model, HttpServletRequest request) {
+
+
+        model.addAttribute("clients", clientService.getAll());
+        model.addAttribute("radioStations", radioStationService.getRadioStations());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
+        return "admin/advert/view";
+    }
+
 
     @PostMapping("save")
     public String saveUser(@ModelAttribute("advert") Advert advert) {
