@@ -1,6 +1,7 @@
 package com.example.radioadsapp.controller;
 
 
+import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.model.Client;
 import com.example.radioadsapp.model.Payment;
 import com.example.radioadsapp.model.RadioStation;
@@ -47,13 +48,27 @@ public class PaymentController {
 
 
     @GetMapping("add")
-    public String addPage(Model model, HttpServletRequest request) {
+    public String addPage(@RequestParam(required = false) Long advertId, Model model, HttpServletRequest request) {
 
         Payment payment = new Payment();
+        List<Advert> adverts = advertService.getAll();
+        if(advertId != null){
+            adverts.stream().filter(advert -> advertId.equals(advert.getId())).findAny().ifPresent(advert1 -> {
+                payment.setAdvert(advert1);
+                if(advert1.getRadioStation() != null){
+                    payment.setRadioStation(advert1.getRadioStation());
+                    
+                }
+                if(advert1.getClient() != null){
+                    payment.setClient(advert1.getClient());
+                }
+            });
+        }
+
         model.addAttribute("payment", payment);
         model.addAttribute("paymentType", paymentTypeService.getAll());
         model.addAttribute("clients", clientService.getAll());
-        model.addAttribute("adverts", advertService.getAll());
+        model.addAttribute("adverts", adverts);
         model.addAttribute("radioStations", radioStationService.getRadioStations());
         model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
         model.addAttribute("request", request);

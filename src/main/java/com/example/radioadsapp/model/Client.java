@@ -40,6 +40,10 @@ public class Client implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Payment> payments = new ArrayList<>();
 
+    @JsonBackReference(value = "advert-client")
+    @OneToMany(mappedBy = "client")
+    private List<Advert> adverts = new ArrayList<>();
+
 
 
     @Column(columnDefinition = "boolean default false")

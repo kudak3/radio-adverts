@@ -3,6 +3,7 @@ package com.example.radioadsapp.controller;
 import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.impl.AdvertServiceImpl;
+import com.example.radioadsapp.service.impl.ClientServiceImpl;
 import com.example.radioadsapp.service.impl.RadioStationServiceImpl;
 import com.example.radioadsapp.utils.AdvertType;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class AdvertController {
     private final AdvertServiceImpl advertService;
     private final RadioStationServiceImpl radioStationService;
+    private final ClientServiceImpl clientService;
 
-    public AdvertController(AdvertServiceImpl advertService, NotificationRepository notificationRepository, RadioStationServiceImpl radioStationService) {
+    public AdvertController(AdvertServiceImpl advertService, NotificationRepository notificationRepository, RadioStationServiceImpl radioStationService, ClientServiceImpl clientService) {
         this.advertService = advertService;
         this.notificationRepository = notificationRepository;
         this.radioStationService = radioStationService;
+        this.clientService = clientService;
     }
 
     private final NotificationRepository notificationRepository;
@@ -42,6 +45,7 @@ public class AdvertController {
         System.out.println(advert);
         model.addAttribute("advertTypes", AdvertType.values());
         model.addAttribute("advert", advert);
+        model.addAttribute("clients", clientService.getAll());
         model.addAttribute("radioStations", radioStationService.getRadioStations());
         model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
         model.addAttribute("request", request);

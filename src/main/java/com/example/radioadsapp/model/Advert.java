@@ -23,6 +23,10 @@ public class Advert implements Serializable {
     @ManyToOne
     private RadioStation radioStation;
 
+    @JsonBackReference(value="advert-client")
+    @ManyToOne
+    private Client client;
+
     public Long getId() {
         return id;
     }
@@ -71,13 +75,21 @@ public class Advert implements Serializable {
         this.radioStation = radioStation;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @Override
     public String toString() {
         return "Advert{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", radio-station='" + radioStation + '\'' +
+//                ", radio-station='" + radioStation + '\'' +
                 '}';
     }
 }

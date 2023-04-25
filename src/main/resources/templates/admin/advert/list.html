@@ -92,10 +92,12 @@
                     <td th:text="${advert.radioStation.name}" class="text-center text-white"></td>
                     <td th:text="${advert.advertType.name}" class="text-center text-white"></td>
                     <td th:text="${advert.url}" class="text-center text-white"></td>
-                    <td class="text-right"><a th:href="@{'/adverts/update/' + ${advert.id}}" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+                    <td class="text-right">
+                        <a th:href="@{'/payments/add?advertId=' + ${advert.id}}" class="btn btn-success btn-sm"><i class="fa fa-money " title="Pay for advert"></i></a>
+                        <a th:href="@{'/adverts/update/' + ${advert.id}}" class="btn btn-info btn-sm" title="Update advert"><i class="fa fa-pencil "></i></a>
 
                     <a th:href="@{'/adverts/delete/' + ${advert.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-danger btn-sm" title="Delete Advert"><i class="fa fa-trash"></i></a>
                     </td>
 
 

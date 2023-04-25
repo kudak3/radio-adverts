@@ -150,14 +150,4 @@ public class Payment implements Serializable {
                 '}';
     }
 
-    @ManyToOne(optional = false)
-    private RadioStation radioStations;
-
-    public RadioStation getRadioStations() {
-        return radioStations;
-    }
-
-    public void setRadioStations(RadioStation radioStations) {
-        this.radioStations = radioStations;
-    }
 }

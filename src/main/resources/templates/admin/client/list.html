@@ -96,9 +96,7 @@
                     <td class="text-center text-white" th:text="${client.gender?.name}"></td>
                     <td class="text-center text-white" th:text="${client.phoneNumber}"></td>
                     <td class="text-center text-white" th:text="${client.email}"></td>
-                    <td class="text-right"><a class="btn btn-outline-success"
-                                              th:href="@{'/clients/view/' + ${client.id}}"><i
-                            class=" fa fa-eye" style="color: green"></i></a>
+                    <td class="text-right">
                         <a class="btn btn-info" th:href="@{'/clients/update/' + ${client.id}}"><i
                                 class="fa fa-pencil"></i></a>
 
