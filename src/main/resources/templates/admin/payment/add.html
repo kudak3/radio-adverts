@@ -76,7 +76,7 @@
 
                                 <div class="flex flex-row space-x-4">
                                     <div class="form-group w-full">
-                                        <label class="control-label text-base text-gray-600">Select Radio Station</label>
+                                        <label class="form-control-label text-base text-gray-600">Select Radio Station</label>
                                         <select class="form-control" required="required" th:field="*{radioStation}">
                                             <option value="">----Select A RadioStation----</option>
                                             <option th:each="radioStation : ${radioStations}"
@@ -87,7 +87,7 @@
                                     </div>
 
                                     <div class="form-group w-full">
-                                        <label class="control-label text-base text-gray-600">Select Client</label>
+                                        <label class="form-control-label text-base text-gray-600">Select Client</label>
                                         <select class="form-control" required="required" th:field="*{client}">
                                             <option value="">----Select A Client----</option>
                                             <option th:each="client : ${clients}"
@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label text-base text-gray-600">Select Advert</label>
+                                    <label class="form-control-label text-base text-gray-600">Select Advert</label>
                                     <select class="form-control" required="required" th:field="*{advert}">
                                         <option value="">----Select An Advert----</option>
                                         <option th:each="advert : ${adverts}"
@@ -116,7 +116,7 @@
 
                                 <div class="flex flex-row space-x-4">
                                     <div class="form-group w-full">
-                                        <label class="control-label text-base text-gray-600">Select Payment Method</label>
+                                        <label class="form-control-label text-base text-gray-600">Select Payment Method</label>
                                         <select class="form-control" required="required" th:field="*{paymentType}">
                                             <option value="">----Select Payment Method----</option>
                                             <option th:each="type : ${paymentType}"
@@ -125,7 +125,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="form-group w-full"><label class="control-label text-base text-gray-600" for="accountNumber">
+                                    <div class="form-group w-full"><label class="form-control-label text-base text-gray-600" for="accountNumber">
                                         Account Number</label><input class="form-control" id="accountNumber"
                                                                      name="accountNumber"
                                                                      placeholder="Account Number"
@@ -137,7 +137,7 @@
                                 </div>
 
                                 <div class="flex flex-row space-x-4">
-                                    <div class="form-group w-full"><label class="control-label text-base text-gray-600" for="amount">
+                                    <div class="form-group w-full"><label class="form-control-label text-base text-gray-600" for="amount">
                                         Amount</label><input class="form-control" id="amount" name="amount"
                                                              placeholder="Enter amount paid"
                                                              required="" th:field="*{amount}"
@@ -145,7 +145,7 @@
                                         <div th:errors="*{amount}" th:if="${#fields.hasErrors('amount')}"></div>
                                     </div>
 
-                                    <div class="form-group w-full"><label class="control-label text-base text-gray-600" for="description">
+                                    <div class="form-group w-full"><label class="form-control-label text-base text-gray-600" for="description">
                                         Payment Description</label><textarea class="form-control" id="description"
                                                                              name="description"
                                                                              placeholder="Payment Description"

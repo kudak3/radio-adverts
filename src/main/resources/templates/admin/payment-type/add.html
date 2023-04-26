@@ -76,7 +76,7 @@
                                 <input th:field="*{id}" type="hidden"/>
 
 
-                                <div class="form-group"><label class="control-label text-base text-gray-600" for="name">
+                                <div class="form-group"><label class="form-control-label text-base text-gray-600" for="name">
                                     Code</label><input class="form-control" id="name" name="name" placeholder="Account Number"
                                                        required="" th:field="*{name}" type="text">
                                     <div th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
