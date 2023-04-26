@@ -81,7 +81,7 @@
                     <th class="text-white text-center" scope="col">Description</th>
                     <th class="text-white text-center" scope="col">Amount</th>
                     <th class="text-white text-center" scope="col">Date</th>
-                    <th class="text-right text-white" scope="col">Action</th>
+                    <th sec:authorize="hasAuthority('ADMIN')" class="text-right text-white" scope="col">Action</th>
 
                 </tr>
                 </thead>
@@ -97,7 +97,7 @@
                     <td class="text-white text-center" th:text="${payment.date ?: '--'}">
                     </td>
 
-                    <td class="text-right"><a class="btn btn-info btn-sm"
+                    <td sec:authorize="hasAuthority('ADMIN')" class="text-right"><a class="btn btn-info btn-sm"
                                               th:href="@{'/payments/update/' + ${payment.id}}"><i
                             class="fa fa-pencil"></i></a>
 

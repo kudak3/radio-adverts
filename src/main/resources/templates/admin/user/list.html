@@ -78,6 +78,7 @@
                     <th class="text-white" scope="col">First Name</th>
                     <th class="text-white text-center" scope="col">Last Name</th>
                     <th class="text-white text-center" scope="col">Email</th>
+                    <th class="text-white text-center" scope="col">Roles</th>
                     <!--<th scope="col">Update</th>-->
                     <!--<th scope="col">Delete</th>-->
                     <th class="text-white text-right ">Action</th>
@@ -94,6 +95,7 @@
                     <td class="text-white" th:text="${user.firstName ?: '--'} "></td>
                     <td class="text-white text-center" th:text="${user.lastName ?: '--'}"></td>
                     <td class="text-white text-center" th:text="${user.email ?: '--'}"></td>
+                    <td class="text-white text-center" th:text="${!user.roles.isEmpty() ? user.roles : '--'}"></td>
                     <td class="text-right">
                         <a class="btn btn-info btn-sm" th:href="@{'/users/update/' + ${user.id}}"><i
                                 class="fa fa-pencil"></i></a>

@@ -19,7 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" mt-2">
+                    <div sec:authorize="hasAuthority('ADMIN')" class=" mt-2">
                         <a class="btn btn-primary rounded " th:href="@{/radio-stations/add}">Add</a>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                        th:href="@{'/adverts/add?stationId=' + ${radioStation.id}}"
                        title="Place advert">Advertise</a>
                     <!-- Edit button -->
-                    <div class="flex flex-row">
+                    <div sec:authorize="hasAuthority('ADMIN')" class="flex flex-row">
                         <a class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded-lg mr-2"
                            th:href="@{'/adverts/add/' + ${radioStation.id}}"
                            title="Edit Station"><i class="fa fa-edit font-medium"></i></a>

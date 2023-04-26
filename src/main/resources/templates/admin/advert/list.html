@@ -61,7 +61,7 @@
                                 <span class="text-white text-xs" sec:authentication="name"></span>
                             </div>
                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
-                                <a class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/config}">settings</a>
                                 <a class="dropdown-item" th:href="@{/logout}">logout</a>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                 <tr>
                     <th class="text-white" scope="col">Title</th>
                     <th class="text-white text-center" scope="col">Description</th>
-                    <th class="text-white text-center" scope="col">Radio Station</th>
+                    <th sec:authorize="hasAnyAuthority('ADMIN', 'ADVERTISER')" class="text-white text-center" scope="col">Radio Station</th>
                     <th class="text-white text-center" scope="col">Platform</th>
                     <th class="text-white text-center" scope="col">Url</th>
 
@@ -90,11 +90,11 @@
                 <tr th:each="advert : ${adverts}">
                     <td class=" text-white" th:text="${advert.title ?: '--'}"></td>
                     <td class="text-center text-white" th:text="${advert.description ?: '--'}"></td>
-                    <td class="text-center text-white" th:text="${advert.radioStation.name ?: '--'}"></td>
+                    <td sec:authorize="hasAnyAuthority('ADMIN', 'ADVERTISER')" class="text-center text-white" th:text="${advert.radioStation.name ?: '--'}"></td>
                     <td class="text-center text-white" th:text="${advert.advertType.name ?: '--'}"></td>
                     <td class="text-center text-white" th:text="${advert.url ?: '--'}"></td>
                     <td class="text-right">
-                        <a class="btn btn-success btn-sm" th:href="@{'/payments/add?advertId=' + ${advert.id}}"><i
+                        <a sec:authorize="hasAnyAuthority('ADMIN', 'ADVERTISER')" class="btn btn-success btn-sm" th:href="@{'/payments/add?advertId=' + ${advert.id}}"><i
                                 class="fa fa-money " title="Pay for advert"></i></a>
                         <a class="btn btn-info btn-sm" th:href="@{'/adverts/update/' + ${advert.id}}"
                            title="Update advert"><i class="fa fa-pencil "></i></a>

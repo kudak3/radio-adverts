@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
@@ -63,7 +63,7 @@
             </div>
 
             <main class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow-md">
+                <div   class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/users/add}"> <span class="mdi mdi-account-group"></span></a>
@@ -97,7 +97,7 @@
 
                     </div>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
+                <div sec:authorize="hasAuthority('ADMIN')"  class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/radio-stations/add}"> <span class="mdi mdi-radio"></span></a>
@@ -129,7 +129,7 @@
 
                     </div>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
+                <div  class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/clients/add}"><span class="mdi mdi-account-multiple-plus"></span></a>
