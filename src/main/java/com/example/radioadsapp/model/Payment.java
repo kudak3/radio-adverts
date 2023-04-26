@@ -139,7 +139,7 @@ public class Payment implements Serializable {
         return "Payment{" +
                 "id=" + id +
                 ", client=" + client.getFirstName() +
-                ", advert=" + advert.getName() +
+                ", advert=" + advert.getTitle() +
                 ", radio=" + radioStation.getName() +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", advertNumber='" + advertNumber + '\'' +

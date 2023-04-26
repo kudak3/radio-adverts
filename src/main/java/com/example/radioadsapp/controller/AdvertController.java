@@ -4,6 +4,7 @@ import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.impl.AdvertServiceImpl;
 import com.example.radioadsapp.service.impl.ClientServiceImpl;
+import com.example.radioadsapp.service.impl.ProgramServiceImpl;
 import com.example.radioadsapp.service.impl.RadioStationServiceImpl;
 import com.example.radioadsapp.utils.AdvertType;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,12 +18,14 @@ public class AdvertController {
     private final AdvertServiceImpl advertService;
     private final RadioStationServiceImpl radioStationService;
     private final ClientServiceImpl clientService;
+    private final ProgramServiceImpl programService;
 
-    public AdvertController(AdvertServiceImpl advertService, NotificationRepository notificationRepository, RadioStationServiceImpl radioStationService, ClientServiceImpl clientService) {
+    public AdvertController(AdvertServiceImpl advertService, NotificationRepository notificationRepository, RadioStationServiceImpl radioStationService, ClientServiceImpl clientService,ProgramServiceImpl programService) {
         this.advertService = advertService;
         this.notificationRepository = notificationRepository;
         this.radioStationService = radioStationService;
         this.clientService = clientService;
+        this.programService = programService;
     }
 
     private final NotificationRepository notificationRepository;
@@ -48,25 +51,16 @@ public class AdvertController {
         model.addAttribute("clients", clientService.getAll());
         model.addAttribute("radioStations", radioStationService.getRadioStations());
         model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("programs",programService.getAll());
         model.addAttribute("request", request);
         return "admin/advert/add";
-    }
-
-    @GetMapping("schedule")
-    public String scheduledPage( Model model, HttpServletRequest request) {
-
-
-        model.addAttribute("clients", clientService.getAll());
-        model.addAttribute("radioStations", radioStationService.getRadioStations());
-        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
-        model.addAttribute("request", request);
-        return "admin/advert/view";
     }
 
 
     @PostMapping("save")
     public String saveUser(@ModelAttribute("advert") Advert advert) {
         System.out.println("========advert");
+        System.out.println(advert);
         // save user to database
         advertService.save(advert);
         return "redirect:/adverts/list";
