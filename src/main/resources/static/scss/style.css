@@ -1093,7 +1093,7 @@ body.open .navbar .navbar-brand.hidden {
     .right-panel .breadcrumbs .col-lg-8 .page-header {
       float: left; }
   .right-panel .page-header {
-    min-height: 50px;
+    min-height: 40px;
     margin: 0px;
     padding: 0px 15px;
     background: #ffffff;

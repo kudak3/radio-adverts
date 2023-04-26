@@ -65,7 +65,7 @@
 
                 <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md mt-8">
                     <div class="card">
-                        <div class="card-header bg-white text-center"><strong>Add Radio Station </strong>
+                        <div class="card-header bg-white text-center text-gray-600"><strong>Add Radio Station </strong>
 
                         </div>
                         <div class="card-body card-block">
@@ -76,7 +76,7 @@
                                   th:action="@{/radio-stations}" th:object="${radioStation}">
 
 
-                                <div class="form-group"><label class=" form-control-label" for="name"> Name
+                                <div class="form-group"><label class="control-label text-base text-gray-600" for="name"> Name
                                 </label><input class="form-control" id="name" name="name" placeholder="Enter Name of Radio Station"
                                                required="" th:field="*{name}"
                                                type="text">
@@ -85,7 +85,7 @@
 
                                 <div class="form-group">
                                     <!--                                 th:classappend="${#fields.hasErrors('photo')}? 'has-error':''">-->
-                                    <label class="control-label" for="logo">Logo</label> <input class="form-control" id="logo"
+                                    <label class="control-label text-base text-gray-600" for="logo">Logo</label> <input class="form-control" id="logo"
                                                                                                 name="logo"
                                                                                                 type="file"/>
                                     <!--                                <p class="error-message"-->

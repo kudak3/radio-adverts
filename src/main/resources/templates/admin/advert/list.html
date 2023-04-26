@@ -26,9 +26,7 @@
                     <div class="ml-4 mt-2">
                         <a class="btn btn-primary rounded " th:href="@{/adverts/add}">Add</a>
                     </div>
-                    <div class="ml-4 mt-2">
-                        <a class="btn btn-primary rounded " th:href="@{/adverts/schedule}">Schedule</a>
-                    </div>
+
                 </div>
                 <div class="flex  flex-row space-x-6">
                     <a th:href="@{/notifications}">
@@ -78,10 +76,10 @@
                 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
                 <thead class="bg-blue-500/[.7] border-solid border-y-2">
                 <tr>
-                    <th class="text-white" scope="col">Name</th>
+                    <th class="text-white" scope="col">Title</th>
                     <th class="text-white text-center" scope="col">Description</th>
                     <th class="text-white text-center" scope="col">Radio Station</th>
-                    <th class="text-white text-center" scope="col">Advert Type</th>
+                    <th class="text-white text-center" scope="col">Platform</th>
                     <th class="text-white text-center" scope="col">Url</th>
 
                     <th class="text-white text-right" scope="col">Action</th>
@@ -90,7 +88,7 @@
 
                 <tbody>
                 <tr th:each="advert : ${adverts}">
-                    <td class=" text-white" th:text="${advert.name ?: '--'}"></td>
+                    <td class=" text-white" th:text="${advert.title ?: '--'}"></td>
                     <td class="text-center text-white" th:text="${advert.description ?: '--'}"></td>
                     <td class="text-center text-white" th:text="${advert.radioStation.name ?: '--'}"></td>
                     <td class="text-center text-white" th:text="${advert.advertType.name ?: '--'}"></td>

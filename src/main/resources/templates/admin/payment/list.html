@@ -90,7 +90,7 @@
                 <tr th:each="payment : ${payments}">
 
                     <td class="text-white" th:text="${payment.client.name ?: '--'}"></td>
-                    <td class="text-white text-center" th:text="${payment.advert.name ?: '--'}"></td>
+                    <td class="text-white text-center" th:text="${payment.advert.title ?: '--'}"></td>
                     <td class="text-white text-center" th:text="${payment.description ?: '--'}"></td>
                     <td class="text-white text-center" th:text="${'$'+payment.amount ?: '--'}">
                     </td>

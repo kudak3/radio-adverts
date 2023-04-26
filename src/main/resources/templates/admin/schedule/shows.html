@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
@@ -13,7 +13,7 @@
                         <div class="page-header float-left">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li class="active">Payment Methods</li>
+                                    <li class="active">Shows</li>
                                 </ol>
                             </div>
                         </div>
@@ -65,22 +65,46 @@
 
                 <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md mt-8">
                     <div class="card">
-                        <div class="card-header bg-white text-center text-gray-600"><strong>Add Payment Method</strong>
+                        <div class="card-header bg-white text-center"><strong>Add Show</strong>
 
                         </div>
                         <div class="card-body card-block">
 
 
-                            <form autocomplete="off" class="sky-form" method="post" role="form"
-                                  th:action="@{/payment-types/save}" th:object="${paymentType}">
-                                <input th:field="*{id}" type="hidden"/>
+                            <form autocomplete="off" class="sky-form" method="post" name="form"
+                                  role="form"
+                                  th:action="@{/schedule/save}" th:object="${show}">
 
 
-                                <div class="form-group"><label class="control-label text-base text-gray-600" for="name">
-                                    Code</label><input class="form-control" id="name" name="name" placeholder="Account Number"
-                                                       required="" th:field="*{name}" type="text">
-                                    <div th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
+                                <div class="form-group"><label class=" form-control-label" for="title"> Title
+                                </label><input class="form-control" id="title" name="title" placeholder="Enter title of the show"
+                                               required="" th:field="*{title}"
+                                               type="text">
+                                    <div th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Select Radio Station</label>
+                                    <select class="form-control" required="required" th:field="*{radioStation}">
+                                        <option value="">----Select A RadioStation----</option>
+                                        <option th:each="radioStation : ${radioStations}"
+                                                th:text="${radioStation.name}"
+                                                th:value="${{radioStation}}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Select Color</label>
+                                    <select class="form-control" required="required" th:field="*{eventColor}">
+                                        <option value="">----Select a color----</option>
+                                        <option th:each="color : ${colors}"
+                                                th:text="${color}"
+                                                th:value="${{color}}">
+                                        </option>
+                                    </select>
+                                </div>
+
 
                                 <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
                                     <button class="btn btn-primary btn-sm rounded" type="submit">
@@ -92,13 +116,14 @@
                                 </div>
 
                             </form>
-                            <!--                        <span th:utext="${successMessage}">-->
+                            <!--                        <span th:utext="${successMessage}"></span>-->
 
                         </div>
                     </div>
 
 
                 </div>
+
             </div>
 
         </div>

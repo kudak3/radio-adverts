@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
@@ -24,7 +24,8 @@
                 <div class="flex  flex-row space-x-6">
                     <a th:href="@{/notifications}">
                         <div class="relative w-fit mt-1">
-                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white" th:if="${notifications}"
+                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white"
+                                 th:if="${notifications}"
                                  th:text="${notifications}">
                             </div>
                             <!--                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell"></span></a>-->
@@ -50,7 +51,7 @@
                                  data-toggle="dropdown"
                                  href="#" id="dropdownMenuButton">
                                 <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
-                                <span sec:authentication="name" class="text-white text-xs"></span>
+                                <span class="text-white text-xs" sec:authentication="name"></span>
                             </div>
                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
                                 <a class="dropdown-item" th:href="@{/config}">settings</a>
@@ -65,7 +66,7 @@
 
                 <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md my-8">
                     <div class="card">
-                        <div class="card-header bg-white text-center"><strong>Add Advert </strong>
+                        <div class="card-header bg-white text-center text-gray-600"><strong>Add Advert </strong>
                         </div>
                         <div class="card-body card-block">
 
@@ -73,55 +74,96 @@
                             <form advert="form" autocomplete="off" class="sky-form" method="post" name="form"
                                   th:action="@{/adverts/save}" th:object="${advert}">
 
+                                <div class="flex flex-row space-x-4">
+                                    <div class="form-group w-full"><label class=" form-control-label text-base text-gray-600" for="title"> Title
+                                    </label><input class="form-control" id="title" name="title"
+                                                   placeholder="Enter the title of advert"
+                                                   required="" th:field="*{title}" type="text">
+                                        <div th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></div>
+                                    </div>
 
-                                <div class="form-group"><label class=" form-control-label" for="name"> Name
-                                </label><input class="form-control" id="name" name="name" placeholder="Enter the name of advert"
-                                               required="" th:field="*{name}" type="text">
-                                    <div th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
+                                    <div class="form-group w-full"><label class=" form-control-label text-base text-gray-600" for="description">
+                                        Description
+                                    </label><textarea class="form-control" id="description" name="description"
+                                                      placeholder="Enter the description of the advert"
+                                                      required="" th:field="*{description}"
+                                    ></textarea>
+                                        <div th:errors="*{description}"
+                                             th:if="${#fields.hasErrors('description')}"></div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group"><label class=" form-control-label" for="name"> Description
-                                </label><input class="form-control" id="description" name="description" placeholder="Enter the description of the advert"
-                                               required="" th:field="*{description}"
-                                               type="text">
-                                    <div th:errors="*{description}" th:if="${#fields.hasErrors('name')}"></div>
+                                <div class="flex flex-row space-x-4">
+                                    <div class="form-group w-full">
+                                        <label class=" form-control-label text-base text-gray-600" >Select Client</label>
+                                        <select class="form-control" th:field="*{client}">
+                                            <option value="">----Select a Client----</option>
+                                            <option th:each="client : ${clients}"
+                                                    th:text="${client.name}"
+                                                    th:value="${{client}}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group w-full">
+                                        <label class=" form-control-label text-base text-gray-600" >Select Advertising Platform</label>
+                                        <select class="form-control" required="required" th:field="*{advertType}">
+                                            <option value="">----Select platform to place advert----</option>
+                                            <option th:each="type : ${advertTypes}"
+                                                    th:text="${type.name}"
+                                                    th:value="${{type}}">
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="form-group" >
-                                    <label>Select Client</label>
-                                    <select class="form-control"  th:field="*{client}">
-                                        <option value="">----Select a Client----</option>
-                                        <option th:each="client : ${clients}"
-                                                th:text="${client.name}"
-                                                th:value="${{client}}">
-                                        </option>
-                                    </select>
+
+                                <div class="flex flex-row space-x-4">
+                                    <div class="form-group w-full">
+                                        <label class=" form-control-label text-base text-gray-600" >Select Radio Station</label>
+                                        <select class="form-control" th:field="*{radioStation}">
+                                            <option value="">----Select a Radio Station----</option>
+                                            <option th:each="radioStation : ${radioStations}"
+                                                    th:text="${radioStation.name}"
+                                                    th:value="${{radioStation}}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group w-full">
+                                        <label class=" form-control-label text-base text-gray-600" >Select Show</label>
+                                        <select class="form-control" th:field="*{resourceId}">
+                                            <option value="">----Select Show ----</option>
+                                            <option th:each="program : ${programs}"
+                                                    th:text="${program.title}"
+                                                    th:value="${{program.id}}">
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="form-group" id="station" >
-                                    <label>Select Radio Station</label>
-                                    <select class="form-control"  th:field="*{radioStation}">
-                                        <option value="">----Select a Radio Station----</option>
-                                        <option th:each="radioStation : ${radioStations}"
-                                                th:text="${radioStation.name}"
-                                                th:value="${{radioStation}}">
-                                        </option>
-                                    </select>
+                                <div class="flex flex-row space-x-4">
+                                    <div class="form-group w-full">
+                                        <label class=" form-control-label text-base text-gray-600"  for="start"> Start Time
+                                        </label><input class="form-control " id="start" name="start"
+                                                       placeholder="Enter the starting time for the advert"
+                                                       th:field="*{start}"
+                                                       type="datetime-local">
+
+                                    </div>
+
+                                    <div class="form-group w-full">
+                                        <label class=" form-control-label text-base text-gray-600" for="end"> End Time
+                                        </label><input class="form-control " id="end" name="end"
+                                                       placeholder="Enter the ending time for the advert"
+                                                       th:field="*{end}" type="datetime-local">
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Select Type of advert</label>
-                                    <select class="form-control" required="required" th:field="*{advertType}">
-                                        <option value="">----Select----</option>
-                                        <option th:each="type : ${advertTypes}"
-                                                th:text="${type.name}"
-                                                th:value="${{type}}">
-                                        </option>
-                                    </select>
-                                </div>
 
-                                <div class="form-group"><label class=" form-control-label" for="url"> Url
-                                </label><input class="form-control" id="url" name="url" placeholder="Enter the url where advert has been posted"
+                                <div class="form-group"><label class=" form-control-label text-base text-gray-600"  for="url"> Url
+                                </label><input class="form-control" id="url" name="url"
+                                               placeholder="Enter the url where advert has been posted"
                                                th:field="*{url}"
                                                type="text">
                                     <div th:errors="*{url}" th:if="${#fields.hasErrors('url')}"></div>

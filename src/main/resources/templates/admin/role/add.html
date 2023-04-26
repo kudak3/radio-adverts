@@ -65,7 +65,7 @@
 
             <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md mt-8">
                 <div class="card">
-                    <div class="card-header bg-white text-center"><strong>Add Role </strong>
+                    <div class="card-header bg-white text-center text-gray-600"><strong>Add Role </strong>
 
                     </div>
                     <div class="card-body card-block">
@@ -76,7 +76,7 @@
 
 
 
-                            <div class="form-group"><label for="name" class=" form-control-label"> Name
+                            <div class="form-group"><label for="name" class="control-label text-base text-gray-600"> Name
                             </label><input type="text" id="name" name="name" th:field="*{name}"
                                            required=""         placeholder="Enter Name of role" class="form-control">
                                 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>

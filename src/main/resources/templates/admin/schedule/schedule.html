@@ -1,9 +1,36 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html lang='en' xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
+<body>
+<script th:inline="javascript">
 
-<div class=" bg-radio-ads bg-cover bg-center h-screen">
+    document.addEventListener('DOMContentLoaded', function() {
+        const resources = /*[[${shows}]]*/ "";
+        const events = /*[[${adverts}]]*/ "";
+        console.log(resources);
+        console.log(events);
+        console.log("===============")
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            // schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            // initialView: 'resourceTimelineWeek'
+            timeZone: 'UTC',
+            initialView: 'resourceTimelineDay',
+            aspectRatio: 1.5,
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+            },
+            editable: true,
+            resourceAreaHeaderContent: 'Shows',
+            resources: resources,
+            events: events
+        });
+        calendar.render();
+    });
+
+</script>
+<div class=" bg-radio-ads bg-cover bg-center">
     <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
         <div class="flex flex-col pt-4 px-8">
             <div class="flex flex-row justify-between">
@@ -12,16 +39,16 @@
 
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li class="active">Payment Methods</li>
-                                </ol>
+                                <div class=" mt-2">
+                                    <a class="btn btn-primary rounded " th:href="@{/schedule/add}">Add</a>
+                                </div>
                             </div>
                         </div>
 
                     </div>
 
                 </div>
-                <div class="flex  flex-row space-x-6">
+                <div class="flex  flex-row space-x-6 mt-2">
                     <a th:href="@{/notifications}">
                         <div class="relative w-fit mt-1">
                             <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white" th:if="${notifications}"
@@ -61,48 +88,14 @@
                 </div>
             </div>
 
-            <div class="flex flex-col justify-center items-center place-content-center ">
-
-                <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md mt-8">
-                    <div class="card">
-                        <div class="card-header bg-white text-center text-gray-600"><strong>Add Payment Method</strong>
-
-                        </div>
-                        <div class="card-body card-block">
-
-
-                            <form autocomplete="off" class="sky-form" method="post" role="form"
-                                  th:action="@{/payment-types/save}" th:object="${paymentType}">
-                                <input th:field="*{id}" type="hidden"/>
-
-
-                                <div class="form-group"><label class="control-label text-base text-gray-600" for="name">
-                                    Code</label><input class="form-control" id="name" name="name" placeholder="Account Number"
-                                                       required="" th:field="*{name}" type="text">
-                                    <div th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
-                                </div>
-
-                                <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
-                                    <button class="btn btn-primary btn-sm rounded" type="submit">
-                                        <i class="fa fa-dot-circle-o"></i> Submit
-                                    </button>
-                                    <button class="btn btn-danger btn-sm rounded" type="reset">
-                                        <i class="fa fa-ban"></i> Reset
-                                    </button>
-                                </div>
-
-                            </form>
-                            <!--                        <span th:utext="${successMessage}">-->
-
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
+        </div>
+        <div class="mx-2.5 bg-white">
+        <div id='calendar' ></div>
         </div>
     </div>
 </div>
+
+</body>
 <div th:include="fragments/footer"></div>
+
 </html>
