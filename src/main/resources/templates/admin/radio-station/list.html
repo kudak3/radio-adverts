@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
 
@@ -9,7 +9,7 @@
 
         <div class="flex flex-col pt-4 px-8">
             <div class="flex flex-row justify-between">
-                <div class="flex flex-row">
+                <div class="flex flex-row space-x-6">
                     <div class="breadcrumbs">
                         <div class="page-header float-left">
                             <div class="page-title">
@@ -17,17 +17,17 @@
                                     <li class="active">Radio Stations</li>
                                 </ol>
                             </div>
-
                         </div>
                     </div>
-                    <div class="col-sm-4 mt-2">
+                    <div class=" mt-2">
                         <a class="btn btn-primary rounded " th:href="@{/radio-stations/add}">Add</a>
                     </div>
                 </div>
                 <div class="flex  flex-row space-x-6">
                     <a th:href="@{/notifications}">
                         <div class="relative w-fit mt-1">
-                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white" th:if="${notifications}"
+                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white"
+                                 th:if="${notifications}"
                                  th:text="${notifications}">
                             </div>
                             <!--                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell"></span></a>-->
@@ -53,7 +53,7 @@
                                  data-toggle="dropdown"
                                  href="#" id="dropdownMenuButton">
                                 <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
-                                <span sec:authentication="name" class="text-white text-xs"></span>
+                                <span class="text-white text-xs" sec:authentication="name"></span>
                             </div>
                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
                                 <a class="dropdown-item" th:href="@{/config}">settings</a>
@@ -97,20 +97,20 @@
                     </div>
                 </div>
 
-            <script th:inline="none">
-                $(document).ready(function () {
-                    $('#roleListTable').DataTable();
-                });
-                $(document).ready(function () {
-                    $('#example').DataTable({
-                        "roleListTable": [[3, "desc"]]
+                <script th:inline="none">
+                    $(document).ready(function () {
+                        $('#roleListTable').DataTable();
                     });
-                });
-            </script>
+                    $(document).ready(function () {
+                        $('#example').DataTable({
+                            "roleListTable": [[3, "desc"]]
+                        });
+                    });
+                </script>
 
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 </html>
