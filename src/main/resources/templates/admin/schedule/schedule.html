@@ -80,7 +80,7 @@
                                 <span sec:authentication="name" class="text-white text-xs"></span>
                             </div>
                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
-                                <a class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/config}">settings</a>
                                 <a class="dropdown-item" th:href="@{/logout}">logout</a>
                             </div>
                         </div>
