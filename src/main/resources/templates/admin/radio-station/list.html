@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
 <div class=" bg-radio-ads bg-cover bg-center ">
 
@@ -86,7 +86,7 @@
                     <!-- Edit button -->
                     <div sec:authorize="hasAuthority('ADMIN')" class="flex flex-row">
                         <a class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded-lg mr-2"
-                           th:href="@{'/adverts/add/' + ${radioStation.id}}"
+                           th:href="@{'/radio-stations/update/' + ${radioStation.id}}"
                            title="Edit Station"><i class="fa fa-edit font-medium"></i></a>
                         <!-- Delete button -->
                         <a class="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 px-3 rounded-lg"

@@ -1,8 +1,11 @@
 package com.example.radioadsapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
@@ -19,6 +22,10 @@ public class User implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<NotificationEntity> notifications = new ArrayList<>();
 
 
     @Column(columnDefinition = "boolean default true")
@@ -120,6 +127,14 @@ public class User implements Serializable {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public List<NotificationEntity> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<NotificationEntity> notifications) {
+        this.notifications = notifications;
     }
 
     @Override

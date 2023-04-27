@@ -140,6 +140,14 @@ public class Client implements Serializable {
         this.payments = payments;
     }
 
+    public List<Advert> getAdverts() {
+        return adverts;
+    }
+
+    public void setAdverts(List<Advert> adverts) {
+        this.adverts = adverts;
+    }
+
     @Override
     public String toString() {
         return "Client{" +

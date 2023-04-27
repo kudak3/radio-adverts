@@ -1,5 +1,6 @@
 package com.example.radioadsapp.controller;
 
+import com.example.radioadsapp.model.LocalNotification;
 import com.example.radioadsapp.model.Program;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.ProgramService;
@@ -40,6 +41,7 @@ public class ScheduleController {
         model.addAttribute("shows", programService.getAll());
         model.addAttribute("adverts", advertService.getAll());
         model.addAttribute("request", request);
+        model.addAttribute("lNotification", new LocalNotification());
         return "admin/schedule/schedule";
     }
 

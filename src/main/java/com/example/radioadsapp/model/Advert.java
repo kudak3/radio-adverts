@@ -20,6 +20,7 @@ public class Advert implements Serializable {
     private Long id;
 
     private Long resourceId;
+    @Column(unique = true)
     private String title;
     private String description;
     @Enumerated
@@ -35,14 +36,10 @@ public class Advert implements Serializable {
     private Client client;
 
     @Column( nullable = false, updatable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @JsonDeserialize(using = CustomDateDeserializer.class)
     private LocalDateTime start;
 
 
     @Column( nullable = false)
-//    @Temporal(TemporalType.TIME)
-//    @JsonDeserialize(using = CustomDateDeserializer.class)
     private LocalDateTime end;
 
     public Long getId() {

@@ -1,33 +1,43 @@
 <html lang='en' xmlns:sec="http://www.w3.org/1999/xhtml">
-<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 <body>
 <script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
 
-    document.addEventListener('DOMContentLoaded', function() {
         const resources = /*[[${shows}]]*/ "";
         const events = /*[[${adverts}]]*/ "";
-        console.log(resources);
-        console.log(events);
-        console.log("===============")
-        const calendarEl = document.getElementById('calendar');
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-            // schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
-            // initialView: 'resourceTimelineWeek'
-            timeZone: 'UTC',
-            initialView: 'resourceTimelineDay',
-            aspectRatio: 1.5,
-            headerToolbar: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
-            },
-            editable: true,
-            resourceAreaHeaderContent: 'Shows',
-            resources: resources,
-            events: events
-        });
-        calendar.render();
+
+    console.log(resources);
+    console.log(events);
+    console.log("===============")
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        // schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+        // initialView: 'resourceTimelineWeek'
+        timeZone: 'UTC',
+        initialView: 'resourceTimelineDay',
+        aspectRatio: 1.5,
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+        },
+        editable: true,
+        resourceAreaHeaderContent: 'Shows',
+        resources: resources,
+        events: events,
+        // this function will be called when an event is clicked
+        eventClick: function (info) {
+            console.log('Event clicked:', info.event._def);
+            // handle the click event here...
+            const action = info.event._def.extendedProps.advertType === 'ONAIR' ? 'air' : 'post';
+            if (confirm(`Are you sure you want to ${action} ${info.event._def.title}!!!!`))
+                location.assign(`/adverts/air?title=${info.event._def.title}`);
+        },
     });
+    calendar.render();
+    })
+    ;
 
 </script>
 <div class=" bg-radio-ads bg-cover bg-center">
@@ -51,7 +61,8 @@
                 <div class="flex  flex-row space-x-6 mt-2">
                     <a th:href="@{/notifications}">
                         <div class="relative w-fit mt-1">
-                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white" th:if="${notifications}"
+                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white"
+                                 th:if="${notifications}"
                                  th:text="${notifications}">
                             </div>
                             <!--                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell"></span></a>-->
@@ -70,17 +81,17 @@
                             </div>
                         </div>
                     </a>
-                    <div class="flex  flex-row pr-8">
+                    <div class="flex  flex-row">
                         <div class="user-area dropdown  float-right">
                             <div aria-expanded="false" aria-haspopup="true"
                                  class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
                                  data-toggle="dropdown"
                                  href="#" id="dropdownMenuButton">
                                 <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
-                                <span sec:authentication="name" class="text-white text-xs"></span>
+                                <span class="text-white text-xs" sec:authentication="name"></span>
                             </div>
                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
-                                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a class="dropdown-item" sec:authorize="hasAuthority('ADMIN')" th:href="@{/config}">settings</a>
                                 <a class="dropdown-item" th:href="@{/logout}">logout</a>
                             </div>
                         </div>
@@ -89,8 +100,9 @@
             </div>
 
         </div>
-        <div class="mx-2.5 bg-white">
-        <div id='calendar' ></div>
+        <div id="toast-container"></div>
+        <div class="mx-2.5 bg-white mt-4">
+            <div id='calendar'></div>
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
 <body>
 <div class=" bg-radio-ads bg-cover bg-center h-screen">

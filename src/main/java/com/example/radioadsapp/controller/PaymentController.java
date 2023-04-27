@@ -1,15 +1,13 @@
 package com.example.radioadsapp.controller;
 
 
-import com.example.radioadsapp.model.Advert;
-import com.example.radioadsapp.model.Client;
-import com.example.radioadsapp.model.Payment;
-import com.example.radioadsapp.model.RadioStation;
+import com.example.radioadsapp.model.*;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.AdvertService;
 import com.example.radioadsapp.service.impl.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,10 +38,8 @@ public class PaymentController {
 
     @GetMapping("/list")
     public String getPayments(Model model, HttpServletRequest request) {
-        model.addAttribute("payments", paymentService.getAll());
-        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
-        model.addAttribute("request", request);
-        return "admin/payment/list";
+        LocalNotification localNotification = new LocalNotification();
+        return getList(model, request,localNotification);
     }
 
 
@@ -77,17 +73,38 @@ public class PaymentController {
     }
 
     @PostMapping("save")
-    public String savePayment(@ModelAttribute("payment") Payment payment) {
+    public String savePayment(@ModelAttribute("payment") Payment payment,Model model, HttpServletRequest request) {
         // save payment to database
         paymentService.save(payment);
-        return "redirect:/payments/list";
+        LocalNotification localNotification = new LocalNotification();
+        localNotification.setError("Payment processed successfully");
+        return getList(model, request, localNotification);
     }
 
     @GetMapping("/delete/{id}")
-    public String deletePayment(@PathVariable(value = "id") long id) {
+    public String deletePayment(@PathVariable(value = "id") long id,Model model, HttpServletRequest request) {
 
         // call delete payment methods
+        try {
         paymentService.delete(id);
-        return "redirect:/payments/list";
+        LocalNotification localNotification = new LocalNotification();
+        localNotification.setSuccess("Record Deleted Successfully");
+        return getList(model, request,localNotification);
+
+    }catch (Exception e){
+        LocalNotification localNotification = new LocalNotification();
+        localNotification.setError("Failed to delete record");
+        return getList(model, request,localNotification);
+
+    }
+}
+
+    private String getList(Model model, HttpServletRequest request , LocalNotification localNotification) {
+        model.addAttribute("payments", paymentService.getAll());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
+        model.addAttribute("lNotification", localNotification);
+        return "admin/payment/list";
+
     }
 }

@@ -1,30 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
-<body>
-<div class=" bg-radio-ads bg-cover bg-center h-screen">
-
+<div class=" bg-radio-ads bg-cover bg-center min-h-screen">
     <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
-
         <div class="flex flex-col pt-4 px-8">
-
             <div class="flex flex-row justify-between">
-                <div class="flex flex-row">
+                <div class="flex flex-row space-x-4">
                     <div class="breadcrumbs">
 
-                            <div class="page-header float-left">
-                                <div class="page-title">
-                                    <ol class="breadcrumb text-right">
-                                        <li class="active">Adverts</li>
-                                    </ol>
-                                </div>
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Adverts</li>
+                                </ol>
                             </div>
+                        </div>
 
-                    </div>
-                    <div class="ml-4 mt-2">
-                        <a class="btn btn-primary rounded " th:href="@{/adverts/add}">Add</a>
                     </div>
 
                 </div>
@@ -51,7 +44,7 @@
                             </div>
                         </div>
                     </a>
-                    <div class="flex  flex-row ">
+                    <div class="flex  flex-row pr-8">
                         <div class="user-area dropdown  float-right">
                             <div aria-expanded="false" aria-haspopup="true"
                                  class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
@@ -69,51 +62,55 @@
                 </div>
             </div>
 
+            <div class="flex flex-col justify-center items-center place-content-center ">
 
-            <table class="table table-striped p-4 w-full" id="advertListTable" style="background-color: rgb(96 165 250 / .5)"
-                   th:inline="none">
-                <br/>
-                <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
-                <thead class="bg-blue-500/[.7] border-solid border-y-2">
-                <tr>
-                    <th class="text-white" scope="col">Title</th>
-                    <th class="text-white text-center" scope="col">Description</th>
-                    <th sec:authorize="hasAnyAuthority('ADMIN', 'ADVERTISER')" class="text-white text-center" scope="col">Radio Station</th>
-                    <th class="text-white text-center" scope="col">Platform</th>
-                    <th class="text-white text-center" scope="col">Url</th>
-
-                    <th class="text-white text-right" scope="col">Action</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr th:each="advert : ${adverts}">
-                    <td class=" text-white" th:text="${advert.title ?: '--'}"></td>
-                    <td class="text-center text-white" th:text="${advert.description ?: '--'}"></td>
-                    <td sec:authorize="hasAnyAuthority('ADMIN', 'ADVERTISER')" class="text-center text-white" th:text="${advert.radioStation.name ?: '--'}"></td>
-                    <td class="text-center text-white" th:text="${advert.advertType.name ?: '--'}"></td>
-                    <td class="text-center text-white" th:text="${advert.url ?: '--'}"></td>
-                    <td class="text-right">
-                        <a sec:authorize="hasAnyAuthority('ADMIN', 'ADVERTISER')" class="btn btn-success btn-sm" th:href="@{'/payments/add?advertId=' + ${advert.id}}"><i
-                                class="fa fa-money " title="Pay for advert"></i></a>
-                        <a class="btn btn-info btn-sm" th:href="@{'/adverts/update/' + ${advert.id}}"
-                           title="Update advert"><i class="fa fa-pencil "></i></a>
-
-                        <a class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')"
-                           th:href="@{'/adverts/delete/' + ${advert.id}}" title="Delete Advert"><i class="fa fa-trash"></i></a>
-                    </td>
+                <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md my-8">
+                    <div class="card">
+                        <div class="card-header bg-white text-center text-gray-600"><strong th:title="${advert.title}"> </strong>
+                        </div>
+                        <div class="card-body card-block">
 
 
-                </tr>
-                </tbody>
-            </table>
+                            <form advert="form" autocomplete="off" class="sky-form" method="post" name="form"
+                                  th:action="@{/adverts/save?air=true}" th:object="${advert}">
 
+
+                                <input class="hidden" id="id" name="id"
+                                       placeholder="Enter the title of advert"
+                                        th:field="*{id}" type="text"/>
+
+                                <div class="form-group"><label class=" form-control-label text-base text-gray-600"  for="url"> Url
+                                </label><input class="form-control" id="url" name="url"
+                                               placeholder="Enter the url where advert has been posted"
+                                               th:field="*{url}"
+                                               type="text">
+                                    <div th:errors="*{url}" th:if="${#fields.hasErrors('url')}"></div>
+                                </div>
+
+
+                                <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
+                                    <button class="btn btn-primary btn-sm rounded" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-sm rounded" type="reset">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+
+                            </form>
+                            <!--                        <span th:utext="${successMessage}"></span>-->
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
 
         </div>
     </div>
 </div>
-</div>
 <div th:include="fragments/footer"></div>
-</body>
 </html>
+

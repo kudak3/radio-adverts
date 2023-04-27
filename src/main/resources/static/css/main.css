@@ -689,6 +689,10 @@ video {
   margin-top: 2rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -739,6 +743,10 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-full {
+  min-height: 100%;
 }
 
 .w-0 {

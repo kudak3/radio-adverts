@@ -16,6 +16,8 @@ public class RadioStation implements Serializable {
     private Long id;
     @Column(unique = true)
     private String name;
+    private String url;
+    private String frequency;
 
     @JsonBackReference(value = "payment-radio-station")
     @OneToMany(mappedBy = "radioStation")
@@ -49,6 +51,38 @@ public class RadioStation implements Serializable {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public List<Advert> getAdverts() {
+        return adverts;
+    }
+
+    public void setAdverts(List<Advert> adverts) {
+        this.adverts = adverts;
+    }
+
+    public List<Program> getPrograms() {
+        return programs;
+    }
+
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
     }
 
     @Override

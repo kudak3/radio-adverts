@@ -1,5 +1,6 @@
 package com.example.radioadsapp.controller;
 
+import com.example.radioadsapp.model.LocalNotification;
 import com.example.radioadsapp.repository.NotificationRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +23,33 @@ public class NotificationController {
     @GetMapping
     public String getNotifications(Model model, HttpServletRequest request){
         notificationRepository.updateAllNotifications();
-        model.addAttribute("notifications",notificationRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
-        model.addAttribute("notificationCount",notificationRepository.countNotificationsByViewedIsFalse());
-        model.addAttribute("request", request);
-        return "admin/notification/list";
+        LocalNotification localNotification = new LocalNotification();
+        return getList(model, request,localNotification);
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteNotification(@PathVariable(value = "id") long id) {
+    public String deleteNotification(@PathVariable(value = "id") long id,Model model, HttpServletRequest request) {
 
         // call delete notification
-        notificationRepository.deleteById(id);
-        return "redirect:/notifications";
+        try {
+            notificationRepository.deleteById(id);
+            LocalNotification localNotification = new LocalNotification();
+            localNotification.setSuccess("Record Deleted Successfully");
+            return getList(model, request,localNotification);
+
+        }catch (Exception e){
+            LocalNotification localNotification = new LocalNotification();
+            localNotification.setError("Failed to delete record");
+            return getList(model, request,localNotification);
+
+        }
+    }
+
+    private String getList(Model model, HttpServletRequest request , LocalNotification localNotification) {
+        model.addAttribute("notifications",notificationRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
+        model.addAttribute("notificationCount",notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
+        model.addAttribute("lNotification", localNotification);
+        return "admin/notification/list";
     }
 }

@@ -37,7 +37,11 @@ public class PaymentServiceImpl implements PaymentsService {
     }
 
     public void delete(Long id) {
-        paymentRepository.deleteById(id);
+        try {
+            paymentRepository.deleteById(id);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void updatePayment(Payment payment) {

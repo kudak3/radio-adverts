@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request})"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
 <div class=" bg-radio-ads bg-cover bg-center min-h-screen">
     <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
@@ -73,7 +73,9 @@
 
                             <form advert="form" autocomplete="off" class="sky-form" method="post" name="form"
                                   th:action="@{/adverts/save}" th:object="${advert}">
-
+                                <input class="hidden" id="id" name="id"
+                                       placeholder="Enter the title of advert"
+                                       th:field="*{id}" type="text"/>
                                 <div class="flex flex-row space-x-4">
                                     <div class="form-group w-full"><label class=" form-control-label text-base text-gray-600" for="title"> Title
                                     </label><input class="form-control" id="title" name="title"
