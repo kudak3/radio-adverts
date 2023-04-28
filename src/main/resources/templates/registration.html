@@ -129,113 +129,123 @@
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet"  th:href="@{/css/index.css}">
-    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div class="flex flex-row min-h-screen bg-blue-100">
+<div class="flex flex-row min-h-screen bg-login">
+
     <div
-            class="  lg:w-1/2 relative"
+            class="  lg:w-1/2 relative bg-gradient-to-l from-cyan-500/[.8] to-blue-500/[.8]"
     >
-        <img  th:src="@{/img/pc-ribbon.png}" alt="Blue background" class="absolute z-0 pc-ribbon">
-        <img  th:src="@{/img/ppc-ribbon-2.png}" alt="Blue background" class="absolute z-10  pc-ribbon-2">
-        <img  th:src="@{/img/pc.png}" alt="Pc" class="absolute z-20 bottom-0 right-0 2xl:transform 2xl:scale-150">
-        <img  th:src="@{/img/logo.jpeg}" alt="School logo" class=" absolute logo">
+        <img alt="Blue background" class="absolute z-0 pc-ribbon" th:src="@{/img/pc-ribbon.png}">
+        <img alt="Blue background" class="absolute z-10  pc-ribbon-2" th:src="@{/img/ppc-ribbon-2.png}">
+        <img alt="Pc" class="absolute z-20 bottom-0 right-0 2xl:transform 2xl:scale-150" th:src="@{/img/pc.png}">
+        <img alt="School logo" class=" absolute logo" th:src="@{/img/logo.jpeg}">
     </div>
 
-    <div class=" w-full  lg:w-1/2">
+    <div class=" w-full  lg:w-1/2 bg-login bg-cover">
         <div
-                class="flex flex-col h-screen overflow-y-auto "
+                class=" bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5]"
         >
             <div
-                    class="flex flex-col items-center justify-center flex-1 w-full"
+                    class="flex flex-col h-screen overflow-y-auto "
             >
-                <a> </a>
-                <h2
-                        class=" mb-4 font-bold leading-9 text-center text-black text-22xl"
+                <div
+                        class="flex flex-col items-center justify-center flex-1 w-full"
                 >
-                    Please fill out form to register!
-                </h2>
-                <form class="flex flex-col" th:action="@{/register/save}" method="post"
-                      th:object="${userDto}">
-                    <div class="flex flex-col">
-                        <label for="account_type"  class="mb-2 text-sm font-normal  text-black">Account Type</label>
-                        <select name="accountTypes" id="account_type" class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8" required="required" th:field="*{role}">
-                            <option value="">----Select Type of Account----</option>
-                            <option th:each="role : ${roles}"
-                                    th:value="${{role.id}}"
-                                    th:text="${role.name}">
-                            </option>
-                        </select>
+                    <a> </a>
+                    <h2
+                            class=" mb-4 font-bold leading-9 text-center text-black text-22xl"
+                    >
+                        Please fill out form to register!
+                    </h2>
+                    <form class="flex flex-col" method="post" th:action="@{/register/save}"
+                          th:object="${userDto}">
+                        <div class="flex flex-col">
+                            <label class="mb-2 text-sm font-normal  text-black" for="account_type">Account Type</label>
+                            <select class="bg-white border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8" id="account_type"
+                                    name="accountTypes"
+                                    required="required" th:field="*{role}">
+                                <option value="">----Select Type of Account----</option>
+                                <option th:each="role : ${roles}"
+                                        th:text="${role.name}"
+                                        th:value="${{role.id}}">
+                                </option>
+                            </select>
 
-                    </div>
-                    <div class="flex flex-col mt-3">
-                        <label for="firstName" class="mb-2 text-sm font-normal  text-black">First Name</label>
-                        <input
-                                type="text"
-                                id="firstName"
-                                class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
-                                placeholder="Enter your first name"
-                                th:field="*{firstName}"
-                                required
-                                autofocus="autofocus"
-                        />
-                    </div>
-                    <div class="flex flex-col mt-3">
-                        <label for="last_name" class="mb-2 text-sm font-normal  text-black">Last Name</label>
-                        <input
-                                type="text"
-                                id="last_name"
-                                class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
-                                placeholder="Enter your last name"
-                                th:field="*{lastName}"
-                                required
-                                autofocus="autofocus"
-                        />
-                    </div>
-                    <div class="flex flex-col mt-3">
-                        <label for="email" class="mb-2 text-sm font-normal  text-black">Username</label>
-                        <input
-                                type="text"
-                                id="email"
-                                class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
-                                placeholder="Enter your username"
-                                th:field="*{email}"
-                                required
-                                autofocus="autofocus"
-                        />
-                    </div>
-                    <div class="flex flex-col mt-3">
-                        <label for="password" class="mb-2 text-sm font-normal  text-black">Password</label>
-                        <input
-                                placeholder="Enter password"
-                                type="password"
-                                id="password"
-                                class="border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
-                                th:field="*{password}"
-                                required
-                                autofocus="autofocus"
-                        />
-                    </div>
-                    <div class="flex flex-col mt-3">
-                        <label for="confirmPassword" class="mb-2 text-sm font-normal  text-black">Confirm Password</label>
-                        <input
-                                placeholder="Confirm your password"
-                                type="password"
-                                id="confirmPassword"
-                                class="border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
-                                th:field="*{confirmPassword}"
-                                required
-                                autofocus="autofocus"
-                        />
-                    </div>
-                    <button type="submit" class="mt-8 mb-6 bg-blue-600 rounded-full h-8 text-white text-sm">Submit</button>
-                    <label  class="font-light text-sm text-center  text-black">Already have an account? <a th:href="@{/login}"> <span class="font-medium">Login</span></a>
-                    </label>
-                </form>
+                        </div>
+                        <div class="flex flex-col mt-3">
+                            <label class="mb-2 text-sm font-normal  text-black" for="firstName">First Name</label>
+                            <input
+                                    autofocus="autofocus"
+                                    class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                    id="firstName"
+                                    placeholder="Enter your first name"
+                                    required
+                                    th:field="*{firstName}"
+                                    type="text"
+                            />
+                        </div>
+                        <div class="flex flex-col mt-3">
+                            <label class="mb-2 text-sm font-normal  text-black" for="last_name">Last Name</label>
+                            <input
+                                    autofocus="autofocus"
+                                    class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                    id="last_name"
+                                    placeholder="Enter your last name"
+                                    required
+                                    th:field="*{lastName}"
+                                    type="text"
+                            />
+                        </div>
+                        <div class="flex flex-col mt-3">
+                            <label class="mb-2 text-sm font-normal  text-black" for="email">Username</label>
+                            <input
+                                    autofocus="autofocus"
+                                    class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                    id="email"
+                                    placeholder="Enter your username"
+                                    required
+                                    th:field="*{email}"
+                                    type="text"
+                            />
+                        </div>
+                        <div class="flex flex-col mt-3">
+                            <label class="mb-2 text-sm font-normal  text-black" for="password">Password</label>
+                            <input
+                                    autofocus="autofocus"
+                                    class="border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                    id="password"
+                                    placeholder="Enter password"
+                                    required
+                                    th:field="*{password}"
+                                    type="password"
+                            />
+                        </div>
+                        <div class="flex flex-col mt-3">
+                            <label class="mb-2 text-sm font-normal  text-black" for="confirmPassword">Confirm
+                                Password</label>
+                            <input
+                                    autofocus="autofocus"
+                                    class="border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                    id="confirmPassword"
+                                    placeholder="Confirm your password"
+                                    required
+                                    th:field="*{confirmPassword}"
+                                    type="password"
+                            />
+                        </div>
+                        <button class="mt-8 mb-6 bg-blue-600 rounded-full h-8 text-white text-sm" type="submit">Submit
+                        </button>
+                        <label class="font-light text-sm text-center  text-black">Already have an account? <a
+                                th:href="@{/login}"> <span class="font-medium">Login</span></a>
+                        </label>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'radio-ads': "url('/img/radio-ads.jpg')",
+        'login': "url('/img/login.jpg')",
       }
     },
   },

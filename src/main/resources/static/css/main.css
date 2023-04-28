@@ -685,12 +685,12 @@ video {
   margin-top: 0.75rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
 }
 
 .inline-block {
@@ -743,10 +743,6 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-full {
-  min-height: 100%;
 }
 
 .w-0 {
@@ -978,6 +974,10 @@ video {
   background-image: url('/img/radio-ads.jpg');
 }
 
+.bg-login {
+  background-image: url('/img/login.jpg');
+}
+
 .from-cyan-500\/\[\.5\] {
   --tw-gradient-from: rgb(6 182 212 / .5) var(--tw-gradient-from-position);
   --tw-gradient-from-position:  ;
@@ -986,8 +986,34 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-cyan-500\/\[\.7\] {
+  --tw-gradient-from: rgb(6 182 212 / .7) var(--tw-gradient-from-position);
+  --tw-gradient-from-position:  ;
+  --tw-gradient-to: rgb(6 182 212 / 0)  var(--tw-gradient-from-position);
+  --tw-gradient-to-position:  ;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-cyan-500\/\[\.8\] {
+  --tw-gradient-from: rgb(6 182 212 / .8) var(--tw-gradient-from-position);
+  --tw-gradient-from-position:  ;
+  --tw-gradient-to: rgb(6 182 212 / 0)  var(--tw-gradient-from-position);
+  --tw-gradient-to-position:  ;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .to-blue-500\/\[\.5\] {
   --tw-gradient-to: rgb(59 130 246 / .5) var(--tw-gradient-to-position);
+  --tw-gradient-to-position:  ;
+}
+
+.to-blue-500\/\[\.7\] {
+  --tw-gradient-to: rgb(59 130 246 / .7) var(--tw-gradient-to-position);
+  --tw-gradient-to-position:  ;
+}
+
+.to-blue-500\/\[\.8\] {
+  --tw-gradient-to: rgb(59 130 246 / .8) var(--tw-gradient-to-position);
   --tw-gradient-to-position:  ;
 }
 
@@ -1143,11 +1169,6 @@ video {
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
-}
-
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .text-gray-600 {
