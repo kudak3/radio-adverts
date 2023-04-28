@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en"
       th:fragment="showCount (count,request,notification)">
 <head>
-    <title>Home Page</title>
+    <title>Radio Adverts</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -51,11 +51,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script th:inline="javascript">
-        window.onload = function() {
-            // Your code here
-
-            console.log("==================== loaded")
-        };
+   
         document.addEventListener('DOMContentLoaded', function () {
 
 
@@ -109,7 +105,7 @@
 <body>
 
 
-<aside id="left-panel" class="left-panel bg-blue-500">
+<aside id="left-panel" class="bg-blue-500 left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
 
         <div class="navbar-header">
@@ -117,60 +113,60 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <div class="w-full flex justify-center mt-2">
-                <img th:src="@{/img/logo.jpeg}" alt="School logo" class=" w-24 h-24 rounded-full">
+            <div class="flex justify-center w-full mt-2">
+                <img th:src="@{/img/logo.jpeg}" alt="School logo" class="w-24 h-24 rounded-full ">
             </div>
 
-            <h5 class="text-white my-2 font-italic text-base">Radio Adverts System </h5>
+            <h5 class="my-2 text-base text-white font-italic">Radio Adverts System </h5>
         </div>
 
 
             <ul class="nav navbar-nav">
 
-                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')" class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300 "
+                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')" class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 "
                     th:classappend="${request.requestURI == '/' ? 'active':''}"
                 >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/}" class="text-base" > <span class="menu-icon mdi mdi-view-dashboard ml-4"></span>Dashboard </a>
+                    <a th:href="@{/}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-view-dashboard"></span>Dashboard </a>
                 </li>
 
-                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')" class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')" class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
                     th:classappend="${request.requestURI == '/schedule' || request.requestURI == '/schedule/add' ? 'active':''}"
                 >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/schedule}" class="text-base" > <span class="menu-icon mdi mdi-radio-tower ml-4"></span>On Air</a>
+                    <a th:href="@{/schedule}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-radio-tower"></span>On Air</a>
                 </li>
 
 
-                <li sec:authorize="hasAuthority('ADMIN')"  class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+                <li sec:authorize="hasAuthority('ADMIN')"  class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
                     th:classappend="${request.requestURI == '/users/list' || request.requestURI == '/users/add' ? 'active':''}"
                 >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/users/list}" class="text-base" > <span class="menu-icon mdi mdi-account-group ml-4"></span>Users</a>
+                    <a th:href="@{/users/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-account-group"></span>Users</a>
                 </li>
 
-                <li sec:authorize="hasAnyAuthority('ADMIN','ADVERTISER')" class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+                <li sec:authorize="hasAnyAuthority('ADMIN','ADVERTISER')" class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
                     th:classappend="${request.requestURI == '/radio-stations' || request.requestURI == '/radio-stations/add' ? 'active':''}"
                 >
-                    <a th:href="@{/radio-stations}" class="text-base" > <span class="menu-icon mdi mdi-radio ml-4"></span>Radio Stations</a>
+                    <a th:href="@{/radio-stations}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-radio"></span>Radio Stations</a>
                 </li>
 
-                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')"  class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')"  class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
                     th:classappend="${request.requestURI == '/clients/list' || request.requestURI == '/clients/add' ? 'active':''}"
                 >
-                    <a th:href="@{/clients/list}" class="text-base" > <span class="menu-icon mdi mdi-account-multiple-plus ml-4"></span>Clients</a>
+                    <a th:href="@{/clients/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-account-multiple-plus"></span>Clients</a>
                 </li>
 
-                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+                <li class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
                     th:classappend="${request.requestURI == '/payments/list' || request.requestURI == '/payments/add' ? 'active':''}"
                 >
-                    <a th:href="@{/payments/list}" class="text-base" > <span class="menu-icon mdi mdi-currency-usd ml-4"></span>Payments</a>
+                    <a th:href="@{/payments/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-currency-usd"></span>Payments</a>
                 </li>
 
-                <li class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 duration-300"
+                <li class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
                     th:classappend="${request.requestURI == '/adverts/list' || request.requestURI == '/adverts/add' || request.requestURI == '/adverts/schedule' ? 'active':''}"
                 >
-                    <a th:href="@{/adverts/list}" class="text-base" > <span class="menu-icon mdi mdi-advertisements ml-4"></span>Adverts</a>
+                    <a th:href="@{/adverts/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-advertisements"></span>Adverts</a>
                 </li>
 
 
