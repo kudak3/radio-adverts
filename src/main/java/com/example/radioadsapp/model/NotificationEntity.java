@@ -1,8 +1,11 @@
 package com.example.radioadsapp.model;
 
 import com.example.radioadsapp.utils.CustomDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
@@ -14,36 +17,35 @@ public class NotificationEntity {
     private Long id;
     private String message;
 
+
+    @CreatedDate
+    @Column( nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
     @JsonDeserialize(using = CustomDateDeserializer.class)
     private Date created;
 
-    private String affectedTable;
+    @LastModifiedDate
+    @Column( nullable = false)
+    @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    private Date modified;
 
     @Column(columnDefinition = "boolean default false")
     private boolean viewed;
 
-    @Column(columnDefinition = "boolean default false")
-    private boolean web;
+
+    @ManyToOne
+    private User user;
 
     public NotificationEntity() {
 
     }
 
-    public boolean isWeb() {
-        return web;
-    }
-
-    public void setWeb(boolean web) {
-        this.web = web;
-    }
 
     public NotificationEntity(String message, Date created, String affectedTable, boolean viewed, boolean web) {
         this.message = message;
         this.created = created;
-        this.affectedTable = affectedTable;
         this.viewed = viewed;
-        this.web = web;
     }
 
     public Long getId() {
@@ -70,12 +72,13 @@ public class NotificationEntity {
         this.created = created;
     }
 
-    public String getAffectedTable() {
-        return affectedTable;
+
+    public Date getModified() {
+        return modified;
     }
 
-    public void setAffectedTable(String affectedTable) {
-        this.affectedTable = affectedTable;
+    public void setModified(Date modified) {
+        this.modified = modified;
     }
 
     public boolean isViewed() {
@@ -84,5 +87,13 @@ public class NotificationEntity {
 
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,88 +1,75 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="https://www.thymeleaf.org">
 
-<th:block th:include="fragments/header"></th:block>
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Configurations</h1>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
+<body>
+<div class=" bg-radio-ads bg-cover bg-center h-screen">
+
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+
+        <div class="flex flex-col pt-4">
+            <div class="flex flex-row justify-between pl-2">
+                <div class="breadcrumbs">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Configurations</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row pr-4">
+                    <div class="user-area dropdown  float-right">
+                        <div aria-expanded="false" aria-haspopup="true"
+                             class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                             data-toggle="dropdown"
+                             href="#" id="dropdownMenuButton">
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                            <span th:text="${username}"></span>
+                        </div>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" th:href="@{/config}">settings</a>
+                            <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li class="active">Configurations</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="content mt-3">
 
-    <div class="animated fadeIn">
-        <div class="row">
-
-            <!--/.col-->
-
-            <div class="col-sm-12 mb-4" >
-                <div class="card-group">
-                    <div class="card col-md-6 no-padding ">
-                        <div class="card-body">
-                            <div class="h1 text-muted text-right mb-4">
-                                <i class="fa fa-building"></i>
-                                <a class="btn btn-primary" th:href="@{/config/roles}"/> Manage Roles</a>
-                            </div>
-
-
-                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
-                                 style="width: 40%; height: 5px;"></div>
+            <main class="p-4 grid grid-cols-1 md:grid-cols-2  gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-building"></i>
+                            <a class="btn btn-primary" th:href="@{/config/roles}"/> Manage Roles</a>
                         </div>
+
+
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
+                             style="width: 40%; height: 5px;"></div>
                     </div>
-
-                    <div class="card col-md-6 no-padding ">
-                        <div class="card-body">
-                            <div class="h1 text-muted text-right mb-4">
-                                <i class="fa fa-building"></i>
-                                <a class="btn btn-primary" th:href="@{/payment-types/list}"/> Payment Types</a>
-                            </div>
-
-
-
-
-                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
-                                 style="width: 40%; height: 5px;"></div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-bank"></i>
+                            <a class="btn btn-primary" th:href="@{/config/payment-types/list}"/> Payment Types</a>
                         </div>
+
+
+                        <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
+                             style="width: 40%; height: 5px;"></div>
                     </div>
-
-                    <div class="card col-md-6 no-padding ">
-                        <div class="card-body">
-                            <div class="h1 text-muted text-right mb-4">
-                                <i class="fa fa-building"></i>
-                                <a class="btn btn-primary" th:href="@{/swagger-ui.html}"/> API docs</a>
-                            </div>
-
-
-
-
-                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
-                                 style="width: 40%; height: 5px;"></div>
-                        </div>
-                    </div>
-
-
                 </div>
 
-            </div>
 
-
+            </main>
         </div>
     </div>
-</div>
 
 
 </div>
 <div th:include="fragments/footer"></div>
+</body>
 </html>

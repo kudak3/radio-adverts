@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
+
+<div class=" bg-radio-ads bg-cover bg-center min-h-screen">
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+        <div class="flex flex-col pt-4 px-8">
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row space-x-4">
+                    <div class="breadcrumbs">
+
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Adverts</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="flex  flex-row space-x-6">
+                    <a th:href="@{/notifications}">
+                        <div class="relative w-fit mt-1">
+                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white"
+                                 th:if="${notifications}"
+                                 th:text="${notifications}">
+                            </div>
+                            <!--                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell"></span></a>-->
+                            <div
+                                    class=" p-1 rounded-lg bg-indigo-500  text-center text-white shadow-lg dark:text-gray-200">
+                                <svg
+                                        class="h-4 w-4 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                            clip-rule="evenodd"
+                                            d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                                            fill-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="flex  flex-row pr-8">
+                        <div class="user-area dropdown  float-right">
+                            <div aria-expanded="false" aria-haspopup="true"
+                                 class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                                 data-toggle="dropdown"
+                                 href="#" id="dropdownMenuButton">
+                                <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                                <span class="text-white text-xs" sec:authentication="name"></span>
+                            </div>
+                            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-center items-center place-content-center ">
+
+                <div class="col-lg-8 bg-white p-4 rounded-lg shadow-md my-8">
+                    <div class="card">
+                        <div class="card-header bg-white text-center text-gray-600"><strong th:title="${advert.title}"> </strong>
+                        </div>
+                        <div class="card-body card-block">
+
+
+                            <form advert="form" autocomplete="off" class="sky-form" method="post" name="form"
+                                  th:action="@{/adverts/save?air=true}" th:object="${advert}">
+
+
+                                <input class="hidden" id="id" name="id"
+                                       placeholder="Enter the title of advert"
+                                        th:field="*{id}" type="text"/>
+
+                                <div class="form-group"><label class=" form-control-label text-base text-gray-600"  for="url"> Url
+                                </label><input class="form-control" id="url" name="url"
+                                               placeholder="Enter the url where advert has been posted"
+                                               th:field="*{url}"
+                                               type="text">
+                                    <div th:errors="*{url}" th:if="${#fields.hasErrors('url')}"></div>
+                                </div>
+
+
+                                <div class="card-footer flex flex-row justify-center space-x-4 bg-white">
+                                    <button class="btn btn-primary btn-sm rounded" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-sm rounded" type="reset">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+
+                            </form>
+                            <!--                        <span th:utext="${successMessage}"></span>-->
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:include="fragments/footer"></div>
+</html>
+

@@ -1,0 +1,26 @@
+{
+  "name": "radioadsapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kudak3/radio-adverts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kudak3/radio-adverts/issues"
+  },
+  "homepage": "https://github.com/kudak3/radio-adverts#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.3.1"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.2.96"
+  }
+}

@@ -1,152 +1,270 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>User Registration</title>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>User Registration</title>-->
 
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-</head>
-<body>
+<!--    <link rel="stylesheet"-->
+<!--          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+<!--          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"-->
+<!--          crossorigin="anonymous">-->
+<!--</head>-->
+<!--<body>-->
 
-<!-- create navigation bar ( header) -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span> <span
-                    class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Life Assurance Premiums Application Backend</a>
-        </div>
-    </div>
-</nav>
+<!--&lt;!&ndash; create navigation bar ( header) &ndash;&gt;-->
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+<!--    <div class="container">-->
+<!--        <div class="navbar-header">-->
+<!--            <button type="button" class="navbar-toggle collapsed"-->
+<!--                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"-->
+<!--                    aria-controls="navbar">-->
+<!--                <span class="sr-only">Toggle navigation</span> <span-->
+<!--                    class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+<!--                    class="icon-bar"></span>-->
+<!--            </button>-->
+<!--            <a class="navbar-brand" href="#" th:href="@{/}">Life Assurance Premiums Application Backend</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
 
-<br>
-<br>
-<!-- Create HTML registration form -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+<!--<br>-->
+<!--<br>-->
+<!--&lt;!&ndash; Create HTML registration form &ndash;&gt;-->
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-6 col-md-offset-3">-->
 
-            <!-- success message -->
-            <div th:if="${param.success}">
-                <div class="alert alert-info">You've successfully registered
-                    to our awesome app!</div>
-            </div>
-<!--            error message-->
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">
-                    User with give email already exists
-                </div>
+<!--            &lt;!&ndash; success message &ndash;&gt;-->
+<!--            <div th:if="${param.success}">-->
+<!--                <div class="alert alert-info">You've successfully registered-->
+<!--                    to our awesome app!</div>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            error message&ndash;&gt;-->
+<!--            <div th:if="${param.error}">-->
+<!--                <div class="alert alert-danger">-->
+<!--                    User with give email already exists-->
+<!--                </div>-->
 
-            </div>
+<!--            </div>-->
 
-            <h1>Registration</h1>
+<!--            <h1>Registration</h1>-->
 
-            <form th:action="@{/users/registration}" method="post"
+<!--            <form th:action="@{/users/registration}" method="post"-->
 
-                  th:object="${userDto}">
-                <div class="form-group">
-                    <label class="control-label" for="firstName"> First Name </label>
-                    <input id="firstName" class="form-control" th:field="*{firstName}"
-                           required autofocus="autofocus" />
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="lastName"> Last Name </label> <input
-                        id="lastName" class="form-control" th:field="*{lastName}"
-                        required autofocus="autofocus" />
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="email"> Email </label> <input
-                        id="email" class="form-control" th:field="*{email}" required
-                        autofocus="autofocus" />
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="password"> Password </label> <input
-                        id="password" class="form-control" type="password"
-                        th:field="*{password}" required autofocus="autofocus" />
-                </div>
-                <div th:if="${param.passwords}">
-                    <div class="alert alert-danger">
-                        Passwords do not match
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-                    <label class="control-label" for="confirmPassword">Confirm Password </label> <input
-                        id="confirmPassword" class="form-control" type="password"
-                        th:field="*{confirmPassword}" required autofocus="autofocus" />
-                </div>
-
-                <div class="form-group">
-                    <label>Select Role</label>
-                    <select class="form-control" required="required" th:field="*{role}">
-                        <option value="">----Select----</option>
-                        <option th:each="role : ${roles}"
-                                th:value="${{role.id}}"
-                                th:text="${role.name}">
-                        </option>
-                    </select>
-                </div>
+<!--                  th:object="${userDto}">-->
+<!--                <div class="form-group">-->
+<!--                    <label class="control-label" for="firstName"> First Name </label>-->
+<!--                    <input id="firstName" class="form-control" th:field="*{firstName}"-->
+<!--                           required autofocus="autofocus" />-->
+<!--                </div>-->
 
 <!--                <div class="form-group">-->
-<!--                    &lt;!&ndash;                                 th:classappend="${#fields.hasErrors('photo')}? 'has-error':''">&ndash;&gt;-->
-<!--                    <label for="profilePhoto" class="control-label">Profile Photo</label> <input id="profilePhoto" name="profilePhoto"-->
-<!--                                                                                                 type="file" />-->
-<!--                    &lt;!&ndash;                                <p class="error-message"&ndash;&gt;-->
-<!--                    &lt;!&ndash;                                   th:each="error : ${#fields.errors('photo')}"&ndash;&gt;-->
-<!--                    &lt;!&ndash;                                   th:text="${error}">Validation error</p>&ndash;&gt;-->
-
-<!--                </div>-->
-<!--                <div class="w-100 text-center ">-->
-
-<!--                    <img src="" class="user-avatar rounded-circle w-25 w-25" id="thumbnail" alt="Image preview">-->
-
+<!--                    <label class="control-label" for="lastName"> Last Name </label> <input-->
+<!--                        id="lastName" class="form-control" th:field="*{lastName}"-->
+<!--                        required autofocus="autofocus" />-->
 <!--                </div>-->
 
+<!--                <div class="form-group">-->
+<!--                    <label class="control-label" for="email"> Email </label> <input-->
+<!--                        id="email" class="form-control" th:field="*{email}" required-->
+<!--                        autofocus="autofocus" />-->
+<!--                </div>-->
 
-                <div class="form-group align-content-center">
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login
-								here</a></span>
-                </div>
-            </form>
+<!--                <div class="form-group">-->
+<!--                    <label class="control-label" for="password"> Password </label> <input-->
+<!--                        id="password" class="form-control" type="password"-->
+<!--                        th:field="*{password}" required autofocus="autofocus" />-->
+<!--                </div>-->
+<!--                <div th:if="${param.passwords}">-->
+<!--                    <div class="alert alert-danger">-->
+<!--                        Passwords do not match-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+
+<!--                <div class="form-group">-->
+<!--                    <label class="control-label" for="confirmPassword">Confirm Password </label> <input-->
+<!--                        id="confirmPassword" class="form-control" type="password"-->
+<!--                        th:field="*{confirmPassword}" required autofocus="autofocus" />-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label>Select Role</label>-->
+<!--                    <select class="form-control" required="required" th:field="*{role}">-->
+<!--                        <option value="">&#45;&#45;&#45;&#45;Select&#45;&#45;&#45;&#45;</option>-->
+<!--                        <option th:each="role : ${roles}"-->
+<!--                                th:value="${{role.id}}"-->
+<!--                                th:text="${role.name}">-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
+
+<!--&lt;!&ndash;                <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;                                 th:classappend="${#fields.hasErrors('photo')}? 'has-error':''">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label for="profilePhoto" class="control-label">Profile Photo</label> <input id="profilePhoto" name="profilePhoto"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                                                 type="file" />&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;                                <p class="error-message"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;                                   th:each="error : ${#fields.errors('photo')}"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;                                   th:text="${error}">Validation error</p>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="w-100 text-center ">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <img src="" class="user-avatar rounded-circle w-25 w-25" id="thumbnail" alt="Image preview">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+
+<!--                <div class="form-group align-content-center">-->
+<!--                    <button type="submit" class="btn btn-success">Register</button>-->
+<!--                    <span>Already registered? <a href="/" th:href="@{/login}">Login-->
+<!--								here</a></span>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"  th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<div class="flex flex-row min-h-screen bg-blue-100">
+    <div
+            class="  lg:w-1/2 relative"
+    >
+        <img  th:src="@{/img/pc-ribbon.png}" alt="Blue background" class="absolute z-0 pc-ribbon">
+        <img  th:src="@{/img/ppc-ribbon-2.png}" alt="Blue background" class="absolute z-10  pc-ribbon-2">
+        <img  th:src="@{/img/pc.png}" alt="Pc" class="absolute z-20 bottom-0 right-0 2xl:transform 2xl:scale-150">
+        <img  th:src="@{/img/logo.jpeg}" alt="School logo" class=" absolute logo">
+    </div>
+
+    <div class=" w-full  lg:w-1/2">
+        <div
+                class="flex flex-col h-screen overflow-y-auto "
+        >
+            <div
+                    class="flex flex-col items-center justify-center flex-1 w-full"
+            >
+                <a> </a>
+                <h2
+                        class=" mb-4 font-bold leading-9 text-center text-black text-22xl"
+                >
+                    Please fill out form to register!
+                </h2>
+                <form class="flex flex-col" th:action="@{/register/save}" method="post"
+                      th:object="${userDto}">
+                    <div class="flex flex-col">
+                        <label for="account_type"  class="mb-2 text-sm font-normal  text-black">Account Type</label>
+                        <select name="accountTypes" id="account_type" class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8" required="required" th:field="*{role}">
+                            <option value="">----Select Type of Account----</option>
+                            <option th:each="role : ${roles}"
+                                    th:value="${{role.id}}"
+                                    th:text="${role.name}">
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="flex flex-col mt-3">
+                        <label for="firstName" class="mb-2 text-sm font-normal  text-black">First Name</label>
+                        <input
+                                type="text"
+                                id="firstName"
+                                class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                placeholder="Enter your first name"
+                                th:field="*{firstName}"
+                                required
+                                autofocus="autofocus"
+                        />
+                    </div>
+                    <div class="flex flex-col mt-3">
+                        <label for="last_name" class="mb-2 text-sm font-normal  text-black">Last Name</label>
+                        <input
+                                type="text"
+                                id="last_name"
+                                class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                placeholder="Enter your last name"
+                                th:field="*{lastName}"
+                                required
+                                autofocus="autofocus"
+                        />
+                    </div>
+                    <div class="flex flex-col mt-3">
+                        <label for="email" class="mb-2 text-sm font-normal  text-black">Username</label>
+                        <input
+                                type="text"
+                                id="email"
+                                class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                placeholder="Enter your username"
+                                th:field="*{email}"
+                                required
+                                autofocus="autofocus"
+                        />
+                    </div>
+                    <div class="flex flex-col mt-3">
+                        <label for="password" class="mb-2 text-sm font-normal  text-black">Password</label>
+                        <input
+                                placeholder="Enter password"
+                                type="password"
+                                id="password"
+                                class="border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                th:field="*{password}"
+                                required
+                                autofocus="autofocus"
+                        />
+                    </div>
+                    <div class="flex flex-col mt-3">
+                        <label for="confirmPassword" class="mb-2 text-sm font-normal  text-black">Confirm Password</label>
+                        <input
+                                placeholder="Confirm your password"
+                                type="password"
+                                id="confirmPassword"
+                                class="border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                th:field="*{confirmPassword}"
+                                required
+                                autofocus="autofocus"
+                        />
+                    </div>
+                    <button type="submit" class="mt-8 mb-6 bg-blue-600 rounded-full h-8 text-white text-sm">Submit</button>
+                    <label  class="font-light text-sm text-center  text-black">Already have an account? <a th:href="@{/login}"> <span class="font-medium">Login</span></a>
+                    </label>
+                </form>
+            </div>
         </div>
     </div>
+
+
 </div>
 
-<script th:inline="none">
-    $(document).ready(function () {
-        $('#profilePhoto').change(function () {
-            showImageThumbnail(this);
-        })
-    });
 
-    function showImageThumbnail(fileInput) {
-        file = fileInput.files[0];
-        reader = new FileReader();
+<!--<script th:inline="none">-->
+<!--    $(document).ready(function () {-->
+<!--        $('#profilePhoto').change(function () {-->
+<!--            showImageThumbnail(this);-->
+<!--        })-->
+<!--    });-->
 
-        reader.onload = function (e) {
-            $('#thumbnail').attr('src',e.target.result);
+<!--    function showImageThumbnail(fileInput) {-->
+<!--        file = fileInput.files[0];-->
+<!--        reader = new FileReader();-->
 
-        };
-        reader.readAsDataURL(file);
+<!--        reader.onload = function (e) {-->
+<!--            $('#thumbnail').attr('src',e.target.result);-->
+
+<!--        };-->
+<!--        reader.readAsDataURL(file);-->
 
 
-    }
+<!--    }-->
 
-</script>
+<!--</script>-->
 
 </body>
 </html>

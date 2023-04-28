@@ -3,10 +3,12 @@ package com.example.radioadsapp.controller;
 
 import com.example.radioadsapp.dto.UserDto;
 import com.example.radioadsapp.model.Role;
-import com.example.radioadsapp.model.User;
+import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.repository.UserRepository;
-import com.example.radioadsapp.service.RoleService;
+import com.example.radioadsapp.service.impl.RoleServiceImpl;
 import com.example.radioadsapp.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,86 +22,43 @@ public class UserRegistrationController {
 
     private UserService userService;
 
-    public UserRegistrationController(UserService userService) {
+    public UserRegistrationController(UserService userService, RoleServiceImpl roleService, UserRepository userRepository, NotificationRepository notificationRepository) {
         super();
         this.userService = userService;
+        this.roleService = roleService;
+        this.userRepository = userRepository;
+        this.notificationRepository = notificationRepository;
     }
 
-    @Autowired
-    private RoleService roleService;
+    private final RoleServiceImpl roleService;
 
-    @Autowired
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
+    private final NotificationRepository notificationRepository;
 
 
-    @GetMapping("registration")
-    public String showRegistrationForm(Model model) {
-
-        UserDto userDto = new UserDto();
-        List<Role> roles = roleService.getRoles();
-        model.addAttribute("roles",roles);
-        model.addAttribute("userDto",userDto);
-
-        return "registration";
-    }
-
-    @PostMapping("registration")
-    public String registerUserAccount(@ModelAttribute("userDto") UserDto userDto)  {
-
-        if(!userDto.getPassword().equals(userDto.getConfirmPassword()))
-            return "redirect:/users/registration?password";
-        // save user to database
-
-//        String  photoName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//        userDto.setPhoto(photoName);
-//        System.out.println("===================userDto");
-//        System.out.println(userDto);
-
-        User user = userService.save(userDto);
-        if(user == null)
-            return "redirect:/users/registration?error";
-
-//        String uploadDir = "./src/main/resources/static/profile-photos/" + user.getId();
-//        Path uploadPath = Paths.get(uploadDir);
-//        if(!Files.exists(uploadPath)){
-//            Files.createDirectories(uploadPath);
-//        }
-//
-//        try (InputStream inputStream = multipartFile.getInputStream()){
-//            Path filePath = uploadPath.resolve(photoName);
-//            Files.copy(inputStream,filePath, StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e){
-//            throw  new IOException("Could not save uploaded file" + photoName);
-//        }
-        return "redirect:/";
-
-
-    }
 
     @GetMapping("list")
-    public String listUsers(Model model) {
+    public String listUsers(Model model, HttpServletRequest request) {
         userRepository.updateAllUsers();
-        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("users", userService.getAll());
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
         return "admin/user/list";
     }
 
     @GetMapping("add")
-    public String addPage(Model model) {
-
+    public String addPage(Model model, HttpServletRequest request) {
 
         UserDto user = new UserDto();
         model.addAttribute("user", user);
         model.addAttribute("roles",roleService.getRoles());
-
-
-
-
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
         return "admin/user/add";
     }
 
     @PostMapping("save")
-    public String saveUser(@ModelAttribute("user") UserDto userDto)  {
+    public String saveUser(@Valid @ModelAttribute("user") UserDto userDto)  {
 
 
         if(!userDto.getPassword().equals(userDto.getConfirmPassword()))
@@ -109,7 +68,8 @@ public class UserRegistrationController {
 
 //        String  photoName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 //            userDto.setPhoto(photoName);
-//        User user = userService.save(userDto);
+
+        userService.saveUser(userDto);
 //       if(user == null)
 //           return "redirect:/users/add?email";
 //
@@ -130,9 +90,9 @@ public class UserRegistrationController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteEm(@PathVariable(value = "id") long id) {
+    public String deleteUser(@PathVariable(value = "id") long id) {
 
-        // call delete employee payment-type
+        // call delete user
         userService.deleteUser(id);
         return "redirect:/users/list";
     }

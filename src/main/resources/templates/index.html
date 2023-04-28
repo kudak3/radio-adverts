@@ -1,150 +1,185 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<th:block th:include="fragments/header :: showCount(count=${notifications})"></th:block>
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header  float-left" >
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li class="active">Dashboard</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="content mt-3">
 
-    <div class="animated fadeIn">
-        <div class="row">
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
-            <!--/.col-->
+<div class=" bg-radio-ads bg-cover bg-center ">
 
-<!--            <div class="col-sm-12 mb-4" sec:authorize=" hasAuthority('ADMIN')">-->
-                <div class="col-sm-12 mb-4">
-                <div class="card-group">
-                    <div class="card col-md-6 no-padding ">
-                        <div class="card-body">
-                            <div class="h1 text-muted text-right mb-4">
-                               <a  th:href="@{/users/add}" > <i class="fa fa-users"></i></a>
-                                <a class="btn btn-primary" th:href="@{/users/list}"> Users</a>
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5]">
+
+        <div class="flex flex-col pt-4">
+            <div class="flex flex-row justify-between pl-2">
+                <div class="breadcrumbs">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Dashboard</li>
+                                </ol>
                             </div>
-                            <div class="row justify-content-around">
-                                <div class="col-xs-6" >
-
-                            <div class="h4 mb-0">
-                                <span class="count" th:text="${newUsers}"></span>
-                            </div>
-
-                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px;color: blue "> New Users</small>
-                            <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
-                                 style="width: 40%; height: 5px;"></div>
-
-                                </div>
-
-
-                                <div class=" col-xs-6">
-                                    <div class="h4 mb-0">
-                                        <span class="count" th:text="${users}"></span>
-                                    </div>
-                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Users</small>
-                                    <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                         style="width: 40%; height: 5px;"></div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                    <div class="card col-md-6 no-padding ">
-                        <div class="card-body">
-                            <div class="h1 text-muted text-right mb-4">
-                                <a th:href="@{/clients/add}"><i class="fa fa-user-plus"></i></a>
-                                <a class="btn btn-primary" th:href="@{/clients/list}">Clients</a>
-                            </div>
-
-                            <div class="row justify-content-around">
-                                <div class="col-xs-6" >
-
-                            <div class="h4 mb-0">
-                                <span class="count" th:text="${newClients}"></span>
-                            </div>
-                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Clients</small>
-                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                 style="width: 40%; height: 5px;"></div>
-
-                                </div>
-
-
-                                <div class=" col-xs-6">
-                                    <div class="h4 mb-0">
-                                        <span class="count" th:text="${clients}"></span>
-                                    </div>
-                                    <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Clients</small>
-                                    <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                         style="width: 40%; height: 5px;"></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card col-md-6 no-padding ">
-                        <div class="card-body">
-                            <div class="h1 text-muted text-right mb-4">
-                                <a th:href="@{/policies/add}"><i class="fa fa-clipboard"></i></a>
-                                <a class="btn btn-primary" th:href="@{/policies/list}">Policies</a>
-                            </div>
-
-
-                            <div class="h4 mb-0">
-                                <span class="count" th:text="${policies}"></span>
-                            </div>
-                            <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">Available Policies</small>
-                            <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                 style="width: 40%; height: 5px;"></div>
-
-
-                        </div>
-                    </div>
-
-
                 </div>
 
+                <div class="flex  flex-row space-x-6 pr-8">
+                    <a th:href="@{/notifications}">
+                        <div class="relative w-fit mt-1">
+                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white" th:if="${notifications}"
+                                 th:text="${notifications}">
+                            </div>
+                            <!--                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell"></span></a>-->
+                            <div
+                                    class=" p-1 rounded-lg bg-indigo-500  text-center text-white shadow-lg dark:text-gray-200">
+                                <svg
+                                        class="h-4 w-4 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                            clip-rule="evenodd"
+                                            d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                                            fill-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="flex  flex-row ">
+                        <div class="user-area dropdown  float-right">
+                            <div aria-expanded="false" aria-haspopup="true"
+                                 class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                                 data-toggle="dropdown"
+                                 href="#" id="dropdownMenuButton">
+                                <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                                <span sec:authentication="name" class="text-white text-xs"></span>
+                            </div>
+                            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-
-
-        </div>
-    </div>
-    <div class="row">
-
-        <!--/.col-->
-
-        <!--            <div class="col-sm-12 mb-4" sec:authorize=" hasAuthority('ADMIN')">-->
-        <div class="col-sm-12 mb-4">
-            <div class="card-group">
-                <div class="card col-md-6 no-padding ">
+            <main class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div sec:authorize="hasAuthority('ADMIN')"  class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                           <a th:href="@{/payments/add}"> <i class=" fa fa-money" ></i></a>
+                            <a th:href="@{/users/add}"> <span class="mdi mdi-account-group"></span></a>
+                            <a class="btn btn-primary" th:href="@{/users/list}"> Users</a>
+                        </div>
+                        <div class="row justify-content-around">
+                            <div class="col-xs-6">
+
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${newUsers}"></span>
+                                </div>
+
+                                <small class="text-muted text-uppercase font-weight-bold"
+                                       style="font-size: 12px;color: blue "> New Users</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
+                                     style="width: 40%; height: 5px;"></div>
+
+                            </div>
+
+
+                            <div class=" col-xs-6">
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${users}"></span>
+                                </div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All
+                                    Users</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                     style="width: 40%; height: 5px;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div sec:authorize="hasAuthority('ADMIN')"  class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <a th:href="@{/radio-stations/add}"> <span class="mdi mdi-radio"></span></a>
+                            <a class="btn btn-primary" th:href="@{/radio-stations}">Radio Stations</a>
+                        </div>
+                        <div class="row justify-content-around">
+                            <div class="col-xs-6">
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${newRadioStation}"></span>
+                                </div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New
+                                    Radio Station</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                     style="width: 40%; height: 5px;"></div>
+                            </div>
+
+
+                            <div class=" col-xs-6">
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${radioStations}"></span>
+                                </div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All
+                                    Radio
+                                    Stations</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                     style="width: 40%; height: 5px;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div  class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <a th:href="@{/clients/add}"><span class="mdi mdi-account-multiple-plus"></span></a>
+                            <a class="btn btn-primary" th:href="@{/clients/list}">Clients</a>
+                        </div>
+
+                        <div class="row justify-content-around">
+                            <div class="col-xs-6">
+
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${newClients}"></span>
+                                </div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New
+                                    Clients</small>
+                                <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                     style="width: 40%; height: 5px;"></div>
+
+                            </div>
+
+
+                            <div class=" col-xs-6">
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${clients}"></span>
+                                </div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All
+                                    Clients</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                     style="width: 40%; height: 5px;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <a th:href="@{/payments/add}"> <span class="mdi mdi-currency-usd"></span></a>
                             <a class="btn btn-primary" th:href="@{/payments/list}"> Payments</a>
                         </div>
                         <div class="row justify-content-around">
-                            <div class="col-xs-6" >
+                            <div class="col-xs-6">
 
-                        <div class="h4 mb-0">
-                            <span class="count" th:text="${newPayments}"></span>
-                        </div>
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${newPayments}"></span>
+                                </div>
 
-                        <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Payments</small>
-                        <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
-                             style="width: 40%; height: 5px;"></div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New
+                                    Payments</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
+                                     style="width: 40%; height: 5px;"></div>
 
                             </div>
 
@@ -153,7 +188,8 @@
                                 <div class="h4 mb-0">
                                     <span class="count" th:text="${payments}"></span>
                                 </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">Total Payments</small>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">Total
+                                    Payments</small>
                                 <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                      style="width: 40%; height: 5px;"></div>
                             </div>
@@ -161,32 +197,33 @@
 
                     </div>
                 </div>
-
-                <div class="card col-md-6 no-padding ">
+                <div class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                           <a th:href="@{/claims/add}"> <i class="fa fa-file"></i></a>
-                            <a class="btn btn-primary" th:href="@{/claims/list}">Claims</a>
+                            <a th:href="@{/adverts/add}"> <span class="mdi mdi-advertisements"></span></a>
+                            <a class="btn btn-primary" th:href="@{/adverts/list}">Adverts</a>
                         </div>
                         <div class="row justify-content-around">
-                            <div class="col-xs-6" >
+                            <div class="col-xs-6">
 
-                        <div class="h4 mb-0">
-                            <span class="count" th:text="${newClaims}"></span>
-                        </div>
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${newAdverts}"></span>
+                                </div>
 
-                        <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Claims</small>
-                        <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
-                             style="width: 40%; height: 5px;"></div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New
+                                    Adverts</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
+                                     style="width: 40%; height: 5px;"></div>
 
                             </div>
 
 
                             <div class=" col-xs-6">
                                 <div class="h4 mb-0">
-                                    <span class="count" th:text="${claims}"></span>
+                                    <span class="count" th:text="${adverts}"></span>
                                 </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Claims</small>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All
+                                    Adverts</small>
                                 <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                      style="width: 40%; height: 5px;"></div>
                             </div>
@@ -194,46 +231,13 @@
                     </div>
                 </div>
 
-                <div class="card col-md-6 no-padding ">
-                    <div class="card-body">
-                        <div class="h1 text-muted text-right mb-4">
-                           <a th:href="@{/coverages/add}"> <i class="fa fa-bank"></i></a>
-                            <a class="btn btn-primary" th:href="@{/coverages/list}">Policy Coverage</a>
-                        </div>
-                        <div class="row justify-content-around">
-                            <div class="col-xs-6" >
-                                <div class="h4 mb-0">
-                                    <span class="count" th:text="${newCoverages}"></span>
-                                </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New Covers</small>
-                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                     style="width: 40%; height: 5px;"></div>
-                            </div>
-
-
-                            <div class=" col-xs-6">
-                                <div class="h4 mb-0">
-                                    <span class="count" th:text="${coverages}"></span>
-                                </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All Coverages</small>
-                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                     style="width: 40%; height: 5px;"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-            </div>
-
+            </main>
         </div>
 
 
-
     </div>
+
 </div>
 
-<div th:include="fragments/footer"></div>
+<div class="h-4" th:include="fragments/footer"></div>
 </html>

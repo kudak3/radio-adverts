@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en" th:fragment="showCount (count)">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en"
+      th:fragment="showCount (count,request,notification)">
 <head>
-    <title>Home Page</title>
+    <title>Radio Adverts</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="description" content="Lapa backend">
+    <meta name="description" content="Radio Adverts backend">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.6/index.global.min.js'></script>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
 
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
     <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
     <link rel="stylesheet" th:href="@{/css/flag-icon.min.css}">
@@ -22,97 +25,154 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <script th:src="@{/js/main.js}"></script>
+<!--    toast notification-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="javascript" src="/js/main.js"></script>
 
 
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <!--<script th:src="@{/../../static/js/jquery-1.12.3.min.js}"></script>-->
+    <script type="javascript" src="/js/plugins.js"></script>
+    <script type="javascript" src="/js/main.js"></script>
 
-    <script th:src="@{/js/plugins.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-
-    <script  th:src="@{/js/dashboard.js}"></script>
-    <script  th:src="@{/js/widgets.js}"></script>
-    <script  th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/vendor/jquery-2.1.4.min.js}">
+    <script type="javascript" src="/js/dashboard.js"></script>
+    <script type="javascript" src="/js/widgets.js"></script>
+    <script type="javascript" src="/js/bootstrap.min.js"></script>
+    <script type="javascript" src="/js/jquery-3.6.4.min.js">
     </script>
+    <script type="javascript" src="/js/popper.min.js" crossorigin="anonymous"></script>
+    <!-- Include Bootstrap JS and jQuery from remote -->
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js" integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+   
+        document.addEventListener('DOMContentLoaded', function () {
 
+
+            const resources = /*[[${shows}]]*/ "";
+            const events = /*[[${adverts}]]*/ "";
+            const notification = /*[[${notification}]]*/ null;
+            console.log("====================")
+            console.log(notification);
+            if (notification) {
+                if (notification.success) {
+                    // Display a success toast notification
+                    Toastify({
+                        text: notification.success,
+                        duration: 3000,
+                        // destination: "https://github.com/apvarun/toastify-js",
+                        newWindow: true,
+                        close: true,
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "linear-gradient(to right, #457fca, #5691c8",
+                        },
+                        onClick: function(){} // Callback after click
+                    }).showToast();
+                }
+                if (notification.error) {
+                    // // Display  error toast notification
+                    Toastify({
+                        text: notification.error,
+                        duration: 3000,
+                        // destination: "https://github.com/apvarun/toastify-js",
+                        newWindow: true,
+                        close: true,
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "linear-gradient(to right, #EB3349, #F45C43)",
+                        },
+                        onClick: function(){} // Callback after click
+                    }).showToast();
+                }
+            }
+        })
+        ;
+
+    </script>
 
 </head>
 <body>
 
 
-<aside id="left-panel" class="left-panel" >
+<aside id="left-panel" class="bg-blue-500 left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
 
         <div class="navbar-header">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
+                <i class="fa-solid fa-bars"></i>
             </button>
-            <h5 style="background-color: #FFFFFF">Life Assurance Premiums </h5>
+            <div class="flex justify-center w-full mt-2">
+                <img th:src="@{/img/logo.jpeg}" alt="School logo" class="w-24 h-24 rounded-full ">
+            </div>
+
+            <h5 class="my-2 text-base text-white font-italic">Radio Adverts System </h5>
         </div>
 
-        <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav ">
 
-                <li class="active ">
-<!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
-                </li>
+            <ul class="nav navbar-nav">
 
-                <li class="active">
+                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')" class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 "
+                    th:classappend="${request.requestURI == '/' ? 'active':''}"
+                >
                     <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/notifications}"> <i class="menu-icon fa fa-bell"></i>Notifications <i th:if="${count}" class="badge bg-danger rounded-circle"><span class="text-center text-capitalize text-white" th:text="${count}"></span></i></a>
+                    <a th:href="@{/}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-view-dashboard"></span>Dashboard </a>
+                </li>
+
+                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')" class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
+                    th:classappend="${request.requestURI == '/schedule' || request.requestURI == '/schedule/add' ? 'active':''}"
+                >
+                    <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
+                    <a th:href="@{/schedule}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-radio-tower"></span>On Air</a>
                 </li>
 
 
-                <li class="active">
-<!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
-                    <a th:href="@{/config}"> <i class="menu-icon fa fa-gears"></i>Configurations </a>
+                <li sec:authorize="hasAuthority('ADMIN')"  class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
+                    th:classappend="${request.requestURI == '/users/list' || request.requestURI == '/users/add' ? 'active':''}"
+                >
+                    <!--                <li class="active"  sec:authorize="hasAuthority('ADMIN')">-->
+                    <a th:href="@{/users/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-account-group"></span>Users</a>
                 </li>
 
-                <li>
-                    <a th:href="@{/logout}"> <i class="menu-icon fa  fa-sign-out"></i>Logout</a>
+                <li sec:authorize="hasAnyAuthority('ADMIN','ADVERTISER')" class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
+                    th:classappend="${request.requestURI == '/radio-stations' || request.requestURI == '/radio-stations/add' ? 'active':''}"
+                >
+                    <a th:href="@{/radio-stations}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-radio"></span>Radio Stations</a>
                 </li>
 
+                <li sec:authorize="hasAnyAuthority('ADMIN', 'RADIOSTATION')"  class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
+                    th:classappend="${request.requestURI == '/clients/list' || request.requestURI == '/clients/add' ? 'active':''}"
+                >
+                    <a th:href="@{/clients/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-account-multiple-plus"></span>Clients</a>
+                </li>
+
+                <li class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
+                    th:classappend="${request.requestURI == '/payments/list' || request.requestURI == '/payments/add' ? 'active':''}"
+                >
+                    <a th:href="@{/payments/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-currency-usd"></span>Payments</a>
+                </li>
+
+                <li class="transition duration-300 ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400"
+                    th:classappend="${request.requestURI == '/adverts/list' || request.requestURI == '/adverts/add' || request.requestURI == '/adverts/schedule' ? 'active':''}"
+                >
+                    <a th:href="@{/adverts/list}" class="text-base" > <span class="ml-4 menu-icon mdi mdi-advertisements"></span>Adverts</a>
+                </li>
 
 
             </ul>
-        </div><!-- /.navbar-collapse -->
+
     </nav>
 </aside><!-- /#left-panel -->
-
-<!-- Left Panel -->
-
-<!-- Right Panel -->
-
-<div id="right-panel" class="right-panel">
-
-<!--    &lt;!&ndash; Header&ndash;&gt;-->
-<!--    <header id="header" class="header">-->
-
-<!--        <div class="header-menu">-->
-
-<!--            <div class="col-sm-7">-->
-<!--                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>-->
-
-<!--            </div>-->
-
-<!--            <div class="col-sm-5">-->
-<!--                <div class="user-area dropdown float-right">-->
-<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                        <span >kksksk</span>-->
-<!--                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">-->
-<!--                    </a>-->
-<!--                </div>-->
-
-
-<!--            </div>-->
-<!--        </div>-->
-
-<!--    </header>-->
-</div>
 </body>
 </html>

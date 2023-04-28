@@ -1,67 +1,98 @@
-
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+<body>
+<div class=" bg-radio-ads bg-cover bg-center h-screen">
 
-            <div class="breadcrumbs">
-                <div class="col-sm-4">
-                    <div class="page-header float-left">
-                        <div class="page-title">
-                            <h1>Payment Types</h1>
+    <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
+
+        <div class="flex flex-col pt-4 px-8">
+
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row space-x-4">
+                    <div class="breadcrumbs">
+
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li class="active">Payment Types</li>
+                                </ol>
+                            </div>
                         </div>
+
+                    </div>
+                    <div class=" mt-2">
+                        <a class="btn btn-primary rounded " th:href="@{/config/payment-types/add}">Add</a>
                     </div>
                 </div>
-                <div class="col-sm-8">
-                    <div class="page-header float-right">
-                        <div class="page-title">
-                            <ol class="breadcrumb text-right">
-                                <li><a href="#"> Payment Type </a></li>
-                                <li class="active ml-4">List</li>
-                            </ol>
+                <div class="flex  flex-row space-x-6">
+                    <a th:href="@{/notifications}">
+                        <div class="relative w-fit mt-1">
+                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white" th:if="${notifications}"
+                                 th:text="${notifications}">
+                            </div>
+                            <!--                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell"></span></a>-->
+                            <div
+                                    class=" p-1 rounded-lg bg-indigo-500  text-center text-white shadow-lg dark:text-gray-200">
+                                <svg
+                                        class="h-4 w-4 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                            clip-rule="evenodd"
+                                            d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                                            fill-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="flex  flex-row">
+                        <div class="user-area dropdown  float-right">
+                            <div aria-expanded="false" aria-haspopup="true"
+                                 class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
+                                 data-toggle="dropdown"
+                                 href="#" id="dropdownMenuButton">
+                                <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
+                                <span sec:authentication="name" class="text-white text-xs"></span>
+                            </div>
+                            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
+                                <a class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a class="dropdown-item" th:href="@{/logout}">logout</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            <div class="col-sm-4 ">
-                <a class="btn btn-primary rounded " th:href="@{/payment-types/add}">New Payment Type</a>
-            </div>
-
-            <br/>
-            <br/>
-
-
-            <table id="roleListTable" th:inline="none" cellspacing="0" width="100%" class="table table-striped">
+            <table class="table table-striped p-4 w-full " id="pTypeListTable" style="background-color: rgb(96 165 250 / .5)"
+                   th:inline="none">
                 <br/>
                 <!--                <span th:utext="${successMessage}" class="text-success"></span>-->
-                <thead>
+                <thead class="bg-blue-500/[.7] border-solid border-y-2 ">
                 <tr>
 
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
+                    <th class="text-white " scope="col">Name</th>
 
-                    <th scope="col">Action</th>
+                    <th class="text-white text-right" scope="col">Action</th>
 
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="type : ${paymentTypes}">
-                    <td th:text="${type.id}"></td>
-                    <td th:text="${type.name}"></td>
 
-                    </td>
+                    <td class="text-white" th:text="${type.name ?: '--'}"></td>
 
-                    <td><a th:href="@{'/payment-types/update/' + ${type.id}}" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a>
 
-                        <a th:href="@{'/payment-types/delete/' + ${type.id}}"
-                           onclick="return confirm('Are you sure you want to delete this!!!!')" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                    <td class="text-right"><a class="btn btn-info btn-sm" th:href="@{'/payment-types/update/' + ${type.id}}"><i
+                            class="fa fa-pencil"></i></a>
+
+                        <a class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this!!!!')"
+                           th:href="@{'/payment-types/delete/' + ${type.id}}"><i class="fa fa-trash"></i></a>
                     </td>
 
                 </tr>
@@ -71,11 +102,11 @@
 
             <script th:inline="none">
                 $(document).ready(function () {
-                    $('#roleListTable').DataTable();
+                    $('#pTypeListTable').DataTable();
                 });
                 $(document).ready(function () {
                     $('#example').DataTable({
-                        "roleListTable": [[3, "desc"]]
+                        "pTypeListTable": [[3, "desc"]]
                     });
                 });
             </script>
@@ -85,4 +116,5 @@
 </div>
 </div>
 <div th:include="fragments/footer"></div>
+</body>
 </html>

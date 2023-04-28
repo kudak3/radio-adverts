@@ -825,7 +825,6 @@ textarea {
   width: 100%; }
 
 aside.left-panel {
-  background: #272c33;
   display: table-cell;
   height: 100vh;
   min-height: 100%;
@@ -835,12 +834,10 @@ aside.left-panel {
   transition: width 0.3s ease; }
 
 .navbar {
-  background: #272c33;
   border-radius: 0;
   border: none;
   display: block;
-  margin: 0;
-  margin-bottom: 100px;
+  margin: 0 0 100px;
   padding: 0; }
   .navbar .navbar-header {
     float: none;
@@ -893,7 +890,7 @@ aside.left-panel {
         display: none; }
       .navbar .navbar-nav li > a {
         background: none !important;
-        color: #c8c9ce !important;
+        color: #fff !important;
         display: inline-block;
         font-family: 'Open Sans';
         font-size: 14px;
@@ -902,11 +899,11 @@ aside.left-panel {
         position: relative;
         width: 100%; }
         .navbar .navbar-nav li > a:hover, .navbar .navbar-nav li > a:hover .menu-icon {
-          color: #fff !important; }
+          color: #f3f3f3 !important; }
         .navbar .navbar-nav li > a .menu-icon {
-          color: #8b939b;
+          color: #fff;
           float: left;
-          margin-top: 8px;
+          font-size: medium;
           width: 55px;
           text-align: left;
           z-index: 9; }
@@ -940,7 +937,6 @@ aside.left-panel {
           .navbar .navbar-nav li.menu-item-has-children a:hover:before {
             color: #fff; }
         .navbar .navbar-nav li.menu-item-has-children .sub-menu {
-          background: #272c33;
           border: none;
           box-shadow: none;
           overflow-y: hidden;
@@ -974,7 +970,16 @@ aside.left-panel {
 .navbar .navbar-nav > .active > a,
 .navbar .navbar-nav > .active > a:focus,
 .navbar .navbar-nav > .active > a:hover {
-  color: #d7d9e3 !important; }
+  --scale-x: 1.1;
+  --scale-y: 1.1;
+  --translate-x: 0;
+  --translate-y: -0.25rem;
+  --rotate: 0;
+  --skew-x: 0;
+  --skew-y: 0;
+  transform: translate(var(--translate-x), var(--translate-y)) rotate(var(--rotate)) skewX(var(--skew-x)) skewY(var(--skew-y)) scaleX(var(--scale-x)) scaleY(var(--scale-y));
+  background-color: rgb(96 165 250)!important;
+}
 
 .navbar-nav li span.count {
   background: #a9d86e;
@@ -1088,7 +1093,7 @@ body.open .navbar .navbar-brand.hidden {
     .right-panel .breadcrumbs .col-lg-8 .page-header {
       float: left; }
   .right-panel .page-header {
-    min-height: 50px;
+    min-height: 40px;
     margin: 0px;
     padding: 0px 15px;
     background: #ffffff;
@@ -1259,7 +1264,10 @@ header .form-inline {
 
 .dropdown-menu {
   border-radius: 0;
-  transform: none !important; }
+  transform: none !important;
+  min-width: auto !important;
+
+}
 
 .for-notification .dropdown-menu .dropdown-item {
   padding: 5px 15px !important;
@@ -1462,12 +1470,6 @@ header .form-inline {
 .corner-ribon i {
   padding: 10px 0 0 35px;
   color: #fff; }
-
-.black-ribon {
-  background: url("../../images/twitter_corner_black.png") no-repeat; }
-
-.blue-ribon {
-  background: url("../../images/twitter_corner_blue.png") no-repeat; }
 
 .twt-feed .wtt-mark {
   color: rgba(255, 255, 255, 0.15);
