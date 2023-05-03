@@ -82,6 +82,10 @@ public class ClientServiceImpl implements ClientService {
 
     }
 
+    public Client getClientByUser(String email){
+        return clientRepository.findClientByCreatedBy(email);
+    }
+
 
     public List<Payment> getPaymentHistory(Long id) {
         return clientRepository.findById(id).map(client -> client.getPayments()).orElse(null);

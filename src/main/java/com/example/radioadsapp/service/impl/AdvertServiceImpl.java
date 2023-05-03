@@ -21,14 +21,18 @@ import java.util.Optional;
 public class AdvertServiceImpl implements AdvertService {
     private final AdvertRepository advertRepository;
 
+    private final NotificationService notificationService;
 
-    public AdvertServiceImpl(AdvertRepository advertRepository) {
+
+    public AdvertServiceImpl(AdvertRepository advertRepository,NotificationService notificationService) {
         this.advertRepository = advertRepository;
+        this.notificationService = notificationService;
     }
 
     @Override
     public Advert save(Advert advert) {
-        return advertRepository.save(advert);
+       return   advertRepository.save(advert);
+
     }
 
     @Override

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Notification;
 import java.util.List;
 
 @Controller
@@ -25,14 +26,16 @@ public class PaymentController {
     private final AdvertServiceImpl advertService;
     private final RadioStationServiceImpl radioStationService;
     private final NotificationRepository notificationRepository;
+    private final NotificationService notificationService;
 
-    public PaymentController(PaymentServiceImpl paymentService, ClientServiceImpl clientService, PaymentTypeServiceImpl paymentTypeService, AdvertServiceImpl advertService, RadioStationServiceImpl radioStationService, NotificationRepository notificationRepository) {
+    public PaymentController(PaymentServiceImpl paymentService, ClientServiceImpl clientService, PaymentTypeServiceImpl paymentTypeService, AdvertServiceImpl advertService, RadioStationServiceImpl radioStationService, NotificationRepository notificationRepository,NotificationService notificationService) {
         this.paymentService = paymentService;
         this.clientService = clientService;
         this.paymentTypeService = paymentTypeService;
         this.advertService = advertService;
         this.radioStationService = radioStationService;
         this.notificationRepository = notificationRepository;
+        this.notificationService = notificationService;
     }
 
 
@@ -78,6 +81,7 @@ public class PaymentController {
         paymentService.save(payment);
         LocalNotification localNotification = new LocalNotification();
         localNotification.setError("Payment processed successfully");
+        notificationService.paymentNotification(payment);
         return getList(model, request, localNotification);
     }
 

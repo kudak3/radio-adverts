@@ -5,8 +5,11 @@ import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.model.Client;
 import com.example.radioadsapp.model.RadioStation;
 import com.example.radioadsapp.model.User;
+import com.example.radioadsapp.repository.ClientRepository;
 import com.example.radioadsapp.repository.NotificationRepository;
+import com.example.radioadsapp.repository.RadioStationRepository;
 import com.example.radioadsapp.repository.UserRepository;
+import com.example.radioadsapp.service.impl.ClientServiceImpl;
 import com.example.radioadsapp.service.impl.UserServiceImpl;
 import com.example.radioadsapp.utils.Gender;
 import jakarta.servlet.http.HttpServlet;
@@ -31,21 +34,28 @@ public class IndexController {
     private final UserRepository userRepository;
 
     private final NotificationRepository notificationRepository;
+    private final ClientRepository clientRepository;
+    private final RadioStationRepository radioStationRepository;
 
 
-    public IndexController(UserRepository userRepository, NotificationRepository notificationRepository) {
+    public IndexController(UserRepository userRepository, NotificationRepository notificationRepository,
+                           ClientRepository clientRepository,
+                           RadioStationRepository radioStationRepository) {
         this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;
+        this.clientRepository = clientRepository;
+        this.radioStationRepository = radioStationRepository;
     }
 
 
     @GetMapping
     public String viewHomePage(Model model, HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         User user = userRepository.findByEmail(auth.getName());
-        if(user != null && user.isNewEntry()){
+        if(user != null ){
             for (GrantedAuthority authority : auth.getAuthorities()) {
-                if ("ADVERTISER".equals(authority.getAuthority())) {
+                if ("ADVERTISER".equals(authority.getAuthority()) && !clientRepository.existsClientByCreatedBy(auth.getName())) {
                     Client client = new Client();
                     client.setFirstName( user.getFirstName());
                     client.setLastName(user.getLastName());
@@ -56,7 +66,7 @@ public class IndexController {
                     model.addAttribute("request", request);
                     return "admin/client/add";
 
-                } else if ("RADIOSTATION".equals(authority.getAuthority())) {
+                } else if ("RADIOSTATION".equals(authority.getAuthority()) && !radioStationRepository.existsRadioStationByCreatedBy(auth.getName())) {
                     RadioStation radioStation = new RadioStation();
                     radioStation.setName(user.getName());
                     model.addAttribute("radioStation", radioStation);

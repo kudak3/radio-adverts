@@ -31,6 +31,7 @@ public class ClientController {
     public String listClients(Model model, HttpServletRequest request) {
         LocalNotification localNotification = new LocalNotification();
         return getList(model, request,localNotification);
+
     }
 
     @GetMapping("add")

@@ -14,6 +14,8 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client,Long> {
 
     long countClientsByNewEntryIsTrue();
+     boolean existsClientByCreatedBy(String email);
+     Client findClientByCreatedBy(String email);
 
     @Transactional
     @Modifying

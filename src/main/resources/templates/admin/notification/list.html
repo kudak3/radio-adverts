@@ -43,7 +43,6 @@
                 <tr>
 
 
-                    <th scope="col" class="text-white">Affected Tables</th>
                     <th scope="col" class="text-white">Message</th>
                     <th scope="col" class="text-white">Date Created</th>
                     <th scope="col" class="text-white">Action</th>
@@ -55,9 +54,8 @@
                 <tbody>
                 <tr th:each="notification : ${notifications}">
 
-                    <td th:text="${notification.affectedTable}"></td>
                     <td th:text="${notification.message}"></td>
-                    <td th:text="${notification.created}"></td>
+                    <td th:text="${notification.createdDate}"></td>
 
                     <td>
 

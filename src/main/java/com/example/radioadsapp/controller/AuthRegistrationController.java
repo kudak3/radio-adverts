@@ -41,7 +41,7 @@ public class AuthRegistrationController {
     public String showRegistrationForm(@RequestParam(required = false) boolean admin, Model model) {
 
         UserDto userDto = new UserDto();
-        List<Role> roles = new ArrayList<Role>();
+        List<Role> roles;
         if(admin){
             roles = roleService.getRoles();
         }else{
