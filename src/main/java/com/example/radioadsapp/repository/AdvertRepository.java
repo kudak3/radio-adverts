@@ -12,4 +12,5 @@ public interface AdvertRepository extends JpaRepository<Advert,Long> {
     Optional<Advert> findAdvertByTitle(String title);
     List<Advert> findAllByCreatedBy(String email);
     List<Advert> findAllByRadioStation_CreatedBy(String email);
+    long countAllByNewEntryIsTrue();
 }

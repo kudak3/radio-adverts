@@ -5,10 +5,7 @@ import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.model.Client;
 import com.example.radioadsapp.model.RadioStation;
 import com.example.radioadsapp.model.User;
-import com.example.radioadsapp.repository.ClientRepository;
-import com.example.radioadsapp.repository.NotificationRepository;
-import com.example.radioadsapp.repository.RadioStationRepository;
-import com.example.radioadsapp.repository.UserRepository;
+import com.example.radioadsapp.repository.*;
 import com.example.radioadsapp.service.impl.ClientServiceImpl;
 import com.example.radioadsapp.service.impl.UserServiceImpl;
 import com.example.radioadsapp.utils.Gender;
@@ -36,15 +33,21 @@ public class IndexController {
     private final NotificationRepository notificationRepository;
     private final ClientRepository clientRepository;
     private final RadioStationRepository radioStationRepository;
+    private final PaymentRepository paymentRepository;
+    private final AdvertRepository advertRepository;
 
 
     public IndexController(UserRepository userRepository, NotificationRepository notificationRepository,
                            ClientRepository clientRepository,
-                           RadioStationRepository radioStationRepository) {
+                           RadioStationRepository radioStationRepository,
+                           PaymentRepository paymentRepository,
+                           AdvertRepository advertRepository) {
         this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;
         this.clientRepository = clientRepository;
         this.radioStationRepository = radioStationRepository;
+        this.paymentRepository = paymentRepository;
+        this.advertRepository = advertRepository;
     }
 
 
@@ -79,6 +82,19 @@ public class IndexController {
         }
         model.addAttribute("users", userRepository.count());
         model.addAttribute("newUsers",userRepository.countUsersByNewEntryIsTrue());
+
+        model.addAttribute("radioStations",radioStationRepository.count());
+        model.addAttribute("newRadioStations",radioStationRepository.countAllByNewEntryIsTrue());
+
+        model.addAttribute("clients",clientRepository.count());
+        model.addAttribute("newClients",clientRepository.countClientsByNewEntryIsTrue());
+
+        model.addAttribute("payments",paymentRepository.count());
+        model.addAttribute("newPayments",paymentRepository.countPaymentsByNewEntryIsTrue());
+
+        model.addAttribute("adverts",advertRepository.count());
+        model.addAttribute("newAdverts",advertRepository.countAllByNewEntryIsTrue());
+
         model.addAttribute("notifications",notificationRepository.countNotificationsByViewedIsFalse());
         model.addAttribute("request", request);
         return "index";

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface RadioStationRepository extends JpaRepository<RadioStation,Long> {
     RadioStation findRadioStationByName(String name);
     boolean existsRadioStationByCreatedBy(String email);
+    long countAllByNewEntryIsTrue();
 
 
 }

@@ -29,6 +29,8 @@ public class RadioStation extends BaseEntity implements Serializable {
     @JsonBackReference(value = "program-radio-station")
     @OneToMany(mappedBy = "radioStation")
     private List<Program> programs = new ArrayList<>();
+    @Column(columnDefinition = "boolean default true")
+    private boolean newEntry;
 
     public String getName() {
         return name;
@@ -83,6 +85,14 @@ public class RadioStation extends BaseEntity implements Serializable {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    public boolean isNewEntry() {
+        return newEntry;
+    }
+
+    public void setNewEntry(boolean newEntry) {
+        this.newEntry = newEntry;
     }
 
     @Transient
