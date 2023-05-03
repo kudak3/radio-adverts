@@ -11,24 +11,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "notification")
-public class NotificationEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class NotificationEntity extends BaseEntity {
+
     private String message;
-
-
-    @CreatedDate
-    @Column( nullable = false, updatable = false)
-    @Temporal(TemporalType.DATE)
-    @JsonDeserialize(using = CustomDateDeserializer.class)
-    private Date created;
-
-    @LastModifiedDate
-    @Column( nullable = false)
-    @Temporal(TemporalType.DATE)
-    @JsonDeserialize(using = CustomDateDeserializer.class)
-    private Date modified;
 
     @Column(columnDefinition = "boolean default false")
     private boolean viewed;
@@ -42,19 +27,11 @@ public class NotificationEntity {
     }
 
 
-    public NotificationEntity(String message, Date created, String affectedTable, boolean viewed, boolean web) {
+    public NotificationEntity(String message, boolean viewed) {
         this.message = message;
-        this.created = created;
         this.viewed = viewed;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getMessage() {
         return message;
@@ -64,22 +41,6 @@ public class NotificationEntity {
         this.message = message;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-
-    public Date getModified() {
-        return modified;
-    }
-
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
 
     public boolean isViewed() {
         return viewed;

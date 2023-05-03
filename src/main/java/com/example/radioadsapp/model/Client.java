@@ -12,12 +12,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "client")
-public class Client implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Client extends BaseEntity implements Serializable {
 
     //attributes
-    private Long id;
     private String firstName;
     private String lastName;
     private String title;
@@ -71,13 +68,6 @@ public class Client implements Serializable {
         this.newEntry = newEntry;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -118,9 +108,6 @@ public class Client implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-
 
 
     public Gender getGender() {

@@ -97,7 +97,7 @@
 
                     </div>
                 </div>
-                <div sec:authorize="hasAuthority('ADMIN')"  class="bg-white p-4 rounded-lg shadow-md">
+                <div sec:authorize="hasAnyAuthority('ADMIN','ADVERTISER')"  class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/radio-stations/add}"> <span class="mdi mdi-radio"></span></a>
@@ -129,7 +129,7 @@
 
                     </div>
                 </div>
-                <div  class="bg-white p-4 rounded-lg shadow-md">
+                <div sec:authorize="hasAnyAuthority('ADMIN','RADIOSTATION')"  class="bg-white p-4 rounded-lg shadow-md">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/clients/add}"><span class="mdi mdi-account-multiple-plus"></span></a>
@@ -156,40 +156,6 @@
                                 </div>
                                 <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">All
                                     Clients</small>
-                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
-                                     style="width: 40%; height: 5px;"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <div class="card-body">
-                        <div class="h1 text-muted text-right mb-4">
-                            <a th:href="@{/payments/add}"> <span class="mdi mdi-currency-usd"></span></a>
-                            <a class="btn btn-primary" th:href="@{/payments/list}"> Payments</a>
-                        </div>
-                        <div class="row justify-content-around">
-                            <div class="col-xs-6">
-
-                                <div class="h4 mb-0">
-                                    <span class="count" th:text="${newPayments}"></span>
-                                </div>
-
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New
-                                    Payments</small>
-                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
-                                     style="width: 40%; height: 5px;"></div>
-
-                            </div>
-
-
-                            <div class=" col-xs-6">
-                                <div class="h4 mb-0">
-                                    <span class="count" th:text="${payments}"></span>
-                                </div>
-                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">Total
-                                    Payments</small>
                                 <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
                                      style="width: 40%; height: 5px;"></div>
                             </div>
@@ -230,6 +196,41 @@
                         </div>
                     </div>
                 </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <a th:href="@{/payments/add}"> <span class="mdi mdi-currency-usd"></span></a>
+                            <a class="btn btn-primary" th:href="@{/payments/list}"> Payments</a>
+                        </div>
+                        <div class="row justify-content-around">
+                            <div class="col-xs-6">
+
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${newPayments}"></span>
+                                </div>
+
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">New
+                                    Payments</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-1"
+                                     style="width: 40%; height: 5px;"></div>
+
+                            </div>
+
+
+                            <div class=" col-xs-6">
+                                <div class="h4 mb-0">
+                                    <span class="count" th:text="${payments}"></span>
+                                </div>
+                                <small class="text-muted text-uppercase font-weight-bold" style="font-size: 12px">Total
+                                    Payments</small>
+                                <div class="w-100 progress progress-xs mt-3 mb-0 bg-flat-color-2"
+                                     style="width: 40%; height: 5px;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
 
             </main>
         </div>

@@ -6,18 +6,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-public class Advert implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    //attributes
-    private Long id;
+public class Advert extends BaseEntity implements Serializable {
 
     private Long resourceId;
     @Column(unique = true)
@@ -42,13 +38,13 @@ public class Advert implements Serializable {
     @Column( nullable = false)
     private LocalDateTime end;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getTitle() {
         return title;
@@ -122,10 +118,13 @@ public class Advert implements Serializable {
         this.end = end;
     }
 
+
+
+
     @Override
     public String toString() {
         return "Advert{" +
-                "id=" + id +
+                "id=" + this.id +
                 ", name='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", radio-station='" + radioStation + '\'' +

@@ -12,10 +12,7 @@ import java.util.Date;
 
 
 @Entity
-public class Payment implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Payment extends BaseEntity implements Serializable {
 
     @JsonBackReference(value="payment-client")
     @ManyToOne
@@ -54,13 +51,6 @@ public class Payment implements Serializable {
         this.newEntry = newEntry;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Client getClient() {
         return client;

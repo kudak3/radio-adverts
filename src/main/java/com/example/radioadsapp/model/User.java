@@ -1,23 +1,20 @@
 package com.example.radioadsapp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity implements Serializable {
+
     @Column(unique = true)
     private String email;
     private String firstName;
     private String lastName;
     private String password;
-    private String token;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -32,7 +29,6 @@ public class User implements Serializable {
     private boolean newEntry;
 
     private String photo;
-
 
 
     public User() {
@@ -51,7 +47,6 @@ public class User implements Serializable {
     }
 
 
-
     public boolean isNewEntry() {
         return newEntry;
     }
@@ -60,13 +55,6 @@ public class User implements Serializable {
         this.newEntry = newEntry;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -146,7 +134,6 @@ public class User implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
-
                 ", newEntry=" + newEntry +
                 ", photo='" + photo + '\'' +
                 '}';

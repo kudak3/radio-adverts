@@ -5,10 +5,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 @Entity
-public class Program implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Program extends BaseEntity implements Serializable {
 
     private String title;
 
@@ -18,13 +15,6 @@ public class Program implements Serializable {
     @ManyToOne
     private RadioStation radioStation;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

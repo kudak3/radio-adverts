@@ -9,11 +9,8 @@ import java.util.List;
 
 
 @Entity
-public class RadioStation implements Serializable {
+public class RadioStation extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(unique = true)
     private String name;
     private String url;
@@ -31,13 +28,6 @@ public class RadioStation implements Serializable {
     @OneToMany(mappedBy = "radioStation")
     private List<Program> programs = new ArrayList<>();
 
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getName() {
         return name;
     }
