@@ -44,8 +44,8 @@
 
 
                     <th scope="col" class="text-white">Message</th>
-                    <th scope="col" class="text-white">Date Created</th>
-                    <th scope="col" class="text-white">Action</th>
+                    <th scope="col" class="text-white text-right">Date Created</th>
+                    <th scope="col" class="text-white text-right">Action</th>
 
 
                 </tr>
@@ -54,8 +54,8 @@
                 <tbody>
                 <tr th:each="notification : ${notifications}">
 
-                    <td th:text="${notification.message}"></td>
-                    <td th:text="${notification.createdDate}"></td>
+                    <td class="text-center text-white" th:text="${notification.message}"></td>
+                    <td class="text-center text-white" th:text="${notification.createdDate}"></td>
 
                     <td>
 
