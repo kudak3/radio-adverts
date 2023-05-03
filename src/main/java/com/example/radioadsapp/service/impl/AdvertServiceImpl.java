@@ -2,12 +2,18 @@ package com.example.radioadsapp.service.impl;
 
 import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.model.Client;
+import com.example.radioadsapp.model.Payment;
 import com.example.radioadsapp.model.RadioStation;
 import com.example.radioadsapp.repository.AdvertRepository;
 import com.example.radioadsapp.service.AdvertService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +38,20 @@ public class AdvertServiceImpl implements AdvertService {
 
     @Override
     public List<Advert> getAll() {
-        return advertRepository.findAll();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Advert> adverts = new ArrayList<>();
+        for (GrantedAuthority authority : auth.getAuthorities()) {
+            if ("ADVERTISER".equals(authority.getAuthority())) {
+                System.out.println("===============");
+                System.out.println(auth.getName());
+                adverts = advertRepository.findAllByCreatedBy(auth.getName());
+            } else if ("RADIOSTATION".equals(authority.getAuthority())) {
+                adverts = advertRepository.findAllByRadioStation_CreatedBy(auth.getName());
+            }else{
+                adverts = advertRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+            }
+        }
+        return adverts;
     }
 
     public Advert findByTitle(String title){

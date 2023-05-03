@@ -2,11 +2,14 @@ package com.example.radioadsapp.controller;
 
 
 import com.example.radioadsapp.dto.UserDto;
+import com.example.radioadsapp.model.Advert;
 import com.example.radioadsapp.model.Role;
+import com.example.radioadsapp.model.User;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.repository.UserRepository;
 import com.example.radioadsapp.service.impl.RoleServiceImpl;
 import com.example.radioadsapp.service.UserService;
+import com.example.radioadsapp.utils.AdvertType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users/")
@@ -46,12 +51,29 @@ public class UserRegistrationController {
         return "admin/user/list";
     }
 
+
     @GetMapping("add")
     public String addPage(Model model, HttpServletRequest request) {
 
         UserDto user = new UserDto();
+        List<Role> roles = roleService.getRoles();
         model.addAttribute("user", user);
-        model.addAttribute("roles",roleService.getRoles());
+        model.addAttribute("roles",roles);
+        model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
+        model.addAttribute("request", request);
+        return "admin/user/add";
+    }
+
+
+    @GetMapping("update/{email}")
+    public String updatePage(@PathVariable(value = "email") String email, Model model, HttpServletRequest request) {
+        User user = userService.findByEmail(email);
+        return getTemplate(model, request, new UserDto().convertEntityToDto(user),roleService.getRoles());
+    }
+
+    private String getTemplate(Model model, HttpServletRequest request, UserDto user,List<Role> roles) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles",roles);
         model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
         model.addAttribute("request", request);
         return "admin/user/add";

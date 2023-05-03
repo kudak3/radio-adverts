@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
+<th:block
+        th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
 <div class=" bg-radio-ads bg-cover bg-center h-screen">
     <div class="animated fadeIn bg-gradient-to-l from-cyan-500/[.5] to-blue-500/[.5] h-full">
@@ -72,25 +73,28 @@
                         <div class="card-body card-block">
 
 
-                            <form autocomplete="off" class="sky-form" method="post" name="form"
-                                  role="form"
-                                  th:action="@{/radio-stations}" th:object="${radioStation}">
+                            <form autocomplete="off" class="sky-form" enctype="multipart/form-data" method="post"
+                                  name="form"
+                                  role="form" th:action="@{/radio-stations}"
+                                  th:object="${radioStation}">
                                 <input class="hidden" id="id" name="id"
                                        placeholder="Enter Name of Radio Station"
-                                       required="" th:field="*{id}"
+                                       th:field="*{id}"
                                        type="text">
 
                                 <div class="flex flex-row space-x-4">
-                                    <div class="form-group w-full"><label class="form-control-label text-base text-gray-600"
-                                                                   for="name"> Name
+                                    <div class="form-group w-full"><label
+                                            class="form-control-label text-base text-gray-600"
+                                            for="name"> Name
                                     </label><input class="form-control" id="name" name="name"
                                                    placeholder="Enter Name of Radio Station"
                                                    required="" th:field="*{name}"
                                                    type="text">
                                         <div th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
                                     </div>
-                                    <div class="form-group w-full"><label class="form-control-label text-base text-gray-600"
-                                                                   for="name"> Frequency
+                                    <div class="form-group w-full"><label
+                                            class="form-control-label text-base text-gray-600"
+                                            for="name"> Frequency
                                     </label><input class="form-control" id="frequency" name="frequency"
                                                    placeholder="Enter Frequency of Radio Station"
                                                    required="" th:field="*{frequency}"
@@ -101,10 +105,10 @@
 
                                 <div class="form-group">
                                     <!--                                 th:classappend="${#fields.hasErrors('photo')}? 'has-error':''">-->
-                                    <label class="form-control-label text-base text-gray-600" for="logo">Logo</label>
-                                    <input class="form-control" id="logo"
-                                           name="logo"
-                                           type="file"/>
+                                    <label class="form-control-label text-base text-gray-600" for="image">Image</label>
+                                    <input accept="image/png, image/jpeg" class="form-control"
+                                           id="image"
+                                           name="image" type="file"/>
                                     <!--                                <p class="error-message"-->
                                     <!--                                   th:each="error : ${#fields.errors('photo')}"-->
                                     <!--                                   th:text="${error}">Validation error</p>-->
@@ -120,7 +124,7 @@
 
                                 <script th:inline="none">
                                     $(document).ready(function () {
-                                        $('#logo').change(function () {
+                                        $('#image').change(function () {
 
                                             showImageThumbnail(this);
                                         })

@@ -8,8 +8,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User extends BaseEntity implements Serializable {
-
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(unique = true)
     private String email;
     private String firstName;
@@ -46,6 +48,13 @@ public class User extends BaseEntity implements Serializable {
         this.photo = photo;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public boolean isNewEntry() {
         return newEntry;

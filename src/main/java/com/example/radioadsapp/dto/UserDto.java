@@ -1,7 +1,10 @@
 package com.example.radioadsapp.dto;
 
 
+import com.example.radioadsapp.model.User;
+
 public class UserDto {
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -15,8 +18,9 @@ public class UserDto {
 
     }
 
-    public UserDto(String firstName, String lastName, String email, String password,Long role,String photo,String deviceToken) {
+    public UserDto(Long id,String firstName, String lastName, String email, String password,Long role,String photo,String deviceToken) {
         super();
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -24,6 +28,22 @@ public class UserDto {
         this.role = role;
         this.photo = photo;
         this.deviceToken = deviceToken;
+    }
+    public UserDto convertEntityToDto(User user){
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setFirstName(userDto.getFirstName());
+        userDto.setLastName(userDto.getLastName());
+        userDto.setEmail(user.getEmail());
+        return userDto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDeviceToken() {

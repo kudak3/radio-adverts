@@ -6,12 +6,12 @@ import com.example.radioadsapp.model.User;
 import com.example.radioadsapp.repository.RoleRepository;
 import com.example.radioadsapp.repository.UserRepository;
 import com.example.radioadsapp.service.UserService;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -59,18 +59,22 @@ public class UserServiceImpl implements UserService {
         this.userRepository.deleteById(id);
     }
 
-    private UserDto convertEntityToDto(User user){
-        UserDto userDto = new UserDto();
-        String[] name = user.getName().split(" ");
-        userDto.setFirstName(name[0]);
-        userDto.setLastName(name[1]);
-        userDto.setEmail(user.getEmail());
-        return userDto;
-    }
+//    public boolean hasAuthority(String au){
+//        boolean isAuth = false;
+//        for (GrantedAuthority authority : auth.getAuthorities()) {
+//                isAuth = au.equals(authority.getAuthority());
+//              break;
+//        }
+//        return isAuth;
+//    }
+
+
 
     private Role checkRoleExist() {
         Role role = new Role();
         role.setName("ADMIN");
         return roleRepository.save(role);
     }
+
+
 }

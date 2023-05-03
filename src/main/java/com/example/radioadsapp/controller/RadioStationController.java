@@ -5,10 +5,13 @@ import com.example.radioadsapp.model.RadioStation;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.ProgramService;
 import com.example.radioadsapp.service.impl.RadioStationServiceImpl;
+import com.example.radioadsapp.utils.FileUploadUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("radio-stations")
@@ -61,18 +64,31 @@ public class RadioStationController {
     }
 
     @PostMapping()
-    public String saveRadioStation(@ModelAttribute("radioStation") RadioStation radioStation, Model model, HttpServletRequest request) {
+    public String saveRadioStation(@ModelAttribute("radioStation") RadioStation radioStation, @RequestParam("image") MultipartFile multipartFile, Model model, HttpServletRequest request) {
         // save/update radioStation to database
         System.out.println("#############################################");
         System.out.println(radioStation);
-        if (radioStation.getId() != null) {
-            radioStationService.update(radioStation);
-        } else {
-            radioStationService.save(radioStation);
-        }
         LocalNotification localNotification = new LocalNotification();
-        localNotification.setError("Record saved successfully");
-        return getList(model, request, localNotification);
+        try {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            radioStation.setImageName(fileName);
+            String uploadDir = "src/main/resources/static/img/";
+
+
+            if (radioStation.getId() != null) {
+               radioStation = radioStationService.update(radioStation);
+
+            } else {
+              radioStation =  radioStationService.save(radioStation);
+            }
+            uploadDir = uploadDir.concat(radioStation.getId().toString());
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            localNotification.setSuccess("Record saved successfully");
+            return getList(model, request, localNotification);
+        } catch (Exception e) {
+            localNotification.setSuccess("Failed to create record");
+            return getList(model, request, localNotification);
+        }
     }
 
     @GetMapping("/delete/{id}")

@@ -74,7 +74,7 @@ public class ClientController {
             clientService.save(client);
         }
         LocalNotification localNotification = new LocalNotification();
-        localNotification.setError("Record processed successfully");
+        localNotification.setSuccess("Record processed successfully");
         return getList(model, request, localNotification);
     }
 
@@ -102,7 +102,7 @@ public class ClientController {
         model.addAttribute("notifications", notificationRepository.countNotificationsByViewedIsFalse());
         model.addAttribute("request", request);
         model.addAttribute("lNotification", localNotification);
-        return "admin/advert/list";
+        return "admin/client/list";
     }
 
 

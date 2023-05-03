@@ -4,10 +4,15 @@ import com.example.radioadsapp.model.Payment;
 import com.example.radioadsapp.repository.PaymentRepository;
 import com.example.radioadsapp.service.PaymentsService;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PaymentServiceImpl implements PaymentsService {
@@ -24,7 +29,19 @@ public class PaymentServiceImpl implements PaymentsService {
 
 
     public List<Payment> getAll() {
-        return paymentRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Payment> payments = new ArrayList<>();
+        for (GrantedAuthority authority : auth.getAuthorities()) {
+            if ("ADVERTISER".equals(authority.getAuthority())) {
+                payments = paymentRepository.findAllByCreatedBy(auth.getName());
+            } else if ("RADIOSTATION".equals(authority.getAuthority())) {
+                payments = paymentRepository.findAllByRadioStation_CreatedBy(auth.getName());
+            }else{
+                payments = paymentRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+            }
+
+        }
+        return payments;
     }
 
     public Payment save(Payment payment) {
@@ -39,7 +56,7 @@ public class PaymentServiceImpl implements PaymentsService {
     public void delete(Long id) {
         try {
             paymentRepository.deleteById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

@@ -10,12 +10,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AuthRegistrationController {
@@ -39,10 +38,16 @@ public class AuthRegistrationController {
     }
 
     @GetMapping("register")
-    public String showRegistrationForm(Model model) {
+    public String showRegistrationForm(@RequestParam(required = false) boolean admin, Model model) {
 
         UserDto userDto = new UserDto();
-        List<Role> roles = roleService.getRoles();
+        List<Role> roles = new ArrayList<Role>();
+        if(admin){
+            roles = roleService.getRoles();
+        }else{
+            roles = roleService.getRoles().stream().filter(role -> !role.getName().equals("ADMIN")).collect(Collectors.toList());
+        }
+
         model.addAttribute("roles",roles);
         model.addAttribute("userDto",userDto);
 

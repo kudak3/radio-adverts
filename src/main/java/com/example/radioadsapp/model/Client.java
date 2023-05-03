@@ -22,15 +22,8 @@ public class Client extends BaseEntity implements Serializable {
     private String email;
 
 
-
-
     @Enumerated
     private Gender gender;
-
-
-    @OneToOne
-    private User user;
-
 
 
     @JsonBackReference(value = "payment-client")
@@ -42,7 +35,6 @@ public class Client extends BaseEntity implements Serializable {
     private List<Advert> adverts = new ArrayList<>();
 
 
-
     @Column(columnDefinition = "boolean default false")
     private boolean newEntry;
 
@@ -51,14 +43,6 @@ public class Client extends BaseEntity implements Serializable {
         return firstName + ' ' + lastName;
     }
 
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public boolean isNewEntry() {
         return newEntry;

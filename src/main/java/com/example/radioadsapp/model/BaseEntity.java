@@ -25,15 +25,13 @@ public abstract class BaseEntity {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    @Column(name = "created_by")
     @CreatedBy
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by", referencedColumnName = "id")
-    private User createdBy;
+    private String createdBy;
 
+    @Column(name = "modified_by")
     @LastModifiedBy
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "last_modified_by", referencedColumnName = "id")
-    private User lastModifiedBy;
+    private String modifiedBy;
 
     public Long getId() {
         return id;
@@ -59,19 +57,19 @@ public abstract class BaseEntity {
         this.lastModifiedDate = lastModifiedDate;
     }
 
-    public User getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
-    public User getLastModifiedBy() {
-        return lastModifiedBy;
+    public String getModifiedBy() {
+        return modifiedBy;
     }
 
-    public void setLastModifiedBy(User lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 }

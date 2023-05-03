@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
+<th:block
+        th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
 <div class=" bg-radio-ads bg-cover bg-center ">
 
@@ -19,7 +20,7 @@
                             </div>
                         </div>
                     </div>
-                    <div sec:authorize="hasAuthority('ADMIN')" class=" mt-2">
+                    <div class=" mt-2" sec:authorize="hasAuthority('ADMIN')">
                         <a class="btn btn-primary rounded " th:href="@{/radio-stations/add}">Add</a>
                     </div>
                 </div>
@@ -56,7 +57,7 @@
                                 <span class="text-white text-xs" sec:authentication="name"></span>
                             </div>
                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
-                                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a class="dropdown-item" sec:authorize="hasAuthority('ADMIN')" th:href="@{/config}">settings</a>
                                 <a class="dropdown-item" th:href="@{/logout}">logout</a>
                             </div>
                         </div>
@@ -71,20 +72,21 @@
 
             <!-- Radio stations grid -->
             <div class="grid grid-cols-4 gap-4 my-4">
-                <div class="bg-white rounded-lg shadow p-4 flex justify-center items-center place-content-center flex-col flex w-11/12 h-4/5"
+                <div class="bg-white rounded-lg shadow p-4  justify-center items-center place-content-center flex-col flex w-11/12 h-4/5"
                      th:each="radioStation : ${radioStations}">
                     <!-- Station name -->
                     <h2 class="text-sm font-bold mb-2" th:text="${radioStation.name}"></h2>
 
                     <!-- Station image/logo -->
-                    <img alt="Radio Station image" class="w-full h-full object-contain mb-4"
-                         src="/img/placeholder.png"/>
+                    <img alt="Radio Station image" class="w-1/2 h-1/2 object-contain mb-4"
+
+                         th:src="@{${radioStation.imagePath}}"/>
                     <!-- advertise button-->
                     <a class=" bg-transparent hover:bg-blue-500 hover:text-blue-700 text-blue-500 font-bold rounded-lg my-2 p-2 border border-2 border-blue-500 text-sm"
                        th:href="@{'/adverts/add?stationId=' + ${radioStation.id}}"
                        title="Place advert">Advertise</a>
                     <!-- Edit button -->
-                    <div sec:authorize="hasAuthority('ADMIN')" class="flex flex-row">
+                    <div class="flex flex-row" sec:authorize="hasAuthority('ADMIN')">
                         <a class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded-lg mr-2"
                            th:href="@{'/radio-stations/update/' + ${radioStation.id}}"
                            title="Edit Station"><i class="fa fa-edit font-medium"></i></a>
@@ -97,20 +99,11 @@
                     </div>
                 </div>
 
-                <script th:inline="none">
-                    $(document).ready(function () {
-                        $('#roleListTable').DataTable();
-                    });
-                    $(document).ready(function () {
-                        $('#example').DataTable({
-                            "roleListTable": [[3, "desc"]]
-                        });
-                    });
-                </script>
 
             </div>
         </div>
     </div>
 </div>
+<div class="h-4" th:include="fragments/footer"></div>
 
 </html>

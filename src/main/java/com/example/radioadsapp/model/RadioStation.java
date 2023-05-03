@@ -16,6 +16,8 @@ public class RadioStation extends BaseEntity implements Serializable {
     private String url;
     private String frequency;
 
+    private String imageName;
+
     @JsonBackReference(value = "payment-radio-station")
     @OneToMany(mappedBy = "radioStation")
     private List<Payment> payments = new ArrayList<>();
@@ -73,6 +75,21 @@ public class RadioStation extends BaseEntity implements Serializable {
 
     public void setPrograms(List<Program> programs) {
         this.programs = programs;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    @Transient
+    public String getImagePath() {
+        if (imageName == null || id == null) return null;
+//        return "/user-photos/stations/" + id + "/" + imageName;
+        return "/img/" + id + "/" + imageName;
     }
 
     @Override

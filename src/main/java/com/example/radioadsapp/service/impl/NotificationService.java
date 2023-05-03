@@ -43,7 +43,7 @@ public class NotificationService {
         System.out.println("================");
         NotificationEntity notificationEntity = new NotificationEntity();
         notificationEntity.setMessage(template);
-        notificationEntity.setUser(advert.getClient().getUser());
+//        notificationEntity.setUser(advert.getClient().getUser());
         notificationRepository.save(notificationEntity);
 try {
     SimpleMailMessage message = new SimpleMailMessage();
