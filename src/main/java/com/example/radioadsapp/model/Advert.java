@@ -46,6 +46,9 @@ public class Advert extends BaseEntity implements Serializable {
 //        this.id = id;
 //    }
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean newEntry;
+
     public String getTitle() {
         return title;
     }
@@ -118,8 +121,13 @@ public class Advert extends BaseEntity implements Serializable {
         this.end = end;
     }
 
+    public boolean isNewEntry() {
+        return newEntry;
+    }
 
-
+    public void setNewEntry(boolean newEntry) {
+        this.newEntry = newEntry;
+    }
 
     @Override
     public String toString() {
