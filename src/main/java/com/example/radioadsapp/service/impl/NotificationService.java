@@ -101,7 +101,7 @@ public class NotificationService {
         String recipient = payment.getRadioStation().getCreatedBy();
         String subject = "New Payment Alert!";
         String template = "Hi " + payment.getRadioStation().getName()
-                + ", you have received  a new payment for , " + payment.getAdvert().getTitle() + "from"+ "\n\n"
+                + ", you have received  a new payment for , " + payment.getAdvert().getTitle() + " from "
                 + payment.getClient().getName() + "\n"
                 + "Click " + "https://localhost:8080/payments/list to view it \n\n"
                 + "We hope you're having a great day!\n\n"
