@@ -5,7 +5,7 @@ import com.example.radioadsapp.model.RadioStation;
 import com.example.radioadsapp.repository.NotificationRepository;
 import com.example.radioadsapp.service.ProgramService;
 import com.example.radioadsapp.service.impl.RadioStationServiceImpl;
-import com.example.radioadsapp.utils.FileUploadUtil;
+import com.example.radioadsapp.utils.Util;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,7 +82,7 @@ public class RadioStationController {
               radioStation =  radioStationService.save(radioStation);
             }
             uploadDir = uploadDir.concat(radioStation.getId().toString());
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            Util.saveFile(uploadDir, fileName, multipartFile);
             localNotification.setSuccess("Record saved successfully");
             return getList(model, request, localNotification);
         } catch (Exception e) {
