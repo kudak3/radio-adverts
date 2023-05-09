@@ -43,7 +43,7 @@ public class PaymentTypeController {
         // save payment to database
         paymentTypeService.save(payment);
         LocalNotification localNotification = new LocalNotification();
-        localNotification.setError("Record saved successfully");
+        localNotification.setSuccess("Record saved successfully");
         return getList(model, request, localNotification);
     }
 

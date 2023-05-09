@@ -80,7 +80,7 @@ public class PaymentController {
         // save payment to database
         paymentService.save(payment);
         LocalNotification localNotification = new LocalNotification();
-        localNotification.setError("Payment processed successfully");
+        localNotification.setSuccess("Payment processed successfully");
         notificationService.paymentNotification(payment);
         return getList(model, request, localNotification);
     }

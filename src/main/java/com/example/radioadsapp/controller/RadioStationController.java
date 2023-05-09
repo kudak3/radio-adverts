@@ -86,7 +86,7 @@ public class RadioStationController {
             localNotification.setSuccess("Record saved successfully");
             return getList(model, request, localNotification);
         } catch (Exception e) {
-            localNotification.setSuccess("Failed to create record");
+            localNotification.setError("Failed to create record");
             return getList(model, request, localNotification);
         }
     }
