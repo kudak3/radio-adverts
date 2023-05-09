@@ -7,6 +7,37 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <!--    toast notification-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script th:inline="javascript">
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.has("error")) {
+                // // Display  error toast notification
+                Toastify({
+                    text: urlParams.get("error"),
+                    duration: 3000,
+                    // destination: "https://github.com/apvarun/toastify-js",
+                    newWindow: true,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, #EB3349, #F45C43)",
+                    },
+                    onClick: function () {
+                    } // Callback after click
+                }).showToast();
+            }
+
+        })
+        ;
+
+    </script>
 </head>
 <body>
 <div class="flex flex-row min-h-screen bg-login">
@@ -40,7 +71,8 @@
                           th:object="${userDto}">
                         <div class="flex flex-col">
                             <label class="mb-2 text-sm font-normal  text-black" for="account_type">Account Type</label>
-                            <select class="bg-white border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8" id="account_type"
+                            <select class="bg-white border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
+                                    id="account_type"
                                     name="accountTypes"
                                     required="required" th:field="*{role}">
                                 <option value="">----Select Type of Account----</option>
@@ -76,12 +108,12 @@
                             />
                         </div>
                         <div class="flex flex-col mt-3">
-                            <label class="mb-2 text-sm font-normal  text-black" for="email">Username</label>
+                            <label class="mb-2 text-sm font-normal  text-black" for="email">Email</label>
                             <input
                                     autofocus="autofocus"
                                     class=" border w-full border-blue-600 border-solid rounded-full text-start px-3 h-8"
                                     id="email"
-                                    placeholder="Enter your username"
+                                    placeholder="Enter your email address"
                                     required
                                     th:field="*{email}"
                                     type="text"
@@ -112,7 +144,8 @@
                                     type="password"
                             />
                         </div>
-                        <button class="mt-8 mb-6 bg-blue-600 rounded-full h-8 text-white text-sm border  border-white hover:bg-blue-500 hover:border-blue-600" type="submit">Submit
+                        <button class="mt-8 mb-6 bg-blue-600 rounded-full h-8 text-white text-sm border  border-white hover:bg-blue-500 hover:border-blue-600"
+                                type="submit">Submit
                         </button>
                         <label class="font-light text-sm text-center  text-black">Already have an account? <a
                                 th:href="@{/login}"> <span class="font-medium">Login</span></a>
