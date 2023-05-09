@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 
-<th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
+<th:block
+        th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 
 <div class=" bg-radio-ads bg-cover bg-center ">
 
@@ -25,7 +26,8 @@
                 <div class="flex  flex-row space-x-6 pr-8">
                     <a th:href="@{/notifications}">
                         <div class="relative w-fit mt-1">
-                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white" th:if="${notifications}"
+                            <div class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-500  p-1 text-center align-baseline text-xs font-bold leading-none text-white"
+                                 th:if="${notifications}"
                                  th:text="${notifications}">
                             </div>
                             <!--                    <a th:href="@{/notifications}"> <span class="menu-icon mdi mdi-bell"></span></a>-->
@@ -45,17 +47,22 @@
                             </div>
                         </div>
                     </a>
-                    <div class="flex  flex-row ">
+                    <div class="flex  flex-col ">
+                         <span class=" text-xs text-white text-center bg-blue-500"
+                               sec:authentication="authorities[0]">
+                         </span>
                         <div class="user-area dropdown  float-right">
                             <div aria-expanded="false" aria-haspopup="true"
                                  class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
                                  data-toggle="dropdown"
                                  href="#" id="dropdownMenuButton">
+
                                 <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
-                                <span sec:authentication="name" class="text-white text-xs"></span>
+                                <span class="text-white text-xs" sec:authentication="name"></span>
+
                             </div>
                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
-                                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/config}">settings</a>
+                                <a class="dropdown-item" sec:authorize="hasAuthority('ADMIN')" th:href="@{/config}">settings</a>
                                 <a class="dropdown-item" th:href="@{/logout}">logout</a>
                             </div>
                         </div>
@@ -64,7 +71,7 @@
             </div>
 
             <main class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div sec:authorize="hasAuthority('ADMIN')"  class="bg-white p-4 rounded-lg shadow-md">
+                <div class="bg-white p-4 rounded-lg shadow-md" sec:authorize="hasAuthority('ADMIN')">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/users/add}"> <span class="mdi mdi-account-group"></span></a>
@@ -98,7 +105,7 @@
 
                     </div>
                 </div>
-                <div sec:authorize="hasAnyAuthority('ADMIN','ADVERTISER')"  class="bg-white p-4 rounded-lg shadow-md">
+                <div class="bg-white p-4 rounded-lg shadow-md" sec:authorize="hasAnyAuthority('ADMIN','ADVERTISER')">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/radio-stations/add}"> <span class="mdi mdi-radio"></span></a>
@@ -130,7 +137,7 @@
 
                     </div>
                 </div>
-                <div sec:authorize="hasAnyAuthority('ADMIN','RADIOSTATION')"  class="bg-white p-4 rounded-lg shadow-md">
+                <div class="bg-white p-4 rounded-lg shadow-md" sec:authorize="hasAnyAuthority('ADMIN','RADIOSTATION')">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <a th:href="@{/clients/add}"><span class="mdi mdi-account-multiple-plus"></span></a>

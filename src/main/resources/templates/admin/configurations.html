@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="https://www.thymeleaf.org">
 
 <th:block th:include="fragments/header :: showCount(count=${notifications},request=${request},notification=${lNotification})"></th:block>
 <body>
@@ -21,13 +21,17 @@
                     </div>
                 </div>
                 <div class="flex flex-row pr-4">
+                         <span class=" text-xs text-white text-center bg-blue-500"
+                               sec:authentication="authorities[0]">
+                         </span>
                     <div class="user-area dropdown  float-right">
                         <div aria-expanded="false" aria-haspopup="true"
                              class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
                              data-toggle="dropdown"
                              href="#" id="dropdownMenuButton">
                             <img alt="User Avatar" class="w-8 h-8 rounded-full" src="/images/user.png">
-                            <span th:text="${username}"></span>
+                            <span class="text-white text-xs" sec:authentication="name"></span>
+
                         </div>
                         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-left">
                             <a class="dropdown-item" th:href="@{/config}">settings</a>

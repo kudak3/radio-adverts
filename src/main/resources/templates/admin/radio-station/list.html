@@ -47,7 +47,10 @@
                             </div>
                         </div>
                     </a>
-                    <div class="flex  flex-row">
+                    <div class="flex  flex-col">
+                         <span class=" text-xs text-white text-center bg-blue-500"
+                               sec:authentication="authorities[0]">
+                         </span>
                         <div class="user-area dropdown  float-right">
                             <div aria-expanded="false" aria-haspopup="true"
                                  class="dropdown-toggle flex flex-col justify-center place-content-center items-center"
