@@ -16,44 +16,61 @@
             const urlParams = new URLSearchParams(window.location.search);
 
 
-            if (urlParams.has("error") || urlParams.has("logout")) {
-                if (urlParams.has("logout")) {
-                    // Display a success toast notification
-                    Toastify({
-                        text: "You have been logout of the system",
-                        duration: 3000,
-                        // destination: "https://github.com/apvarun/toastify-js",
-                        newWindow: true,
-                        close: true,
-                        gravity: "top", // `top` or `bottom`
-                        position: "center", // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                        style: {
-                            background: "linear-gradient(to right, #457fca, #5691c8",
-                        },
-                        onClick: function () {
-                        } // Callback after click
-                    }).showToast();
-                }
-                if (urlParams.has("error")) {
-                    // // Display  error toast notification
-                    Toastify({
-                        text: "Invalid Email and Password",
-                        duration: 3000,
-                        // destination: "https://github.com/apvarun/toastify-js",
-                        newWindow: true,
-                        close: true,
-                        gravity: "top", // `top` or `bottom`
-                        position: "center", // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                        style: {
-                            background: "linear-gradient(to right, #EB3349, #F45C43)",
-                        },
-                        onClick: function () {
-                        } // Callback after click
-                    }).showToast();
-                }
+            if (urlParams.has("logout")) {
+                // Display a success toast notification
+                Toastify({
+                    text: "You have been logout of the system",
+                    duration: 3000,
+                    // destination: "https://github.com/apvarun/toastify-js",
+                    newWindow: true,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, #457fca, #5691c8",
+                    },
+                    onClick: function () {
+                    } // Callback after click
+                }).showToast();
             }
+            if (urlParams.has("success")) {
+                // // Display  error toast notification
+                Toastify({
+                    text: "Account created successfully",
+                    duration: 3000,
+                    // destination: "https://github.com/apvarun/toastify-js",
+                    newWindow: true,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, #457fca, #5691c8",
+                    },
+                    onClick: function () {
+                    } // Callback after click
+                }).showToast();
+            }
+            if (urlParams.has("error")) {
+                // // Display  error toast notification
+                Toastify({
+                    text: "Invalid Email and Password",
+                    duration: 3000,
+                    // destination: "https://github.com/apvarun/toastify-js",
+                    newWindow: true,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, #EB3349, #F45C43)",
+                    },
+                    onClick: function () {
+                    } // Callback after click
+                }).showToast();
+            }
+
         })
         ;
 
