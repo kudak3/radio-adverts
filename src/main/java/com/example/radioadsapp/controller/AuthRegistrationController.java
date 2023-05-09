@@ -66,7 +66,7 @@ public class AuthRegistrationController {
             return "redirect:/register?error=Invalid email address";
         // save user to database
         userService.saveUser(userDto);
-        return "redirect:/login?success";
+        return "redirect:/";
 
 
     }
